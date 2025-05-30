@@ -2,10 +2,11 @@ import logo from "~/assets/logos/logo.png";
 import { StoreIcon } from "../icons/StoreIcon";
 import { SearchIcon } from "../icons/SearchIcon";
 import { ShoppingCartIcon } from "../icons/ShoppingCartIcon";
+import { Link, useLocation } from "react-router";
 
 function Header() {
 
-
+  const location = useLocation();
 
   return (
     <div
@@ -16,10 +17,15 @@ function Header() {
       >
         <img src={logo} className="w-[48px] h-[48px] rounded-[60px]" />
         <div className="flex flex-1 pr-[48px] justify-center">
-          <div className="flex flex-row px-[10px] py-[5px] gap-[10px] bg-white text-black text-[18px] border-2 rounded-full items-center">
-            <StoreIcon />
-            Store
-          </div>
+
+          <Link
+            to={{ pathname: "/" }}
+          >
+            <div className={"flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[18px] rounded-full items-center " + (location.pathname === "/" ? "bg-white border-2" : "bg-gray-200")}>
+              <StoreIcon />
+              Store
+            </div>
+          </Link>
         </div>
       </div>
       <div
@@ -27,20 +33,26 @@ function Header() {
       >
         <SearchIcon />
         <input
-          className="text-black"
+          className="w-[100%] h-[100%] text-black outline-none"
           placeholder="Search insects"
         />
       </div>
       <div
         className={"flex flex-1 justify-center"}
       >
-        <div className="flex flex-row px-[10px] py-[5px] gap-[10px] bg-gray-200 text-black text-[20px] rounded-full items-center ">
-          <ShoppingCartIcon />
-          $0,00
-          <div className="text-[16px] opacity-[0.5]">
-            0 items
+        <Link
+          to={{ pathname: "/cart" }}
+        >
+          <div
+            className={"flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[20px] rounded-full items-center " + (location.pathname === "/cart" ? "bg-white border-2" : "bg-gray-200")}>
+
+            <ShoppingCartIcon />
+            $0,00
+            <div className="text-[16px] opacity-[0.5]">
+              0 items
+            </div>
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   );

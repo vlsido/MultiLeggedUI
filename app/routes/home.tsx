@@ -1,6 +1,7 @@
 import Store from "~/components/views/Store";
 import type { Route } from "./+types/home";
-import Header from "~/components/header/Header";
+import Header from "~/components/views/Header";
+import Navigation from "~/components/views/Navigation";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -14,12 +15,15 @@ export default function Home() {
     <main
       data-testid="HOME.MAIN_CONTAINER:VIEW"
       aria-label="Home page"
-      className={"h-screen w-screen flex-1 overflow-auto bg-green-800"}
+      className={"flex flex-col h-screen w-screen bg-green-800"}
     >
       <div className="hidden md:flex">
         <Header />
       </div>
       <Store />
+      <div className="md:hidden flex">
+        <Navigation />
+      </div>
     </main>
   );
 }

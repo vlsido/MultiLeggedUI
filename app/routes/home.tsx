@@ -1,13 +1,25 @@
+import Store from "~/components/views/Store";
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import Header from "~/components/header/Header";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Multi Legged Store" },
+    { name: "description", content: "Welcome to the MultiLegged Store!" },
   ];
 }
 
 export default function Home() {
-  return <Welcome />;
+  return (
+    <main
+      data-testid="HOME.MAIN_CONTAINER:VIEW"
+      aria-label="Home page"
+      className={"h-screen w-screen flex-1 overflow-auto bg-green-800"}
+    >
+      <div className="hidden md:flex">
+        <Header />
+      </div>
+      <Store />
+    </main>
+  );
 }

@@ -1,8 +1,11 @@
+import { useLocation } from "react-router";
 import { SearchIcon } from "../icons/SearchIcon";
 import { ShoppingCartIcon } from "../icons/ShoppingCartIcon";
 import { StoreIcon } from "../icons/StoreIcon";
 
 function Navigation() {
+
+  const location = useLocation();
 
   return (
     <div className="flex w-[100%] h-16 gap-2.5 bg-brown-400 justify-center items-center">

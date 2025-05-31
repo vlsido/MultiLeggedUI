@@ -7,10 +7,10 @@ describe(
   () => {
     test(
       "Shopping cart view renders correctly",
-      async () => {
+      () => {
         render(<ShoppingCart />);
 
-        await screen.findByTestId("SHOPPING_CART.CONTAINER:VIEW");
+        expect(screen.getByTestId("SHOPPING_CART.CONTAINER:VIEW")).toBeInTheDocument();
       }
     );
   }

@@ -1,21 +1,34 @@
-import React, { type ReactElement } from "react"
+import React, { type JSX, type ReactElement } from "react"
 import { render, type RenderOptions } from "@testing-library/react"
+import { Provider } from "react-redux";
+import { setupStore, type AppStore, type RootState } from "~/redux/store";
 
-const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <>
-      {children}
-    </>
-  )
+interface ExtendedRenderOptions extends Omit<RenderOptions, "wrapper"> {
+  preloadedState?: Partial<RootState>
+  store?: AppStore
 }
 
-const customRender = (
+function AllTheProviders(
   ui: ReactElement,
-  options?: Omit<RenderOptions, "wrapper">,
-) => render(
-  ui,
-  { wrapper: AllTheProviders, ...options }
-)
+  {
+    preloadedState = {},
+    store = setupStore(preloadedState),
+    ...renderOptions
+  }: ExtendedRenderOptions = {}
+) {
+
+  function Wrapper({ children }: { children: React.ReactNode }): JSX.Element {
+    return <Provider store={store}>{children}</Provider>
+  }
+
+  return {
+    store,
+    ...render(
+      ui,
+      { wrapper: Wrapper, ...renderOptions }
+    ),
+  }
+}
 
 export * from "@testing-library/react"
-export { customRender as render }
+export { AllTheProviders as render }

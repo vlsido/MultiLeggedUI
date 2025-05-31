@@ -6,7 +6,13 @@
     "build": "react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "test": "jest",
+    "test-unit": "jest app/__tests__/unit",
+    "test-integration": "jest app/__tests__/integration",
+    "test-e2e": "jest app/__tests__/e2e",
+    "test-watch": "jest --watchAll",
+    "coverage": "jest --coverage"
   },
   "dependencies": {
     "@react-router/node": "^7.5.3",

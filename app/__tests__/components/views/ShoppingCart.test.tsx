@@ -13,7 +13,5 @@ describe(
         await screen.findByTestId("SHOPPING_CART.CONTAINER:VIEW");
       }
     );
-
-
   }
 );

@@ -17,11 +17,10 @@ function Header() {
       >
         <img src={logo} className="w-[48px] h-[48px] rounded-[60px]" />
         <div className="flex flex-1 pr-[48px] justify-center">
-
           <Link
             to={{ pathname: "/" }}
           >
-            <div className={"flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[18px] rounded-full items-center " + (location.pathname === "/" ? "bg-white border-2" : "bg-gray-200")}>
+            <div className={"flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[18px] rounded-full items-center " + (location.pathname === "/" ? "bg-white outline-2" : "bg-gray-200")}>
               <StoreIcon />
               Store
             </div>
@@ -44,7 +43,7 @@ function Header() {
           to={{ pathname: "/cart" }}
         >
           <div
-            className={"flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[20px] rounded-full items-center " + (location.pathname === "/cart" ? "bg-white border-2" : "bg-gray-200")}>
+            className={"flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[20px] rounded-full items-center " + (location.pathname === "/cart" ? "bg-white outline-2" : "bg-gray-200")}>
 
             <ShoppingCartIcon />
             $0,00

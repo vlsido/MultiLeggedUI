@@ -45,8 +45,3 @@ button:active {
   opacity: 0.6;
 }
 
-/* Safe area support for bottom navigation (iOS Safari) */
-safe-bottom {
-  padding-bottom: 100;
-}
-

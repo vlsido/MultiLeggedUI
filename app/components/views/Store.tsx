@@ -1,17 +1,20 @@
 import { animalsData } from "~/data/data";
 import { FiltersIcon } from "../icons/FiltersIcon";
 import TextButton from "../buttons/TextButton";
+import { useAppSelector } from "~/hooks/reduxHooks";
+import Footer from "./Footer";
 
 function Store() {
+  const cart = useAppSelector((state) => state.cart.cartItems);
 
   return (
     <div
       data-testid="STORE.CONTAINER:VIEW"
-      className="flex p-2.5 place-content-center overflow-y-auto"
+      className="flex flex-col justify-between overflow-y-auto"
     >
       <div
         data-testid="STORE.CONTAINER.BODY:VIEW"
-        className="flex flex-col items-end max-w-[1000px] gap-2.5">
+        className="flex flex-col p-2.5 self-center items-end max-w-[1000px] gap-2.5">
         <button className="flex flex-row gap-1 text-black py-1 px-2 bg-yellow-100 rounded-full cursor-pointer drop-shadow-md">
           <FiltersIcon />
           Filters
@@ -41,26 +44,26 @@ function Store() {
                         key={animal.name}
                         data-testid={`STORE.CONTAINER.BODY.ANIMAL_DATA.ANIMAL:ITEM-${index}`}
                         className="flex flex-col max-w-[400px] bg-gray-400 p-5 rounded-xl">
-                        <div className="p-5 bg-gray-500 rounded-xl">
-                          <p className="text-black">{animal.name}</p>
+                        <div className="flex flex-col gap-3 p-5 bg-gray-500 rounded-xl items-center">
+                          <p className="text-black text-center">{animal.name}</p>
                           <img src={animal.imageUrl} />
                         </div>
                         <div
                           data-testid={`STORE.CONTAINER.BODY.ANIMAL_DATA.ANIMAL.ITEM-${index}.INFO:VIEW`}
-                          className="text-black">
+                          className="flex flex-col py-2 gap-1 text-black">
                           <p>Names: {animal.names}</p>
                           <p>Origin: {animal.origin}</p>
                           <p>Size: {animal.size}</p>
                           <p>Humidity: {animal.humidity}</p>
                           <p>Environment temp: {animal.environment}</p>
                           <p>Additional info: {animal.info}</p>
-                          <div className="flex flex-col w-full my-2 items-center text-[20px]">
+                          <div className="flex flex-col w-full my-2 gap-2 items-center text-[20px]">
                             {animal.ppu}$/10pcs
                             <TextButton
                               testId={`STORE.CONTAINER.BODY.ANIMAL_DATA.ANIMAL.ITEM-${index}.INFO.ADD_TO_CART:BUTTON`}
                               ariaLabel={`Add ${animal.name} to cart`}
                               text="Add to cart"
-                              containerClassName="px-10 py-4 w-full rounded-full bg-black-500 text-white cursor-pointer"
+                              containerClassName="px-10 py-4 w-full rounded-full bg-black-500 text-white cursor-pointer drop-shadow-md"
                               textClassName="text-[20px]"
                               onPress={() => { }} />
                           </div>
@@ -73,8 +76,8 @@ function Store() {
             );
           })}
         </div>
-
       </div>
+      <Footer />
     </div>
   );
 }

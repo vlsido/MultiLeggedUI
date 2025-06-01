@@ -5,5 +5,13 @@ export default [
   route(
     "cart",
     "routes/cart.tsx"
+  ),
+  route(
+    "privacy",
+    "routes/privacy.tsx"
+  ),
+  route(
+    "contact",
+    "routes/contact.tsx"
   )
 ] satisfies RouteConfig;

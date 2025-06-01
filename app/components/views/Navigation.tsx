@@ -7,9 +7,10 @@ function Navigation() {
 
   const location = useLocation();
 
-  return (
-    <div className="flex w-[100%] h-16 gap-2.5 bg-brown-400 justify-center items-center">
 
+  return (
+    <div className="flex w-[100%] h-16 gap-2.5 bg-brown-400 justify-center items-center"
+    >
       <Link
         to={{ pathname: "/" }}
       >
@@ -28,7 +29,7 @@ function Navigation() {
       <div className={"px-[15px] py-1.25 rounded-full " + (location.pathname === "/search" ? "bg-gray-200" : "bg-gray-200/50")}>
         <SearchIcon />
       </div>
-    </div>
+    </div >
   );
 }
 

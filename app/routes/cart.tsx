@@ -2,6 +2,7 @@ import Header from "~/components/views/Header";
 import type { Route } from "./+types/cart";
 import Navigation from "~/components/views/Navigation";
 import ShoppingCart from "~/components/views/ShoppingCart";
+import Footer from "~/components/views/Footer";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -16,7 +17,7 @@ export default function Cart({
   return (
     <main
       data-testid="CART.MAIN_CONTAINER:VIEW"
-      aria-label="Home page"
+      aria-label="Cart page"
       className={"flex flex-col h-screen w-screen bg-green-800"}
     >
       <div className="hidden md:flex">

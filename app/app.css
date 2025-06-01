@@ -22,6 +22,8 @@
 
   --color-gray-500: #C9C7C7;
 
+  --color-gray-600: #C4C4C4;
+
   --color-black-500: #212221;
 
   --color-blue-500: #1AA3FF;
@@ -36,4 +38,15 @@ body {
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+
 }
+
+button:active {
+  opacity: 0.6;
+}
+
+/* Safe area support for bottom navigation (iOS Safari) */
+safe-bottom {
+  padding-bottom: 100;
+}
+

@@ -33,7 +33,7 @@ export const animalsData: AnimalGroup[] = [
         environment: "18-26 C",
         info: "Large isopod, very popular and recognizable because of their unique coloring. Very sturdy and easy to keep and breed, perfect species for a beginner. Very forgiving when it comes to temperature changes and moisture fluctuations.",
         unitsLeft: 100,
-        ppu: 1
+        ppu: 4.99
       },
     ]
   },

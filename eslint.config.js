@@ -3,9 +3,11 @@ import tseslint from "typescript-eslint";
 import stylistic from "@stylistic/eslint-plugin";
 import react from "eslint-plugin-react";
 import disableAutofix from "eslint-plugin-disable-autofix";
+import pluginQuery from "@tanstack/eslint-plugin-query";
 
 export default [
   ...tseslint.configs.recommended,
+  ...pluginQuery.configs["flat/recommended"],
   {
     files: ["**/*.{jsx,ts,tsx}"],
     plugins: {

@@ -18,6 +18,8 @@
     "@react-router/node": "^7.5.3",
     "@react-router/serve": "^7.5.3",
     "@reduxjs/toolkit": "^2.8.2",
+    "@tanstack/react-query": "^5.79.2",
+    "firebase": "^11.8.1",
     "isbot": "^5.1.27",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -33,6 +35,7 @@
     "@react-router/dev": "^7.5.3",
     "@stylistic/eslint-plugin": "^4.4.0",
     "@tailwindcss/vite": "^4.1.4",
+    "@tanstack/eslint-plugin-query": "^5.78.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -54,14 +57,6 @@
     "typescript-eslint": "^8.33.0",
     "vite": "^6.3.3",
     "vite-tsconfig-paths": "^5.1.4"
-  },
-  "overrides": {
-    "@babel/plugin-transform-classes": {
-      "globals": "11.1.0"
-    },
-    "@babel/traverse": {
-      "globals": "11.1.0"
-    }
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

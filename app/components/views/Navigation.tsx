@@ -15,7 +15,7 @@ function Navigation() {
         <Link
           to={{ pathname: "/" }}
         >
-          <div className={"px-[15px] py-1.25 rounded-full " + (location.pathname === "/" ? "bg-gray-200" : "bg-gray-200/50")}>
+          <div className={"px-[15px] py-1.25 rounded-full " + (location.pathname === "/" ? "bg-gray-200 ring ring-white" : "bg-gray-200 opacity-[0.75]")}>
             <StoreIcon />
           </div>
         </Link>
@@ -23,11 +23,11 @@ function Navigation() {
         <Link
           to={{ pathname: "/cart" }}
         >
-          <div className={"px-[15px] py-1.25 rounded-full " + (location.pathname === "/cart" ? "bg-gray-200" : "bg-gray-200/50")}>
+          <div className={"px-[15px] py-1.25 rounded-full " + (location.pathname === "/cart" ? "bg-gray-200 ring ring-white" : "bg-gray-200 opacity-[0.75]")}>
             <ShoppingCartIcon />
           </div>
         </Link>
-        <div className={"px-[15px] py-1.25 rounded-full " + (location.pathname === "/search" ? "bg-gray-200" : "bg-gray-200/50")}>
+        <div className={"px-[15px] py-1.25 rounded-full " + (location.pathname === "/search" ? "bg-gray-200 ring ring-white" : "bg-gray-200 opacity-[0.75]")}>
           <SearchIcon />
         </div>
       </div>

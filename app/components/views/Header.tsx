@@ -20,7 +20,7 @@ function Header() {
           <Link
             to={{ pathname: "/" }}
           >
-            <div className={"flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[18px] rounded-full items-center " + (location.pathname === "/" ? "bg-white outline-2" : "bg-gray-200")}>
+            <div className={"flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[18px] rounded-full items-center " + (location.pathname === "/" ? "bg-white ring-2 ring-black" : "bg-gray-200")}>
               <StoreIcon />
               Store
             </div>
@@ -43,7 +43,7 @@ function Header() {
           to={{ pathname: "/cart" }}
         >
           <div
-            className={"flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[20px] rounded-full items-center " + (location.pathname === "/cart" ? "bg-white outline-2" : "bg-gray-200")}>
+            className={"flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[20px] rounded-full items-center " + (location.pathname === "/cart" ? "bg-white ring-2 ring-black" : "bg-gray-200")}>
 
             <ShoppingCartIcon />
             $0,00

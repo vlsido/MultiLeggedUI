@@ -9,7 +9,7 @@ function ShoppingCart() {
       data-testid="SHOPPING_CART.CONTAINER:VIEW"
       className="flex flex-1 flex-col justify-between overflow-y-auto"
     >
-      <div className="flex flex-1 justify-center items-center flex-col gap-2.5">
+      <div className="flex flex-1 p-2.5 justify-center items-center flex-col gap-2.5">
         <Notification
           testId="SHOPPING_CART.CONTAINER.NOTIFICATION:VIEW"
           text="Cart is empty!"

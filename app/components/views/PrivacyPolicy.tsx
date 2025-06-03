@@ -3,8 +3,8 @@ import Footer from "./Footer";
 function PrivacyPolicy() {
 
   return (
-    <div className="flex flex-1 flex-col gap-2.5 pt-2.5 justify-between overflow-y-auto" >
-      <div className="flex flex-col max-w-[600px] p-2.5 self-center bg-white text-black rounded-xl">
+    <div className="flex flex-1 flex-col justify-between overflow-y-auto" >
+      <div className="flex flex-col max-w-[600px] my-2.5 p-2.5 self-center bg-white text-black rounded-xl">
         <div id="header" className="px-5 py-2.5">
           <h1 className="text-[20px] font-bold">PRIVACY POLICY</h1>
         </div>

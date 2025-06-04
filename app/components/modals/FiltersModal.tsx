@@ -1,10 +1,40 @@
+import { animalsData } from "~/data/data";
 import TextButton from "../buttons/TextButton";
+import { useCallback, useRef, type ChangeEvent } from "react";
 
 interface FiltersModalProps {
   isVisible: boolean;
+  onApply: (filtersArr: string[]) => void;
 }
 
 function FiltersModal(props: FiltersModalProps) {
+
+  const filtersArr = useRef<string[]>([]);
+
+  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+
+    switch (e.target.checked) {
+      case true:
+        if (filtersArr.current.some((filter) => filter === e.target.id)) {
+          return;
+        } else {
+          filtersArr.current.push(e.target.id);
+        }
+        break;
+      case false:
+        const filterIndex = filtersArr.current.findIndex((filter) => filter === e.target.id);
+        if (filterIndex === -1) return;
+
+        filtersArr.current.splice(filterIndex, 1);
+        break;
+
+    }
+
+  }, []);
+
+  const handleApply = useCallback(() => {
+    props.onApply(filtersArr.current);
+  }, []);
 
   if (props.isVisible === false) {
     return null;
@@ -19,27 +49,29 @@ function FiltersModal(props: FiltersModalProps) {
       >
         <div className="flex flex-col gap-2.5">
           <div className="py-1.25 border-b-1">
-            <h3 className="font-light text-[14px]">Insect types</h3>
+            <h3 className="font-light text-[14px]">Groups</h3>
           </div>
           <div
             id="options"
             className="text-[16px]"
           >
-            <div className="flex gap-2.5 items-center">
-              <input type="checkbox" />
-              <p>Isopods</p>
-            </div>
-            <div className="flex gap-2.5 items-center">
-              <input type="checkbox" />
-              <p>Stick insects</p>
-            </div>
-            <div className="flex gap-2.5 items-center">
-              <input type="checkbox" />
-              <p>Leaf insects</p>
-            </div>
+            {animalsData.map((data) => {
+              return (
+                <div
+                  key={data.group}
+                  className="flex gap-2.5 items-center"
+                >
+                  <input
+                    id={data.group}
+                    type="checkbox"
+                    onChange={onChange}
+                  />
+                  <p>{data.group}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
-
         <div className="flex flex-col gap-2.5">
           <div className="py-1.25 border-b-1">
             <h3 className="font-light text-[14px]">Store Presence</h3>
@@ -49,11 +81,19 @@ function FiltersModal(props: FiltersModalProps) {
             className="text-[16px]"
           >
             <div className="flex gap-2.5 items-center">
-              <input type="checkbox" />
+              <input
+                id="IN STOCK"
+                type="checkbox"
+                onChange={onChange}
+              />
               <p>In stock</p>
             </div>
             <div className="flex gap-2.5 items-center">
-              <input type="checkbox" />
+              <input
+                id="OUT OF STOCK"
+                type="checkbox"
+                onChange={onChange}
+              />
               <p>Out of Stock</p>
             </div>
           </div>
@@ -65,7 +105,7 @@ function FiltersModal(props: FiltersModalProps) {
         text="OK"
         containerClassName="h-[48px] bg-black-500 rounded-full cursor-pointer"
         textClassName="text-white text-[16px]"
-        onPress={() => { }}
+        onPress={handleApply}
       />
     </div>
   );

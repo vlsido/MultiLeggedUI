@@ -24,8 +24,22 @@ function Store() {
   ] = useState<AnimalGroup[]>(animalsData);
 
   const applyFilters = useCallback(
-    () => {
+    (filtersArr: string[]) => {
+      toggleFiltersModal(false);
 
+      if (filtersArr.length === 0) {
+        setAnimals(animalsData);
+        return;
+      }
+
+      const filteredAnimals = animalsData.filter((data) => {
+
+        // TODO: consider in stock/out of stock
+
+        return filtersArr.includes(data.group)
+      });
+
+      setAnimals(filteredAnimals);
     },
     []
   );
@@ -52,7 +66,7 @@ function Store() {
         <div
           data-testid="STORE.CONTAINER.BODY.ANIMAL_DATA:LIST"
           className="flex flex-col gap-2.5">
-          {animalsData.map((
+          {animals.map((
             data, index
           ) => {
             return (

@@ -1,74 +1,108 @@
-import { type AnimalGroup, animalsData } from "~/data/data";
-import { FiltersIcon } from "../icons/FiltersIcon";
-import TextButton from "../buttons/TextButton";
-import { useAppSelector } from "~/hooks/reduxHooks";
-import Footer from "./Footer";
-import FiltersModal from "../modals/FiltersModal";
-import useToggle from "~/hooks/useToggle";
+import { animalsData } from "~/data/data";
+import TextButton from "~/components/ui/buttons/TextButton";
+import { useAppDispatch } from "~/hooks/reduxHooks";
+import Footer from "~/components/ui/Footer";
 import {
   useCallback,
   useState
 } from "react";
+import { pushToCart } from "~/redux/slices/cartSlice";
+import { ArrowLeft } from "~/components/icons/ArrowLeftIcon";
 
 function Store() {
-  const cart = useAppSelector((state) => state.cart.cartItems);
+  const dispatch = useAppDispatch();
 
   const [
-    isFiltersModalVisible,
-    toggleFiltersModal
-  ] = useToggle();
+    group,
+    setGroup
+  ] = useState<string>("");
 
-  const [
-    animals,
-    setAnimals
-  ] = useState<AnimalGroup[]>(animalsData);
-
-  const applyFilters = useCallback(
-    (filtersArr: string[]) => {
-      toggleFiltersModal(false);
-
-      if (filtersArr.length === 0) {
-        setAnimals(animalsData);
-        return;
-      }
-
-      const filteredAnimals = animalsData.filter((data) => {
-
-        // TODO: consider in stock/out of stock
-
-        return filtersArr.includes(data.group)
-      });
-
-      setAnimals(filteredAnimals);
+  const handleAddToCart = useCallback(
+    (id: number) => {
+      dispatch(pushToCart({ id: id, quantity: 1 }));
     },
     []
   );
+
+  const chooseCategory = useCallback(
+    (category: string) => {
+      setGroup(category);
+    },
+    []
+  );
+
+  if (group === "") {
+    return (
+      <div
+        data-testid="STORE.CONTAINER:VIEW"
+        className="flex flex-1 flex-col p-2.5 justify-between overflow-y-auto"
+      >
+        <div
+          data-testid="STORE.CONTAINER.BODY:VIEW"
+          className="flex flex-col p-2.5 self-center items-start max-w-[1000px] gap-2.5 text-black bg-gray-100 rounded-xl ">
+
+          <h1 className="text-[20px] font-bold" >Categories</h1>
+          <div
+            data-testid="STORE.CONTAINER.BODY.ANIMAL_DATA:LIST"
+            className="flex flex-row flex-wrap justify-center gap-2.5 p-4">
+            <button
+              data-testid={"STORE.CONTAINER.BODY.ANIMAL_DATA:ITEM"}
+              className="flex flex-col items-center cursor-pointer"
+              onPointerUp={() => chooseCategory("ALL")}
+            >
+              <div className="px-6 font-bold">
+                <h3>ALL</h3>
+              </div>
+              <div className="flex gap-3 p-5 bg-gray-500 rounded-xl items-center">
+                <img className="h-32 w-32 rounded-full object-cover hover:scale-125" src={"/all_categories.png"} />
+              </div>
+            </button>
+            {animalsData.map((
+              data, index
+            ) => {
+              return (
+                <button
+                  key={index}
+                  data-testid={`STORE.CONTAINER.BODY.ANIMAL_DATA:ITEM-${index}`}
+                  className="flex flex-col items-center cursor-pointer"
+                  onPointerUp={() => chooseCategory(data.group)}
+                >
+                  <div className="px-6  font-bold">
+                    <h3>{data.group}</h3>
+                  </div>
+                  <div className="flex gap-3 p-5 bg-gray-500 rounded-xl items-center">
+                    <img className="h-32 w-32 rounded-full object-cover hover:scale-125" src={data.animals.at(0)?.imageUrl} />
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
       data-testid="STORE.CONTAINER:VIEW"
       className="flex flex-1 flex-col justify-between overflow-y-auto"
     >
-      <FiltersModal
-        isVisible={isFiltersModalVisible}
-        onApply={applyFilters}
-      />
       <div
         data-testid="STORE.CONTAINER.BODY:VIEW"
-        className="flex flex-col p-2.5 self-center items-end max-w-[1000px] gap-2.5">
+        className="flex flex-col p-2.5 self-center items-start max-w-[1000px] gap-2.5">
         <button
-          className="flex flex-row gap-1 text-black py-1 px-2 bg-yellow-100 rounded-full cursor-pointer drop-shadow-md"
-          onPointerDown={() => toggleFiltersModal()}
-        >
-          <FiltersIcon />
-          Filters
+          className="cursor-pointer"
+          onPointerUp={() => setGroup("")}>
+          <ArrowLeft color={"white"} />
         </button>
         <div
           data-testid="STORE.CONTAINER.BODY.ANIMAL_DATA:LIST"
           className="flex flex-col gap-2.5">
-          {animals.map((
+          {animalsData.map((
             data, index
           ) => {
+            if (group !== "ALL" && data.group !== group) return null;
+
             return (
               <div
                 key={index}
@@ -80,9 +114,7 @@ function Store() {
                 <div
                   data-testid={"STORE.CONTAINER.BODY.ANIMAL_DATA.ANIMAL:LIST"}
                   className="flex px-4 py-4 gap-4 flex-wrap justify-center">
-                  {data.animals.map((
-                    animal, index
-                  ) => {
+                  {data.animals.map((animal) => {
                     return (
                       <div
                         key={animal.name}
@@ -112,7 +144,7 @@ function Store() {
                               text="Add to cart"
                               containerClassName="px-10 py-4 w-full rounded-full bg-black-500 text-white cursor-pointer drop-shadow-md"
                               textClassName="text-[20px]"
-                              onPress={() => { }} />
+                              onPress={() => handleAddToCart(animal.id)} />
                           </div>
                         </div>
                       </div>

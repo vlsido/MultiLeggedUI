@@ -1,9 +1,7 @@
-import Header from "~/components/views/Header";
+import Header from "~/components/Navigation/NavigationHeader";
 import type { Route } from "./+types/contact";
-import Navigation from "~/components/views/Navigation";
-import ShoppingCart from "~/components/views/ShoppingCart";
-import Footer from "~/components/views/Footer";
-import ContactBody from "~/components/views/ContactBody";
+import Navigation from "~/components/Navigation/NavigationFooter";
+import ContactBody from "~/components/Pages/Contact/ContactBody";
 
 export function meta({ }: Route.MetaArgs) {
   return [

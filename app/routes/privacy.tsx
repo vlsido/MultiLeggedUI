@@ -1,9 +1,7 @@
-import Header from "~/components/views/Header";
+import Header from "~/components/Navigation/NavigationHeader";
 import type { Route } from "./+types/privacy";
-import Navigation from "~/components/views/Navigation";
-import ShoppingCart from "~/components/views/ShoppingCart";
-import PrivacyPolicy from "~/components/views/PrivacyPolicy";
-import Footer from "~/components/views/Footer";
+import Navigation from "~/components/Navigation/NavigationFooter";
+import PrivacyPolicy from "~/components/Pages/Privacy/PrivacyPolicy";
 
 export function meta({ }: Route.MetaArgs) {
   return [

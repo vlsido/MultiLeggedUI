@@ -1,8 +1,8 @@
 import logo from "~/assets/logos/logo.png";
 import { StoreIcon } from "../icons/StoreIcon";
 import { SearchIcon } from "../icons/SearchIcon";
-import { ShoppingCartIcon } from "../icons/ShoppingCartIcon";
 import { Link, useLocation } from "react-router";
+import ShoppingCartLink from "./ShoppingCartLink";
 
 function Header() {
 
@@ -39,19 +39,7 @@ function Header() {
       <div
         className={"flex flex-1 justify-center"}
       >
-        <Link
-          to={{ pathname: "/cart" }}
-        >
-          <div
-            className={"flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[20px] rounded-full items-center " + (location.pathname === "/cart" ? "bg-white ring-2 ring-black" : "bg-gray-200")}>
-
-            <ShoppingCartIcon />
-            $0,00
-            <div className="text-[16px] opacity-[0.5]">
-              0 items
-            </div>
-          </div>
-        </Link>
+        <ShoppingCartLink />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ export interface AnimalGroup {
 }
 
 export interface Animal {
+  id: number;
   name: string;
   imageUrl: string;
   names: string[];
@@ -16,12 +17,19 @@ export interface Animal {
   ppu: number;
 }
 
+export const groupsData: string[] = [
+  "Isopods",
+  "Stick insects",
+  "Leaf insects"
+];
+
 export const animalsData: AnimalGroup[] = [
   {
     group: "ISOPODS",
     animals: [
 
       {
+        id: 1,
         name: "Porcellio Laevis \"Milkback\"",
         imageUrl: "PorcellioLaevis1.jpg",
         names: [
@@ -41,6 +49,7 @@ export const animalsData: AnimalGroup[] = [
     group: "STICK INSECTS",
     animals: [
       {
+        id: 2,
         name: "Achrioptera Manga \"Metallic Stick Insect\"",
         imageUrl: "AchriopteraManga.jpg",
         names: [
@@ -55,6 +64,7 @@ export const animalsData: AnimalGroup[] = [
         ppu: 1
       },
       {
+        id: 3,
         name: "Medauroidea extradentata",
         imageUrl: "MedauroideaExtradentata.jpg",
         names: [
@@ -74,6 +84,7 @@ export const animalsData: AnimalGroup[] = [
     group: "LEAF INSECTS",
     animals: [
       {
+        id: 4,
         name: "Phyllium letiranti \"Tataba\"",
         imageUrl: "PhylliumLetiranti.jpg",
         names: [

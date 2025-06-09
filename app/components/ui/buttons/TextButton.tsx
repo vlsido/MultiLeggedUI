@@ -22,7 +22,7 @@ function TextButton(props: TextButtonProps) {
       }
       aria-label={props.ariaLabel}
       disabled={props.disabled}
-      onPointerDown={props.onPress}
+      onPointerUp={props.onPress}
     >
       {props.leftSideIcon}
       <p

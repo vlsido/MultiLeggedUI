@@ -9,7 +9,7 @@ import {
 import { pushToCart } from "~/redux/slices/cartSlice";
 import { ArrowLeft } from "~/components/icons/ArrowLeftIcon";
 
-function Store() {
+function StoreBody() {
   const dispatch = useAppDispatch();
 
   const [
@@ -161,4 +161,4 @@ function Store() {
   );
 }
 
-export default Store;
+export default StoreBody;

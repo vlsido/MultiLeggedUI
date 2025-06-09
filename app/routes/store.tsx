@@ -1,4 +1,4 @@
-import Store from "~/components/Pages/Store/Store";
+import StoreBody from "~/components/Pages/Store/StoreBody";
 import type { Route } from "./+types/home";
 import Header from "~/components/Navigation/NavigationHeader";
 import Navigation from "~/components/Navigation/NavigationFooter";
@@ -10,7 +10,7 @@ export function meta({ }: Route.MetaArgs) {
   ];
 }
 
-export default function Home() {
+export default function Store() {
   return (
     <main
       data-testid="HOME.MAIN_CONTAINER:VIEW"
@@ -20,7 +20,7 @@ export default function Home() {
       <div className="hidden md:flex">
         <Header />
       </div>
-      <Store />
+      <StoreBody />
       <div className="md:hidden flex">
         <Navigation />
       </div>

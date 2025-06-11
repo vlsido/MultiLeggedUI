@@ -128,16 +128,12 @@ function StoreBody() {
                           data-testid={`STORE.CONTAINER.BODY.ANIMAL_DATA.ANIMAL.ITEM-${index}.INFO:VIEW`}
                           className="flex flex-col h-full justify-between text-black">
                           <div
-                            className="flex flex-col py-2 gap-1">
-                            <p>Names: {animal.names}</p>
-                            <p>Origin: {animal.origin}</p>
-                            <p>Size: {animal.size}</p>
-                            <p>Humidity: {animal.humidity}</p>
-                            <p>Environment temp: {animal.environment}</p>
-                            <p>Additional info: {animal.info}</p>
+                            className="flex flex-col py-2 gap-1 whitespace-pre-line">
+                            <p>Names: {animal.names} </p>
+                            <p>{animal.description}</p>
                           </div>
-                          <div className="flex flex-col w-full my-2 gap-2 items-center text-[20px]">
-                            {animal.ppu}$/10pcs
+                          <div className="flex flex-col w-full my-2 gap-2 items-center text-[20px] ">
+                            {animal.orderPacks[0].price / 100}$/{animal.orderPacks[0].units}pcs
                             <TextButton
                               testId={`STORE.CONTAINER.BODY.ANIMAL_DATA.ANIMAL.ITEM-${index}.INFO.ADD_TO_CART:BUTTON`}
                               ariaLabel={`Add ${animal.name} to cart`}

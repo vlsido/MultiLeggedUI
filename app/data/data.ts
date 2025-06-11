@@ -8,13 +8,12 @@ export interface Animal {
   name: string;
   imageUrl: string;
   names: string[];
-  origin: string;
-  size: string;
-  humidity: string;
-  environment: string;
-  info: string;
-  unitsLeft: number;
-  ppu: number;
+  description: string;
+  units: number;
+  orderPacks: {
+    units: number,
+    price: number
+  }[];
 }
 
 export const groupsData: string[] = [
@@ -35,13 +34,11 @@ export const animalsData: AnimalGroup[] = [
         names: [
           "Milkback"
         ],
-        origin: "around globe",
-        size: "2-3 cm",
-        humidity: "60%",
-        environment: "18-26 C",
-        info: "Large isopod, very popular and recognizable because of their unique coloring. Very sturdy and easy to keep and breed, perfect species for a beginner. Very forgiving when it comes to temperature changes and moisture fluctuations.",
-        unitsLeft: 100,
-        ppu: 4.99
+        description: "Origin: around globe\n Size: 2 - 3 cm\nHumidity: 60 %\nEnvironment temp: 18 - 26 C\nAdditional info: Large isopod, very popular and recognizable because of their unique coloring.Very sturdy and easy to keep and breed, perfect species for a beginner.Very forgiving when it comes to temperature changes and moisture fluctuations.",
+        units: 100,
+        orderPacks: [
+          { units: 8, price: 899 }
+        ]
       },
     ]
   },
@@ -55,13 +52,11 @@ export const animalsData: AnimalGroup[] = [
         names: [
           "Milkback"
         ],
-        origin: "around globe",
-        size: "2-3 cm",
-        humidity: "60%",
-        environment: "18-26 C",
-        info: "Large isopod, very popular and recognizable because of their unique coloring. Very sturdy and easy to keep and breed, perfect species for a beginner. Very forgiving when it comes to temperature changes and moisture fluctuations.",
-        unitsLeft: 100,
-        ppu: 1
+        description: "Origin: around globe\nSize: 2 - 3 cm\nHumidity: 60 %\nEnvironment temp: 18 - 26 C\nAdditional info: Large isopod, very popular and recognizable because of their unique coloring.Very sturdy and easy to keep and breed, perfect species for a beginner.Very forgiving when it comes to temperature changes and moisture fluctuations.",
+        units: 100,
+        orderPacks: [
+          { units: 8, price: 899 }
+        ]
       },
       {
         id: 3,
@@ -70,13 +65,11 @@ export const animalsData: AnimalGroup[] = [
         names: [
           "Milkback"
         ],
-        origin: "around globe",
-        size: "2-3 cm",
-        humidity: "60%",
-        environment: "18-26 C",
-        info: "Large isopod, very popular and recognizable because of their unique coloring. Very sturdy and easy to keep and breed, perfect species for a beginner. Very forgiving when it comes to temperature changes and moisture fluctuations.",
-        unitsLeft: 100,
-        ppu: 1
+        description: "Origin: around globe\nSize: 2 - 3 cm\nHumidity: 60 %\nEnvironment temp: 18 - 26 C\nAdditional info: Large isopod, very popular and recognizable because of their unique coloring.Very sturdy and easy to keep and breed, perfect species for a beginner.Very forgiving when it comes to temperature changes and moisture fluctuations.",
+        units: 100,
+        orderPacks: [
+          { units: 8, price: 899 }
+        ]
       },
     ]
   },
@@ -90,13 +83,11 @@ export const animalsData: AnimalGroup[] = [
         names: [
           "Milkback"
         ],
-        origin: "around globe",
-        size: "2-3 cm",
-        humidity: "60%",
-        environment: "18-26 C",
-        info: "Large isopod, very popular and recognizable because of their unique coloring. Very sturdy and easy to keep and breed, perfect species for a beginner. Very forgiving when it comes to temperature changes and moisture fluctuations.",
-        unitsLeft: 100,
-        ppu: 1
+        description: "Origin: around globe\nSize: 2 - 3 cm\nHumidity: 60 %\nEnvironment temp: 18 - 26 C\nAdditional info: Large isopod, very popular and recognizable because of their unique coloring.Very sturdy and easy to keep and breed, perfect species for a beginner.Very forgiving when it comes to temperature changes and moisture fluctuations.",
+        units: 100,
+        orderPacks: [
+          { units: 8, price: 899 }
+        ]
       },
     ]
   }

@@ -3,9 +3,12 @@ import {
   configureStore
 } from "@reduxjs/toolkit";
 import cartReducer from "./slices/cartSlice";
+import speciesReducer from "./slices/speciesSlice";
+
 
 const rootReducer = combineReducers({
   cart: cartReducer,
+  species: speciesReducer
 })
 
 export const setupStore = (preloadedState?: Partial<RootState>) => {
@@ -18,6 +21,7 @@ export const setupStore = (preloadedState?: Partial<RootState>) => {
 const store = configureStore({
   reducer: {
     cart: cartReducer,
+    species: speciesReducer
   },
 });
 

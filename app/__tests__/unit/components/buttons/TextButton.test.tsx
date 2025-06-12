@@ -1,5 +1,5 @@
 import { render, screen } from "~/utils/test-utils";
-import TextButton from "~/components/ui/buttons/TextButton";
+import TextButton from "~/components/UI/buttons/TextButton";
 import "@testing-library/jest-dom";
 
 describe(

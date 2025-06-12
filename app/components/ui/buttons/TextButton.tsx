@@ -1,7 +1,6 @@
 import type { ReactElement } from "react";
 
 interface TextButtonProps {
-  testId: string;
   text: string;
   onPress: () => void;
   ariaLabel: string;
@@ -15,7 +14,6 @@ function TextButton(props: TextButtonProps) {
 
   return (
     <button
-      data-testid={props.testId}
       className={props.containerClassName
         ? props.containerClassName
         : "flex flex-row items-center px-[16px] py-[10px] gap-[8px] bg-black rounded-[4px] cursor-pointer"

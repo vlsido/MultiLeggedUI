@@ -1,4 +1,4 @@
-import Footer from "~/components/ui/Footer";
+import Footer from "~/components/UI/Footer";
 
 function PrivacyPolicy() {
 

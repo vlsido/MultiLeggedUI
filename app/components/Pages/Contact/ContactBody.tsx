@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import TextButton from "~/components/ui/buttons/TextButton";
-import { EmailIcon } from "~/components/icons/EmailIcon";
-import Footer from "~/components/ui/Footer";
+import TextButton from "~/components/UI/buttons/TextButton";
+import { EmailIcon } from "~/components/Icons/EmailIcon";
+import Footer from "~/components/UI/Footer";
 
 function ContactBody() {
 

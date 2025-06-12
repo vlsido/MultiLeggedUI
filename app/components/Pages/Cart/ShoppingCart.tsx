@@ -1,5 +1,5 @@
-import Footer from "~/components/ui/Footer";
-import Notification from "~/components/ui/Notification";
+import Footer from "~/components/UI/Footer";
+import Notification from "~/components/UI/Notification";
 
 function ShoppingCart() {
 

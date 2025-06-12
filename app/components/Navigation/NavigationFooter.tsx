@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router";
-import { SearchIcon } from "../icons/SearchIcon";
-import { ShoppingCartIcon } from "../icons/ShoppingCartIcon";
-import { StoreIcon } from "../icons/StoreIcon";
+import { SearchIcon } from "../Icons/SearchIcon";
+import { ShoppingCartIcon } from "../Icons/ShoppingCartIcon";
+import { StoreIcon } from "../Icons/StoreIcon";
 
 function Navigation() {
 

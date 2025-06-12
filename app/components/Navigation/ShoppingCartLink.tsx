@@ -1,19 +1,27 @@
 import { Link, useLocation } from "react-router";
-import { ShoppingCartIcon } from "../icons/ShoppingCartIcon";
+import { ShoppingCartIcon } from "../Icons/ShoppingCartIcon";
 import { useAppSelector } from "~/hooks/reduxHooks";
 
 function ShoppingCartLink() {
   const cart = useAppSelector((state) => state.cart.cartItems);
+  const species = useAppSelector((state) => state.species.species);
 
   const location = useLocation();
 
+  function findPriceById(id: number): number {
+    for (const category of species) {
+      for (const sp of category.species) {
+        const pack = sp.speciesPacks.find((pack) => pack.id === id);
+        if (pack) return pack.price;
+      }
+    }
+    return 0;
+  };
+
   const price = cart.reduce(
     (
-      accum, curValue
-    ) => {
-      accum += 1;
-      return accum;
-    },
+      total, item
+    ) => total + findPriceById(item.id),
     0
   );
 
@@ -25,7 +33,7 @@ function ShoppingCartLink() {
         className={"flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[20px] rounded-full items-center " + (location.pathname === "/cart" ? "bg-white ring-2 ring-black" : "bg-gray-200")}>
 
         <ShoppingCartIcon />
-        ${price}
+        ${price / 100}
         <div className="text-[16px] opacity-[0.5]">
           {cart.length} items
         </div>

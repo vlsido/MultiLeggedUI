@@ -8,9 +8,9 @@ function ShoppingCartLink() {
 
   const location = useLocation();
 
-  function findPriceById(id: number): number {
+  function findPriceByPackId(id: number): number {
     for (const category of species) {
-      for (const sp of category.species) {
+      for (const sp of category.data) {
         const pack = sp.speciesPacks.find((pack) => pack.id === id);
         if (pack) return pack.price;
       }
@@ -21,7 +21,7 @@ function ShoppingCartLink() {
   const price = cart.reduce(
     (
       total, item
-    ) => total + findPriceById(item.id),
+    ) => total + (findPriceByPackId(item.packId) * item.quantity),
     0
   );
 

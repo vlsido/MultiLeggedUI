@@ -1,94 +1,42 @@
-export interface AnimalGroup {
-  group: "ISOPODS" | "STICK INSECTS" | "LEAF INSECTS";
-  animals: Animal[];
-}
+import type { Species } from "~/types/common";
 
-export interface Animal {
-  id: number;
-  name: string;
-  imageUrl: string;
-  names: string[];
-  description: string;
-  units: number;
-  orderPacks: {
-    units: number,
-    price: number
-  }[];
-}
 
-export const groupsData: string[] = [
-  "Isopods",
-  "Stick insects",
-  "Leaf insects"
-];
-
-export const animalsData: AnimalGroup[] = [
+export const animalsData: Species[] = [
   {
-    group: "ISOPODS",
-    animals: [
+    name: "ISOPODS",
+    data: [
 
       {
         id: 1,
-        name: "Porcellio Laevis \"Milkback\"",
-        imageUrl: "PorcellioLaevis1.jpg",
+        imageUrl: "porcellio_laevis_1.png",
         names: [
+          "Porcellio Laevis",
           "Milkback"
         ],
         description: "Origin: around globe\n Size: 2 - 3 cm\nHumidity: 60 %\nEnvironment temp: 18 - 26 C\nAdditional info: Large isopod, very popular and recognizable because of their unique coloring.Very sturdy and easy to keep and breed, perfect species for a beginner.Very forgiving when it comes to temperature changes and moisture fluctuations.",
-        units: 100,
-        orderPacks: [
-          { units: 8, price: 899 }
+        units: 0,
+        speciesPacks: [
+          { id: 1, units: 8, price: 599 }
         ]
       },
     ]
   },
   {
-    group: "STICK INSECTS",
-    animals: [
+    name: "STICK INSECTS",
+    data: [
       {
         id: 2,
-        name: "Achrioptera Manga \"Metallic Stick Insect\"",
-        imageUrl: "AchriopteraManga.jpg",
+        imageUrl: "medauroidea_extradentata_1.png",
         names: [
+          "Medauroidea extradentata",
           "Milkback"
         ],
         description: "Origin: around globe\nSize: 2 - 3 cm\nHumidity: 60 %\nEnvironment temp: 18 - 26 C\nAdditional info: Large isopod, very popular and recognizable because of their unique coloring.Very sturdy and easy to keep and breed, perfect species for a beginner.Very forgiving when it comes to temperature changes and moisture fluctuations.",
-        units: 100,
-        orderPacks: [
-          { units: 8, price: 899 }
-        ]
-      },
-      {
-        id: 3,
-        name: "Medauroidea extradentata",
-        imageUrl: "MedauroideaExtradentata.jpg",
-        names: [
-          "Milkback"
-        ],
-        description: "Origin: around globe\nSize: 2 - 3 cm\nHumidity: 60 %\nEnvironment temp: 18 - 26 C\nAdditional info: Large isopod, very popular and recognizable because of their unique coloring.Very sturdy and easy to keep and breed, perfect species for a beginner.Very forgiving when it comes to temperature changes and moisture fluctuations.",
-        units: 100,
-        orderPacks: [
-          { units: 8, price: 899 }
+        units: 0,
+        speciesPacks: [
+          { id: 3, units: 10, price: 499 }
         ]
       },
     ]
   },
-  {
-    group: "LEAF INSECTS",
-    animals: [
-      {
-        id: 4,
-        name: "Phyllium letiranti \"Tataba\"",
-        imageUrl: "PhylliumLetiranti.jpg",
-        names: [
-          "Milkback"
-        ],
-        description: "Origin: around globe\nSize: 2 - 3 cm\nHumidity: 60 %\nEnvironment temp: 18 - 26 C\nAdditional info: Large isopod, very popular and recognizable because of their unique coloring.Very sturdy and easy to keep and breed, perfect species for a beginner.Very forgiving when it comes to temperature changes and moisture fluctuations.",
-        units: 100,
-        orderPacks: [
-          { units: 8, price: 899 }
-        ]
-      },
-    ]
-  }
 ]

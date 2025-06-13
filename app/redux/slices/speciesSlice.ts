@@ -3,31 +3,16 @@ import {
   createSlice
 } from "@reduxjs/toolkit";
 import { type RootState } from "../store";
+import type { Species } from "~/types/common";
+import { animalsData } from "~/data/data";
 
-export interface Species {
-  name: "ISOPODS" | "STICK INSECTS" | "LEAF INSECTS";
-  species: SpeciesData[];
-}
-
-export interface SpeciesData {
-  id: number;
-  names: string[];
-  imageUrl: string;
-  description: string;
-  units: number;
-  speciesPacks: {
-    id: number,
-    units: number,
-    price: number
-  }[];
-}
 
 export interface SpeciesState {
   species: Species[],
 }
 
 const initialState: SpeciesState = {
-  species: [],
+  species: animalsData,
 }
 
 export const speciesSlice = createSlice({

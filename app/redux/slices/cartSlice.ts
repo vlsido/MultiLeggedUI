@@ -5,7 +5,10 @@ import {
 import { type RootState } from "../store";
 
 interface CartItem {
-  id: number;
+  speciesId: number;
+  packId: number;
+  name: string;
+  imageUrl: string;
   quantity: number;
 }
 
@@ -33,7 +36,12 @@ export const cartSlice = createSlice({
     pushToCart: (
       state, action: PayloadAction<CartItem>
     ) => {
-      state.cartItems.push(action.payload);
+      const itemIndex = state.cartItems.findIndex((ci) => ci.packId === action.payload.packId);
+      if (itemIndex !== -1) {
+        state.cartItems[itemIndex].quantity += 1;
+      } else {
+        state.cartItems.push(action.payload);
+      }
       localStorage.setItem(
         "cartItems",
         JSON.stringify(state.cartItems)
@@ -42,7 +50,33 @@ export const cartSlice = createSlice({
     removeFromCart: (
       state, action: PayloadAction<number>
     ) => {
-      state.cartItems = state.cartItems.filter((item) => item.id !== action.payload)
+      state.cartItems = state.cartItems.filter((item) => item.packId !== action.payload)
+      localStorage.setItem(
+        "cartItems",
+        JSON.stringify(state.cartItems)
+      );
+    },
+    addPack: (
+      state, action: PayloadAction<number>
+    ) => {
+      const itemIndex = state.cartItems.findIndex((ci) => ci.packId === action.payload);
+      if (itemIndex !== -1) {
+        state.cartItems[itemIndex].quantity += 1;
+        localStorage.setItem(
+          "cartItems",
+          JSON.stringify(state.cartItems)
+        );
+      }
+    },
+    removePack: (
+      state, action: PayloadAction<number>
+    ) => {
+      const itemIndex = state.cartItems.findIndex((ci) => ci.packId === action.payload && ci.quantity > 1);
+      if (itemIndex !== -1) {
+        state.cartItems[itemIndex].quantity -= 1;
+      } else {
+        state.cartItems = state.cartItems.filter((item) => item.packId !== action.payload)
+      }
       localStorage.setItem(
         "cartItems",
         JSON.stringify(state.cartItems)
@@ -59,6 +93,8 @@ export const {
   setCartItems,
   pushToCart,
   removeFromCart,
+  addPack,
+  removePack,
   clearCart
 } = cartSlice.actions;
 

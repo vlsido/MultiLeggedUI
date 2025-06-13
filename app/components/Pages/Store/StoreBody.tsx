@@ -19,8 +19,13 @@ function StoreBody() {
   ] = useState<string>("");
 
   const handleAddToCart = useCallback(
-    (id: number) => {
-      dispatch(pushToCart({ id: id, quantity: 1 }));
+    (
+      speciesId: number,
+      packId: number,
+      name: string,
+      imageUrl: string,
+    ) => {
+      dispatch(pushToCart({ speciesId, packId, name, imageUrl, quantity: 1 }));
     },
     []
   );
@@ -31,10 +36,6 @@ function StoreBody() {
     },
     []
   );
-
-  if (species.length === 0) {
-    return <p>Loading</p>
-  }
 
   if (group === "") {
     return (
@@ -73,7 +74,7 @@ function StoreBody() {
                       <h3>{data.name.toUpperCase()}</h3>
                     </div>
                     <div className="flex gap-3 p-5 bg-gray-500 rounded-xl items-center">
-                      <img className="h-32 w-32 rounded-full object-cover hover:scale-125" src={data.species.at(0)?.imageUrl} />
+                      <img className="h-32 w-32 rounded-full object-cover hover:scale-125" src={data.data.at(0)?.imageUrl} />
                     </div>
                   </button>
                 )
@@ -113,7 +114,7 @@ function StoreBody() {
                 </div>
                 <div
                   className="flex px-4 py-4 gap-4 flex-wrap justify-center">
-                  {data.species.map((data) => {
+                  {data.data.map((data) => {
                     return (
                       <div
                         key={data.id}
@@ -136,7 +137,12 @@ function StoreBody() {
                               text="Add to cart"
                               containerClassName="px-10 py-4 w-full rounded-full bg-black-500 text-white cursor-pointer drop-shadow-md"
                               textClassName="text-[20px]"
-                              onPress={() => handleAddToCart(data.speciesPacks[0].id)} />
+                              onPress={() => handleAddToCart(
+                                data.id,
+                                data.speciesPacks[0].id,
+                                data.names[0],
+                                data.imageUrl
+                              )} />
                           </div>
                         </div>
                       </div>

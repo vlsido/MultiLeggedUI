@@ -22,10 +22,11 @@ function StoreBody() {
     (
       speciesId: number,
       packId: number,
+      units: number,
       name: string,
       imageUrl: string,
     ) => {
-      dispatch(pushToCart({ speciesId, packId, name, imageUrl, quantity: 1 }));
+      dispatch(pushToCart({ speciesId, packId, units, name, imageUrl, quantity: 1 }));
     },
     []
   );
@@ -140,6 +141,7 @@ function StoreBody() {
                               onPress={() => handleAddToCart(
                                 data.id,
                                 data.speciesPacks[0].id,
+                                data.speciesPacks[0].units,
                                 data.names[0],
                                 data.imageUrl
                               )} />

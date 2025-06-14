@@ -7,6 +7,7 @@ import { type RootState } from "../store";
 interface CartItem {
   speciesId: number;
   packId: number;
+  units: number;
   name: string;
   imageUrl: string;
   quantity: number;

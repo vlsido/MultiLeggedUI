@@ -33,7 +33,7 @@ function ShoppingCartLink() {
         className={"flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[20px] rounded-full items-center " + (location.pathname === "/cart" ? "bg-white ring-2 ring-black" : "bg-gray-200")}>
 
         <ShoppingCartIcon />
-        ${price / 100}
+        ${(price / 100).toFixed(2)}
         <div className="text-[16px] opacity-[0.5]">
           {cart.length} items
         </div>

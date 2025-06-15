@@ -29,7 +29,7 @@ function QuantitySelector(props: QuantitySelectorProps) {
   );
 
   return (
-    <div className="flex flex-1 items-center justify-center ">
+    <div className="flex md:flex-1 items-center justify-center ">
       <button
         className="p-2.5 cursor-pointer border-1 bg-gray-400"
         onPointerUp={handleRemove}

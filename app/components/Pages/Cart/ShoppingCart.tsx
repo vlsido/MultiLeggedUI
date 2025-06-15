@@ -112,8 +112,9 @@ function ShoppingCart() {
                     </div>
                     <div className="flex md:flex-1 w-[100%] justify-between">
                       <p className="md:hidden">Sub-total:</p>
-                      <p className="md:flex-1 text-center">
+                      <p className="md:flex-1 relative text-center">
                         ${(price * item.quantity).toFixed(2)}
+                        <p className="hidden md:flex absolute top-[-20px] w-full justify-center opacity-90">(sub-total)</p>
                       </p>
                     </div>
                     <button

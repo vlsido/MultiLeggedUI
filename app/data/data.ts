@@ -13,7 +13,7 @@ export const animalsData: Species[] = [
           "Porcellio Laevis",
           "Milkback"
         ],
-        description: "Origin: around globe\n Size: 2 - 3 cm\nHumidity: 60 %\nEnvironment temp: 18 - 26 C\nAdditional info: Large isopod, very popular and recognizable because of their unique coloring.Very sturdy and easy to keep and breed, perfect species for a beginner.Very forgiving when it comes to temperature changes and moisture fluctuations.",
+        description: "Origin: around globe\n Size: 2 - 3 cm\nHumidity: 60 %\nEnvironment temp: 18 - 26 C\nAdditional info: Large isopod, very popular and recognizable because of their unique coloring. Very sturdy and easy to keep and breed, perfect species for a beginner. Very forgiving when it comes to temperature changes and moisture fluctuations.",
         units: 0,
         speciesPacks: [
           { id: 1, units: 8, price: 599 }

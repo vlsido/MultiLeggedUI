@@ -9,13 +9,16 @@ export interface SpeciesData {
   imageUrl: string;
   description: string;
   units: number;
-  speciesPacks: {
-    id: number,
-    units: number,
-    price: number
-  }[];
+  speciesPacks: SpeciesPack[];
 }
 
 export interface SpeciesState {
   species: Species[],
+}
+
+export interface SpeciesPack {
+  id: number;
+  units: number;
+  price: number;
+  form: string;
 }

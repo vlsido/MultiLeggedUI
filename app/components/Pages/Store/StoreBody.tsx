@@ -7,6 +7,7 @@ import {
 } from "react";
 import { pushToCart } from "~/redux/slices/cartSlice";
 import { ArrowLeft } from "~/components/Icons/ArrowLeftIcon";
+import { ChevronIcon } from "~/components/Icons/ChevronIcon";
 
 function StoreBody() {
   const species = useAppSelector((state) => state.species.species);
@@ -25,8 +26,9 @@ function StoreBody() {
       units: number,
       name: string,
       imageUrl: string,
+      form: string
     ) => {
-      dispatch(pushToCart({ speciesId, packId, units, name, imageUrl, quantity: 1 }));
+      dispatch(pushToCart({ speciesId, packId, units, name, imageUrl, form, quantity: 1 }));
     },
     []
   );
@@ -93,14 +95,16 @@ function StoreBody() {
       className="flex flex-1 flex-col justify-between overflow-y-auto"
     >
       <div
-        className="flex flex-col p-2.5 self-center items-start max-w-[1000px] gap-2.5">
-        <button
-          className="cursor-pointer"
-          onPointerUp={() => setGroup("")}>
-          <ArrowLeft color={"white"} />
-        </button>
+        className="flex flex-col w-full items-center p-2.5 self-center items-start max-w-[1000px] gap-2.5">
+        <div className="w-full">
+          <button
+            className="cursor-pointer "
+            onPointerUp={() => setGroup("")}>
+            <ArrowLeft color={"white"} />
+          </button>
+        </div>
         <div
-          className="flex flex-col gap-2.5">
+          className="flex flex-col self-center gap-2.5">
           {species.map((
             data, index
           ) => {
@@ -131,8 +135,17 @@ function StoreBody() {
                             <p>Names: {data.names.join(", ")} </p>
                             <p>{data.description}</p>
                           </div>
-                          <div className="flex flex-col w-full my-2 gap-2 items-center text-[20px] ">
-                            {data.speciesPacks[0].price / 100}$/{data.speciesPacks[0].units}pcs
+                          <div className="flex flex-col w-full my-2 gap-2 items-center text-[20px]">
+                            <div className="relative w-full inline-block text-left">
+                              <div>
+                                <button type="button" className="inline-flex w-full justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold w-full text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                                  <p className="animate-[wiggle_1s_ease-in-out_infinite]">
+                                    {data.speciesPacks[0].price / 100}$/{data.speciesPacks[0].units}pcs ({data.speciesPacks[0].form})
+                                  </p>
+                                  <ChevronIcon />
+                                </button>
+                              </div>
+                            </div>
                             <TextButton
                               ariaLabel={`Add ${data.names[0]} to cart`}
                               text="Add to cart"
@@ -143,7 +156,8 @@ function StoreBody() {
                                 data.speciesPacks[0].id,
                                 data.speciesPacks[0].units,
                                 data.names[0],
-                                data.imageUrl
+                                data.imageUrl,
+                                data.speciesPacks[0].form
                               )} />
                           </div>
                         </div>

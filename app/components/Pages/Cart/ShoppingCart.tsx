@@ -94,7 +94,7 @@ function ShoppingCart() {
                       <img src={item.imageUrl} className="h-32 w-32 rounded-xl object-contain" />
                     </div>
                     <p className="flex-1 underline text-center">
-                      {item.name} x {item.units}
+                      {item.name} x {item.units} ({item.form})
                     </p>
                     <div className="flex md:flex-1 w-[100%] justify-between">
                       <p className="md:hidden">Price:</p>

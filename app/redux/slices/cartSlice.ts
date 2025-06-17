@@ -11,6 +11,7 @@ interface CartItem {
   name: string;
   imageUrl: string;
   quantity: number;
+  form: string;
 }
 
 export interface CartState {

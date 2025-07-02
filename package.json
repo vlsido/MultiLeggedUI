@@ -34,7 +34,6 @@
     "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
     "@react-router/dev": "^7.5.3",
-    "@stylistic/eslint-plugin": "^4.4.0",
     "@tailwindcss/vite": "^4.1.4",
     "@tanstack/eslint-plugin-query": "^5.78.0",
     "@testing-library/dom": "^10.4.0",

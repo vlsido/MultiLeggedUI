@@ -9,6 +9,10 @@ export interface Animal {
   id: number;
   name: string;
   imageUrl: string;
+  origin: string | null;
+  size: string | null;
+  humidity: string | null;
+  temperature: string | null;
   description: string;
   units: number;
   animalPrices: AnimalPrice[];
@@ -17,7 +21,7 @@ export interface Animal {
 
 export interface AnimalPrice {
   id: number;
-  min_quantity: number;
-  max_quantity: number;
-  cents_per_unit: number;
+  minQuantity: number;
+  maxQuantity: number | null;
+  centsPerUnit: number;
 }

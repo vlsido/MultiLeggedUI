@@ -29,7 +29,7 @@ function QuantitySelectorPill(props: QuantitySelectorPillProps) {
 
   const onInputChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      const number = parseInt(e.target.value);
+      const number = Number(e.target.value);
 
       if (isNaN(number)) return;
 

@@ -4,15 +4,15 @@ import { useAppSelector } from "~/hooks/reduxHooks";
 
 function ShoppingCartLink() {
   const cart = useAppSelector((state) => state.cart.cartItems);
-  const species = useAppSelector((state) => state.species.species);
+  const animals = useAppSelector((state) => state.animals.data);
 
   const location = useLocation();
 
   function findPriceByPackId(id: number): number {
-    for (const category of species) {
-      for (const sp of category.data) {
-        const pack = sp.speciesPacks.find((pack) => pack.id === id);
-        if (pack) return pack.price;
+    for (const category of animals) {
+      for (const ap of category.animalPrices) {
+        const price = ap.animalsPrices.find((pack) => price.id === id);
+        if (price) return price.price;
       }
     }
     return 0;
@@ -21,7 +21,7 @@ function ShoppingCartLink() {
   const price = cart.reduce(
     (
       total, item
-    ) => total + (findPriceByPackId(item.packId) * item.quantity),
+    ) => total + (findPriceByPackId(item.priceId) * item.quantity),
     0
   );
 

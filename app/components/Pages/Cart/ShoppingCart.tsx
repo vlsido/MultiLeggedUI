@@ -27,22 +27,22 @@ function ShoppingCart() {
   };
 
   const addQuantity = useCallback(
-    (packId: number) => {
-      dispatch(addPack(packId));
+    (priceId: number) => {
+      dispatch(addPack(priceId));
     },
     []
   );
 
   const removeQuantity = useCallback(
-    (packId: number) => {
-      dispatch(removePack(packId));
+    (priceId: number) => {
+      dispatch(removePack(priceId));
     },
     []
   );
 
   const removeItem = useCallback(
-    (packId: number) => {
-      dispatch(removeFromCart(packId));
+    (priceId: number) => {
+      dispatch(removeFromCart(priceId));
     },
     []
   );
@@ -79,15 +79,15 @@ function ShoppingCart() {
             <div className="flex flex-col max-w-[1000px] w-[100%] bg-white">
               {cart.map((item) => {
 
-                const price = findPriceByPackId(item.packId) / 100;
+                const price = findPriceByPackId(item.priceId) / 100;
 
                 return (
                   <div
-                    key={item.packId}
+                    key={item.priceId}
                     className="flex flex-col md:flex-row justify-between items-center px-10 md:px-2.5 py-4 gap-2.5 border-1 text-black">
                     <button
                       className="flex w-[100%] justify-end md:hidden cursor-pointer"
-                      onPointerUp={() => removeItem(item.packId)}>
+                      onPointerUp={() => removeItem(item.priceId)}>
                       <TrashIcon />
                     </button>
                     <div className="flex-1">
@@ -106,8 +106,8 @@ function ShoppingCart() {
                       <p className="md:hidden">Quantity:</p>
                       <QuantitySelector
                         initialQuantity={item.quantity}
-                        onAdd={() => addQuantity(item.packId)}
-                        onRemove={() => removeQuantity(item.packId)}
+                        onAdd={() => addQuantity(item.priceId)}
+                        onRemove={() => removeQuantity(item.priceId)}
                       />
                     </div>
                     <div className="flex md:flex-1 w-[100%] justify-between">
@@ -119,7 +119,7 @@ function ShoppingCart() {
                     </div>
                     <button
                       className="hidden md:flex cursor-pointer"
-                      onPointerUp={() => removeItem(item.packId)}>
+                      onPointerUp={() => removeItem(item.priceId)}>
                       <TrashIcon />
                     </button>
                   </div>

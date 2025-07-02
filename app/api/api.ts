@@ -1,5 +1,5 @@
-export async function fetchSpecies() {
-  const response = await fetch("http://localhost:8080/api/species");
+export async function fetchAnimals() {
+  const response = await fetch("http://localhost:8080/api/animals");
 
   if (!response.ok) {
     throw new Error("Error fetching species data");

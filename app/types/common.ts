@@ -1,24 +1,23 @@
-export interface Species {
-  name: "ISOPODS" | "STICK INSECTS" | "LEAF INSECTS";
-  data: SpeciesData[];
+export type AnimalCategory = "ISOPODS" | "STICK INSECTS" | "LEAD INSECTS ";
+
+export interface CategoryAnimals {
+  category: AnimalCategory;
+  animals: Animal[];
 }
 
-export interface SpeciesData {
+export interface Animal {
   id: number;
-  names: string[];
+  name: string;
   imageUrl: string;
   description: string;
   units: number;
-  speciesPacks: SpeciesPack[];
-}
-
-export interface SpeciesState {
-  species: Species[],
-}
-
-export interface SpeciesPack {
-  id: number;
-  units: number;
-  price: number;
+  animalPrices: AnimalPrice[];
   form: string;
+}
+
+export interface AnimalPrice {
+  id: number;
+  min_quantity: number;
+  max_quantity: number;
+  cents_per_unit: number;
 }

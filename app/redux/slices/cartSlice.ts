@@ -3,15 +3,17 @@ import {
   createSlice
 } from "@reduxjs/toolkit";
 import { type RootState } from "../store";
+import type { AnimalCategory } from "~/types/common";
 
 interface CartItem {
-  speciesId: number;
-  packId: number;
+  animalId: number;
+  priceId: number;
   units: number;
   name: string;
   imageUrl: string;
-  quantity: number;
   form: string;
+  category: AnimalCategory;
+  quantity: number;
 }
 
 export interface CartState {
@@ -38,7 +40,7 @@ export const cartSlice = createSlice({
     pushToCart: (
       state, action: PayloadAction<CartItem>
     ) => {
-      const itemIndex = state.cartItems.findIndex((ci) => ci.packId === action.payload.packId);
+      const itemIndex = state.cartItems.findIndex((ci) => ci.priceId === action.payload.priceId);
       if (itemIndex !== -1) {
         state.cartItems[itemIndex].quantity += 1;
       } else {
@@ -52,7 +54,7 @@ export const cartSlice = createSlice({
     removeFromCart: (
       state, action: PayloadAction<number>
     ) => {
-      state.cartItems = state.cartItems.filter((item) => item.packId !== action.payload)
+      state.cartItems = state.cartItems.filter((item) => item.priceId !== action.payload)
       localStorage.setItem(
         "cartItems",
         JSON.stringify(state.cartItems)
@@ -61,7 +63,7 @@ export const cartSlice = createSlice({
     addPack: (
       state, action: PayloadAction<number>
     ) => {
-      const itemIndex = state.cartItems.findIndex((ci) => ci.packId === action.payload);
+      const itemIndex = state.cartItems.findIndex((ci) => ci.priceId === action.payload);
       if (itemIndex !== -1) {
         state.cartItems[itemIndex].quantity += 1;
         localStorage.setItem(
@@ -73,11 +75,11 @@ export const cartSlice = createSlice({
     removePack: (
       state, action: PayloadAction<number>
     ) => {
-      const itemIndex = state.cartItems.findIndex((ci) => ci.packId === action.payload && ci.quantity > 1);
+      const itemIndex = state.cartItems.findIndex((ci) => ci.priceId === action.payload && ci.quantity > 1);
       if (itemIndex !== -1) {
         state.cartItems[itemIndex].quantity -= 1;
       } else {
-        state.cartItems = state.cartItems.filter((item) => item.packId !== action.payload)
+        state.cartItems = state.cartItems.filter((item) => item.priceId !== action.payload)
       }
       localStorage.setItem(
         "cartItems",

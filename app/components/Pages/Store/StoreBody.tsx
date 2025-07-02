@@ -8,39 +8,34 @@ import {
 import { pushToCart } from "~/redux/slices/cartSlice";
 import { ArrowLeft } from "~/components/Icons/ArrowLeftIcon";
 import { ChevronIcon } from "~/components/Icons/ChevronIcon";
+import type { AnimalCategory } from "~/types/common";
 
 function StoreBody() {
-  const species = useAppSelector((state) => state.species.species);
+  const categoriesAnimals = useAppSelector((state) => state.animals.categoriesAnimals);
 
   const dispatch = useAppDispatch();
 
   const [
-    group,
-    setGroup
+    category,
+    setCategory
   ] = useState<string>("");
 
   const handleAddToCart = useCallback(
     (
-      speciesId: number,
-      packId: number,
+      animalId: number,
+      priceId: number,
       units: number,
       name: string,
       imageUrl: string,
-      form: string
+      form: string,
+      category: AnimalCategory
     ) => {
-      dispatch(pushToCart({ speciesId, packId, units, name, imageUrl, form, quantity: 1 }));
+      dispatch(pushToCart({ animalId, priceId, units, name, imageUrl, form, category, quantity: 1 }));
     },
     []
   );
 
-  const chooseCategory = useCallback(
-    (category: string) => {
-      setGroup(category);
-    },
-    []
-  );
-
-  if (group === "") {
+  if (category === "") {
     return (
       <div
         className="flex flex-1 flex-col justify-between overflow-y-auto"
@@ -55,7 +50,7 @@ function StoreBody() {
               className="flex flex-row flex-wrap justify-center gap-2.5 p-4">
               <button
                 className="flex flex-col items-center cursor-pointer"
-                onPointerUp={() => chooseCategory("ALL")}
+                onPointerUp={() => setCategory("ALL")}
               >
                 <div className="px-6 font-bold">
                   <h3>ALL</h3>
@@ -64,20 +59,20 @@ function StoreBody() {
                   <img className="h-32 w-32 rounded-full object-cover hover:scale-125" src={"/all_categories.png"} />
                 </div>
               </button>
-              {species.map((
-                data, index
+              {categoriesAnimals.map((
+                categoryAnimals, index
               ) => {
                 return (
                   <button
                     key={index}
                     className="flex flex-col items-center cursor-pointer"
-                    onPointerUp={() => chooseCategory(data.name)}
+                    onPointerUp={() => setCategory(categoryAnimals.category)}
                   >
                     <div className="px-6  font-bold">
-                      <h3>{data.name.toUpperCase()}</h3>
+                      <h3>{categoryAnimals.category.toUpperCase()}</h3>
                     </div>
                     <div className="flex gap-3 p-5 bg-gray-500 rounded-xl items-center">
-                      <img className="h-32 w-32 rounded-full object-cover hover:scale-125" src={data.data.at(0)?.imageUrl} />
+                      <img className="h-32 w-32 rounded-full object-cover hover:scale-125" src={categoryAnimals.animals[0].imageUrl} />
                     </div>
                   </button>
                 )
@@ -99,66 +94,55 @@ function StoreBody() {
         <div className="w-full">
           <button
             className="cursor-pointer "
-            onPointerUp={() => setGroup("")}>
+            onPointerUp={() => setCategory("")}>
             <ArrowLeft color={"white"} />
           </button>
         </div>
         <div
           className="flex flex-col self-center gap-2.5">
-          {species.map((
-            data, index
+          {categoriesAnimals.map((
+            categoryAnimals, index
           ) => {
-            if (group !== "ALL" && data.name !== group) return null;
+            if (category !== "ALL" && categoryAnimals.category !== category) return null;
 
             return (
               <div
                 key={index}
                 className="bg-gray-100 rounded-xl">
                 <div className="px-6 py-2 text-black font-bold">
-                  {data.name.toUpperCase()}
+                  {categoryAnimals.category.toUpperCase()}
                 </div>
                 <div
                   className="flex px-4 py-4 gap-4 flex-wrap justify-center">
-                  {data.data.map((data) => {
+                  {categoryAnimals.animals.map((data) => {
                     return (
                       <div
                         key={data.id}
                         className="flex flex-col max-w-[400px] bg-gray-400 p-5 rounded-xl">
                         <div className="flex flex-col gap-3 p-5 bg-gray-500 rounded-xl items-center">
-                          <p className="text-black text-center">{data.names[0]}</p>
+                          <p className="text-black text-center">{data.name}</p>
                           <img src={data.imageUrl} />
                         </div>
                         <div
                           className="flex flex-col h-full justify-between text-black">
                           <div
                             className="flex flex-col py-2 gap-1 whitespace-pre-line">
-                            <p>Names: {data.names.join(", ")} </p>
                             <p>{data.description}</p>
                           </div>
                           <div className="flex flex-col w-full my-2 gap-2 items-center text-[20px]">
                             <div className="relative w-full inline-block text-left">
                               <div>
                                 <button type="button" className="inline-flex w-full justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold w-full text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
-                                  <p className="animate-[wiggle_1s_ease-in-out_infinite]">
-                                    {data.speciesPacks[0].price / 100}$/{data.speciesPacks[0].units}pcs ({data.speciesPacks[0].form})
-                                  </p>
                                   <ChevronIcon />
                                 </button>
                               </div>
                             </div>
                             <TextButton
-                              ariaLabel={`Add ${data.names[0]} to cart`}
+                              ariaLabel={`Add ${data.name} to cart`}
                               text="Add to cart"
                               containerClassName="px-10 py-4 w-full rounded-full bg-black-500 text-white cursor-pointer drop-shadow-md"
                               textClassName="text-[20px]"
-                              onPress={() => handleAddToCart(
-                                data.id,
-                                data.speciesPacks[0].id,
-                                data.speciesPacks[0].units,
-                                data.names[0],
-                                data.imageUrl,
-                                data.speciesPacks[0].form
-                              )} />
+                              onPress={() => { }} />
                           </div>
                         </div>
                       </div>

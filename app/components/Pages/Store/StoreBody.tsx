@@ -9,6 +9,11 @@ import { pushToCart } from "~/redux/slices/cartSlice";
 import { ArrowLeft } from "~/components/Icons/ArrowLeftIcon";
 import { ChevronIcon } from "~/components/Icons/ChevronIcon";
 import type { AnimalCategory } from "~/types/common";
+import RulerIcon from "~/components/Icons/RulerIcon";
+import WorldIcon from "~/components/Icons/WorldIcon";
+import HumidityIcon from "~/components/Icons/HumidityIcon";
+import TemperatureIcon from "~/components/Icons/TemperatureIcon";
+import PricePackages from "./PricePackages";
 
 function StoreBody() {
   const categoriesAnimals = useAppSelector((state) => state.animals.categoriesAnimals);
@@ -84,7 +89,7 @@ function StoreBody() {
       </div>
     );
   }
-
+  console.log(categoriesAnimals);
   return (
     <div
       className="flex flex-1 flex-col justify-between overflow-y-auto"
@@ -127,16 +132,36 @@ function StoreBody() {
                           className="flex flex-col h-full justify-between text-black">
                           <div
                             className="flex flex-col py-2 gap-1 whitespace-pre-line">
+                            {data.origin && (
+                              <div className="flex gap-1.5">
+                                <WorldIcon />
+                                <p>Origin <span className="font-bold"> {data.origin}</span></p>
+                              </div>
+                            )}
+                            {data.size && (
+                              <div className="flex gap-1.5">
+                                <RulerIcon />
+                                <p>Size up to <span className="font-bold"> {data.size}</span></p>
+                              </div>
+                            )}
+                            {data.humidity && (
+                              <div className="flex gap-1.5">
+                                <HumidityIcon />
+                                <p>Humidity <span className="font-bold"> {data.humidity}</span></p>
+                              </div>
+                            )}
+                            {data.temperature && (
+                              <div className="flex gap-1.5">
+                                <TemperatureIcon />
+                                <p>Environment temp<span className="font-bold"> {data.temperature}</span></p>
+                              </div>
+                            )}
+
+                            <ChevronIcon />
                             <p>{data.description}</p>
                           </div>
                           <div className="flex flex-col w-full my-2 gap-2 items-center text-[20px]">
-                            <div className="relative w-full inline-block text-left">
-                              <div>
-                                <button type="button" className="inline-flex w-full justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold w-full text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
-                                  <ChevronIcon />
-                                </button>
-                              </div>
-                            </div>
+                            <PricePackages animal={data} />
                             <TextButton
                               ariaLabel={`Add ${data.name} to cart`}
                               text="Add to cart"

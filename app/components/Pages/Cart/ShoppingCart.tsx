@@ -4,23 +4,23 @@ import { TrashIcon } from "~/components/Icons/TrashIcon";
 import TextButton from "~/components/UI/buttons/TextButton";
 import Footer from "~/components/UI/Footer";
 import Notification from "~/components/UI/Notification";
-import QuantitySelector from "~/components/UI/QuantitySelector";
+import QuantitySelector from "~/components/UI/selectors/QuantitySelectorFlat";
 import { useAppDispatch, useAppSelector } from "~/hooks/reduxHooks";
 import { addPack, removeFromCart, removePack } from "~/redux/slices/cartSlice";
 
 function ShoppingCart() {
   const cart = useAppSelector((state) => state.cart.cartItems);
-  const species = useAppSelector((state) => state.species.species);
+  const categoriesAnimals = useAppSelector((state) => state.animals.categoriesAnimals);
 
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
   function findPriceByPackId(id: number): number {
-    for (const category of species) {
-      for (const sp of category.data) {
-        const pack = sp.speciesPacks.find((pack) => pack.id === id);
-        if (pack) return pack.price;
+    for (const category of categoriesAnimals) {
+      for (const cd of category.animals) {
+        const pricePackage = cd.animalPrices.find((pricePackage) => pricePackage.id === id);
+        if (pricePackage) return pricePackage.centsPerUnit;
       }
     }
     return 0;

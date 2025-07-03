@@ -94,7 +94,7 @@ function StoreBody() {
       </div>
     );
   }
-  console.log(categoriesAnimals);
+
   return (
     <div className="flex flex-1 flex-col justify-between overflow-y-auto">
       <div className="flex flex-col w-full items-center p-2.5 self-center items-start max-w-[1000px] gap-2.5">
@@ -188,7 +188,7 @@ function StoreBody() {
                               text="Add to cart"
                               containerClassName="px-10 py-4 w-full rounded-full bg-black-500 text-white cursor-pointer drop-shadow-md"
                               textClassName="text-[20px]"
-                              onPress={() => {}}
+                              onPress={() => handleAddToCart()}
                             />
                           </div>
                         </div>

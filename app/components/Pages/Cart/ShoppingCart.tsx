@@ -10,7 +10,9 @@ import { addPack, removeFromCart, removePack } from "~/redux/slices/cartSlice";
 
 function ShoppingCart() {
   const cart = useAppSelector((state) => state.cart.cartItems);
-  const categoriesAnimals = useAppSelector((state) => state.animals.categoriesAnimals);
+  const categoriesAnimals = useAppSelector(
+    (state) => state.animals.categoriesAnimals,
+  );
 
   const dispatch = useAppDispatch();
 
@@ -19,47 +21,34 @@ function ShoppingCart() {
   function findPriceByPackId(id: number): number {
     for (const category of categoriesAnimals) {
       for (const cd of category.animals) {
-        const pricePackage = cd.animalPrices.find((pricePackage) => pricePackage.id === id);
+        const pricePackage = cd.animalPrices.find(
+          (pricePackage) => pricePackage.id === id,
+        );
         if (pricePackage) return pricePackage.centsPerUnit;
       }
     }
     return 0;
-  };
+  }
 
-  const addQuantity = useCallback(
-    (priceId: number) => {
-      dispatch(addPack(priceId));
-    },
-    []
-  );
+  const addQuantity = useCallback((priceId: number) => {
+    dispatch(addPack(priceId));
+  }, []);
 
-  const removeQuantity = useCallback(
-    (priceId: number) => {
-      dispatch(removePack(priceId));
-    },
-    []
-  );
+  const removeQuantity = useCallback((priceId: number) => {
+    dispatch(removePack(priceId));
+  }, []);
 
-  const removeItem = useCallback(
-    (priceId: number) => {
-      dispatch(removeFromCart(priceId));
-    },
-    []
-  );
+  const removeItem = useCallback((priceId: number) => {
+    dispatch(removeFromCart(priceId));
+  }, []);
 
-  const handleGoBack = useCallback(
-    () => {
-      return navigate("/");
-    },
-    []
-  );
+  const handleGoBack = useCallback(() => {
+    return navigate("/");
+  }, []);
 
-  const handleGoCheckout = useCallback(
-    () => {
-      return navigate("/checkout");
-    },
-    []
-  );
+  const handleGoCheckout = useCallback(() => {
+    return navigate("/checkout");
+  }, []);
 
   return (
     <div
@@ -75,32 +64,36 @@ function ShoppingCart() {
           />
         ) : (
           <>
-            <p className="flex md:hidden text-[20px] self-start font-bold">CART</p>
+            <p className="flex md:hidden text-[20px] self-start font-bold">
+              CART
+            </p>
             <div className="flex flex-col max-w-[1000px] w-[100%] bg-white">
               {cart.map((item) => {
-
                 const price = findPriceByPackId(item.priceId) / 100;
 
                 return (
                   <div
                     key={item.priceId}
-                    className="flex flex-col md:flex-row justify-between items-center px-10 md:px-2.5 py-4 gap-2.5 border-1 text-black">
+                    className="flex flex-col md:flex-row justify-between items-center px-10 md:px-2.5 py-4 gap-2.5 border-1 text-black"
+                  >
                     <button
                       className="flex w-[100%] justify-end md:hidden cursor-pointer"
-                      onPointerUp={() => removeItem(item.priceId)}>
+                      onPointerUp={() => removeItem(item.priceId)}
+                    >
                       <TrashIcon />
                     </button>
                     <div className="flex-1">
-                      <img src={item.imageUrl} className="h-32 w-32 rounded-xl object-contain" />
+                      <img
+                        src={item.imageUrl}
+                        className="h-32 w-32 rounded-xl object-contain"
+                      />
                     </div>
                     <p className="flex-1 underline text-center">
                       {item.name} x {item.units} ({item.form})
                     </p>
                     <div className="flex md:flex-1 w-[100%] justify-between">
                       <p className="md:hidden">Price:</p>
-                      <p className="md:flex-1 text-center">
-                        ${price}
-                      </p>
+                      <p className="md:flex-1 text-center">${price}</p>
                     </div>
                     <div className="flex md:flex-1 w-[100%] justify-between items-center">
                       <p className="md:hidden">Quantity:</p>
@@ -114,12 +107,15 @@ function ShoppingCart() {
                       <p className="md:hidden">Sub-total:</p>
                       <p className="md:flex-1 relative text-center">
                         ${(price * item.quantity).toFixed(2)}
-                        <p className="hidden md:flex absolute top-[-20px] w-full justify-center opacity-90">(sub-total)</p>
+                        <p className="hidden md:flex absolute top-[-20px] w-full justify-center opacity-90">
+                          (sub-total)
+                        </p>
                       </p>
                     </div>
                     <button
                       className="hidden md:flex cursor-pointer"
-                      onPointerUp={() => removeItem(item.priceId)}>
+                      onPointerUp={() => removeItem(item.priceId)}
+                    >
                       <TrashIcon />
                     </button>
                   </div>

@@ -6,24 +6,17 @@ import { setCategoriesAnimals } from "~/redux/slices/animalsSlice";
 
 function DataStore() {
   const queryClient = useQuery({
-    queryKey: [
-      "animals"
-    ],
-    queryFn: fetchAnimals
+    queryKey: ["animals"],
+    queryFn: fetchAnimals,
   });
 
   const dispatch = useAppDispatch();
 
-  useEffect(
-    () => {
-      if (queryClient.isSuccess) {
-        dispatch(setCategoriesAnimals(queryClient.data));
-      }
-    },
-    [
-      queryClient.isSuccess
-    ]
-  );
+  useEffect(() => {
+    if (queryClient.isSuccess) {
+      dispatch(setCategoriesAnimals(queryClient.data));
+    }
+  }, [queryClient.isSuccess]);
 
   return null;
 }

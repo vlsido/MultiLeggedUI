@@ -3,16 +3,17 @@ import type { Route } from "./+types/cart";
 import Navigation from "~/components/Navigation/NavigationFooter";
 import ShoppingCart from "~/components/Pages/Cart/ShoppingCart";
 
-export function meta({ }: Route.MetaArgs) {
+export function meta({}: Route.MetaArgs) {
   return [
     { title: "Cart - MultiLegged" },
-    { name: "description", content: "Welcome to the MultiLegged Shopping Cart!" },
+    {
+      name: "description",
+      content: "Welcome to the MultiLegged Shopping Cart!",
+    },
   ];
 }
 
-export default function Cart({
-  loaderData,
-}: Route.ComponentProps) {
+export default function Cart({ loaderData }: Route.ComponentProps) {
   return (
     <main
       data-testid="CART.MAIN_CONTAINER:VIEW"
@@ -29,4 +30,3 @@ export default function Cart({
     </main>
   );
 }
-

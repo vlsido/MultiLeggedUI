@@ -3,7 +3,7 @@ import type { Route } from "./+types/store";
 import Header from "~/components/Navigation/NavigationHeader";
 import Navigation from "~/components/Navigation/NavigationFooter";
 
-export function meta({ }: Route.MetaArgs) {
+export function meta({}: Route.MetaArgs) {
   return [
     { title: "Store - MultiLegged" },
     { name: "description", content: "Welcome to the MultiLegged Store!" },
@@ -11,7 +11,6 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 export default function Store() {
-
   return (
     <main
       data-testid="HOME.MAIN_CONTAINER:VIEW"

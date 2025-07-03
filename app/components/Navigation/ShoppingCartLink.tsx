@@ -16,27 +16,25 @@ function ShoppingCartLink() {
       }
     }
     return 0;
-  };
+  }
 
   const price = cart.reduce(
-    (
-      total, item
-    ) => total + (findPriceByPackId(item.priceId) * item.quantity),
-    0
+    (total, item) => total + findPriceByPackId(item.priceId) * item.quantity,
+    0,
   );
 
   return (
-    <Link
-      to={{ pathname: "/cart" }}
-    >
+    <Link to={{ pathname: "/cart" }}>
       <div
-        className={"flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[20px] rounded-full items-center " + (location.pathname === "/cart" ? "bg-white ring-2 ring-black" : "bg-gray-200")}>
-
-        <ShoppingCartIcon />
-        ${(price / 100).toFixed(2)}
-        <div className="text-[16px] opacity-[0.5]">
-          {cart.length} items
-        </div>
+        className={
+          "flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[20px] rounded-full items-center " +
+          (location.pathname === "/cart"
+            ? "bg-white ring-2 ring-black"
+            : "bg-gray-200")
+        }
+      >
+        <ShoppingCartIcon />${(price / 100).toFixed(2)}
+        <div className="text-[16px] opacity-[0.5]">{cart.length} items</div>
       </div>
     </Link>
   );

@@ -8,7 +8,7 @@ const firebaseConfig = {
   storageBucket: "multileggedstore.firebasestorage.app",
   messagingSenderId: "657945773034",
   appId: "1:657945773034:web:01b9ff441d2d1dcce2a893",
-  measurementId: "G-H2KQMGKBHY"
+  measurementId: "G-H2KQMGKBHY",
 };
 
 // Initialize Firebase

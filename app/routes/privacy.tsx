@@ -3,16 +3,17 @@ import type { Route } from "./+types/privacy";
 import Navigation from "~/components/Navigation/NavigationFooter";
 import PrivacyPolicy from "~/components/Pages/Privacy/PrivacyPolicy";
 
-export function meta({ }: Route.MetaArgs) {
+export function meta({}: Route.MetaArgs) {
   return [
     { title: "Privacy - MultiLegged" },
-    { name: "description", content: "Welcome to the MultiLegged Shopping Cart!" },
+    {
+      name: "description",
+      content: "Welcome to the MultiLegged Shopping Cart!",
+    },
   ];
 }
 
-export default function Privacy({
-  loaderData,
-}: Route.ComponentProps) {
+export default function Privacy({ loaderData }: Route.ComponentProps) {
   return (
     <main
       data-testid="PRIVACY.MAIN_CONTAINER:VIEW"
@@ -29,4 +30,3 @@ export default function Privacy({
     </main>
   );
 }
-

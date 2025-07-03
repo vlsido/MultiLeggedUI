@@ -10,11 +10,11 @@ interface QuantitySelectorPillProps {
 }
 
 function QuantitySelectorPill(props: QuantitySelectorPillProps) {
-
   function add() {
     const newValue = props.value + 1;
 
-    if (props.maxQuantity && newValue > props.maxQuantity) return props.onChange(props.maxQuantity);
+    if (props.maxQuantity && newValue > props.maxQuantity)
+      return props.onChange(props.maxQuantity);
 
     props.onChange(newValue);
   }
@@ -22,31 +22,26 @@ function QuantitySelectorPill(props: QuantitySelectorPillProps) {
   function sub() {
     const newValue = props.value - 1;
 
-    if (props.minQuantity && newValue < props.minQuantity) return props.onChange(props.minQuantity);
+    if (props.minQuantity && newValue < props.minQuantity)
+      return props.onChange(props.minQuantity);
 
     props.onChange(newValue);
   }
 
-  const onInputChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      const number = Number(e.target.value);
+  const onInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const number = Number(e.target.value);
 
-      if (isNaN(number)) return;
+    if (isNaN(number)) return;
 
-      props.onChange(number);
-    },
-    []
-  );
+    props.onChange(number);
+  }, []);
 
-  const onBlur = useCallback(
-    () => {
-      if (props.maxQuantity && props.value > props.maxQuantity) return props.onChange(props.maxQuantity);
-      if (props.minQuantity && props.value < props.minQuantity) return props.onChange(props.minQuantity);
-    },
-    [
-      props.value
-    ]
-  );
+  const onBlur = useCallback(() => {
+    if (props.maxQuantity && props.value > props.maxQuantity)
+      return props.onChange(props.maxQuantity);
+    if (props.minQuantity && props.value < props.minQuantity)
+      return props.onChange(props.minQuantity);
+  }, [props.value]);
 
   return (
     <div className="flex h-[36px] ring-1 rounded-full">
@@ -69,9 +64,7 @@ function QuantitySelectorPill(props: QuantitySelectorPillProps) {
         <CrossedLineIcon />
       </button>
     </div>
-
   );
-
 }
 
 export default QuantitySelectorPill;

@@ -5,7 +5,6 @@ interface NotificationProps {
 }
 
 function Notification(props: NotificationProps) {
-
   let severityColor = "bg-orange-900";
 
   switch (props.severity) {

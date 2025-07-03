@@ -5,22 +5,22 @@ import { Link, useLocation } from "react-router";
 import ShoppingCartLink from "./ShoppingCartLink";
 
 function Header() {
-
   const location = useLocation();
 
   return (
-    <div
-      className={"flex w-[100%] bg-brown-400 p-[10px]"}
-    >
-      <div
-        className={"flex flex-1"}
-      >
+    <div className={"flex w-[100%] bg-brown-400 p-[10px]"}>
+      <div className={"flex flex-1"}>
         <img src={logo} className="w-[48px] h-[48px] rounded-[60px]" />
         <div className="flex flex-1 pr-[48px] justify-center">
-          <Link
-            to={{ pathname: "/" }}
-          >
-            <div className={"flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[18px] rounded-full items-center " + (location.pathname === "/" ? "bg-white ring-2 ring-black" : "bg-gray-200")}>
+          <Link to={{ pathname: "/" }}>
+            <div
+              className={
+                "flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[18px] rounded-full items-center " +
+                (location.pathname === "/"
+                  ? "bg-white ring-2 ring-black"
+                  : "bg-gray-200")
+              }
+            >
               <StoreIcon />
               Store
             </div>
@@ -28,7 +28,9 @@ function Header() {
         </div>
       </div>
       <div
-        className={"flex flex-1 flex-row px-[10px] py-[5px] gap-[10px] min-w-[200px] bg-yellow-100 rounded-full items-center"}
+        className={
+          "flex flex-1 flex-row px-[10px] py-[5px] gap-[10px] min-w-[200px] bg-yellow-100 rounded-full items-center"
+        }
       >
         <SearchIcon />
         <input
@@ -36,14 +38,11 @@ function Header() {
           placeholder="Search insects"
         />
       </div>
-      <div
-        className={"flex flex-1 justify-center"}
-      >
+      <div className={"flex flex-1 justify-center"}>
         <ShoppingCartLink />
       </div>
     </div>
   );
-
 }
 
 export default Header;

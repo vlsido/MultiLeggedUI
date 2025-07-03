@@ -4,21 +4,17 @@ import { EmailIcon } from "~/components/Icons/EmailIcon";
 import Footer from "~/components/UI/Footer";
 
 function ContactBody() {
-
-  const sendMessage = useCallback(
-    () => {
-
-    },
-    []
-  );
+  const sendMessage = useCallback(() => {}, []);
 
   return (
     <div
       data-testid="CONTACT_BODY.CONTAINER:VIEW"
-      className="flex flex-1 flex-col justify-between overflow-y-auto">
+      className="flex flex-1 flex-col justify-between overflow-y-auto"
+    >
       <div className="flex flex-col p-2.5 gap-4 items-center">
         <p className="text-center">
-          Have questions or feedback? Send us a message, and we’ll try to respond within 24 hours.
+          Have questions or feedback? Send us a message, and we’ll try to
+          respond within 24 hours.
         </p>
         <div
           id="contact-form"
@@ -48,9 +44,7 @@ function ContactBody() {
         <div className="flex flex-col max-w-[400px] w-full p-2.5 bg-white rounded-md text-black">
           <div className="flex flex-row items-center gap-2">
             <EmailIcon />
-            <p>
-              info@multilegged.io
-            </p>
+            <p>info@multilegged.io</p>
           </div>
         </div>
       </div>

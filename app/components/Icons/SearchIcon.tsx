@@ -1,4 +1,4 @@
-import { type SVGProps, memo } from "react"
+import { type SVGProps, memo } from "react";
 const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -12,6 +12,6 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
       d="m29.4 31.5-9.45-9.45a9.143 9.143 0 0 1-5.7 1.95c-2.725 0-5.031-.944-6.918-2.832C5.445 19.28 4.501 16.974 4.5 14.25c-.001-2.724.943-5.03 2.832-6.918C9.221 5.444 11.527 4.5 14.25 4.5s5.03.944 6.92 2.832c1.89 1.888 2.833 4.194 2.83 6.918a9.143 9.143 0 0 1-1.95 5.7l9.45 9.45-2.1 2.1ZM14.25 21c1.875 0 3.469-.656 4.782-1.968 1.313-1.312 1.969-2.906 1.968-4.782-.001-1.876-.657-3.47-1.968-4.78-1.311-1.312-2.905-1.968-4.782-1.97-1.877-.002-3.47.655-4.78 1.97-1.31 1.314-1.967 2.908-1.97 4.78-.003 1.872.653 3.466 1.97 4.782 1.316 1.316 2.909 1.972 4.78 1.968Z"
     />
   </svg>
-)
-const Memo = memo(SvgComponent)
-export { Memo as SearchIcon }
+);
+const Memo = memo(SvgComponent);
+export { Memo as SearchIcon };

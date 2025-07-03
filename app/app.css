@@ -1,26 +1,39 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inria Sans", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    "Inria Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
   --color-mint-500: oklch(0.72 0.11 178);
 
-  --color-brown-400: #9C895D;
-  
-  --color-green-800: #4F4F3A;
+  --color-brown-400: #9c895d;
 
-  --color-yellow-100: #E9E0B9;
+  --color-green-800: #4f4f3a;
 
-  --color-yellow-600: #DEC927;
+  --color-yellow-100: #e9e0b9;
 
-  --color-gray-100: #EFEFEF;
+  --color-yellow-600: #dec927;
 
-  --color-gray-200: #E3E3E3;
+  --color-gray-100: #efefef;
 
-  --color-gray-400: #DCDCDC;
+  --color-gray-200: #e3e3e3;
 
-  --color-gray-500: #C9C7C7;
+  --color-gray-400: #dcdcdc;
+
+  --color-gray-500: #c9c7c7;
+
+  --color-gray-600: #c4c4c4;
+
+  --color-black-500: #212221;
+
+  --color-blue-400: #3199e8;
+
+  --color-blue-500: #1aa3ff;
+
+  --color-red-800: #8f3d3d;
+
+  --color-orange-900: #ff6f00;
 }
 
 html,
@@ -30,4 +43,8 @@ body {
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+}
+
+button:active {
+  opacity: 0.6;
 }

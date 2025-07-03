@@ -1,92 +1,46 @@
-export interface AnimalGroup {
-  group: "ISOPODS" | "STICK INSECTS" | "LEAF INSECTS";
-  animals: Animal[];
-}
+import type { CategoryAnimals } from "~/types/common";
 
-export interface Animal {
-  name: string;
-  imageUrl: string;
-  names: string[];
-  origin: string;
-  size: string;
-  humidity: string;
-  environment: string;
-  info: string;
-  unitsLeft: number;
-  ppu: number;
-}
-
-export const animalsData: AnimalGroup[] = [
+export const categoriesAnimalsData: CategoryAnimals[] = [
   {
-    group: "ISOPODS",
+    category: "ISOPODS",
     animals: [
-
       {
-        name: "Porcellio Laevis \"Milkback\"",
-        imageUrl: "PorcellioLaevis1.jpg",
-        names: [
-          "Milkback"
-        ],
-        origin: "around globe",
+        id: 1,
+        imageUrl: "porcellio_laevis_1.png",
+        name: "Porcellio Laevis 'Milkback'",
+        origin: "Globe",
         size: "2-3 cm",
         humidity: "60%",
-        environment: "18-26 C",
-        info: "Large isopod, very popular and recognizable because of their unique coloring. Very sturdy and easy to keep and breed, perfect species for a beginner. Very forgiving when it comes to temperature changes and moisture fluctuations.",
-        unitsLeft: 100,
-        ppu: 1
+        temperature: "18-24",
+        description:
+          "Large isopod, very popular and recognizable because of their unique coloring. Very sturdy and easy to keep and breed, perfect species for a beginner. Very forgiving when it comes to temperature changes and moisture fluctuations.",
+        units: 0,
+        animalPrices: [
+          { id: 1, minQuantity: 8, maxQuantity: 20, centsPerUnit: 599 },
+        ],
+        form: "animals",
       },
-    ]
+    ],
   },
   {
-    group: "STICK INSECTS",
+    category: "STICK INSECTS",
     animals: [
       {
-        name: "Achrioptera Manga \"Metallic Stick Insect\"",
-        imageUrl: "AchriopteraManga.jpg",
-        names: [
-          "Milkback"
-        ],
-        origin: "around globe",
+        id: 2,
+        imageUrl: "medauroidea_extradentata_1.png",
+        name: "Medauroidea extradentata 'Annam Walking Stick'",
+        origin: "Globe",
         size: "2-3 cm",
         humidity: "60%",
-        environment: "18-26 C",
-        info: "Large isopod, very popular and recognizable because of their unique coloring. Very sturdy and easy to keep and breed, perfect species for a beginner. Very forgiving when it comes to temperature changes and moisture fluctuations.",
-        unitsLeft: 100,
-        ppu: 1
-      },
-      {
-        name: "Medauroidea extradentata",
-        imageUrl: "MedauroideaExtradentata.jpg",
-        names: [
-          "Milkback"
+        temperature: "18-24",
+        description:
+          "Large isopod, very popular and recognizable because of their unique coloring.Very sturdy and easy to keep and breed, perfect species for a beginner. Very forgiving when it comes to temperature changes and moisture fluctuations.",
+        units: 0,
+        animalPrices: [
+          { id: 1, minQuantity: 8, maxQuantity: 20, centsPerUnit: 599 },
         ],
-        origin: "around globe",
-        size: "2-3 cm",
-        humidity: "60%",
-        environment: "18-26 C",
-        info: "Large isopod, very popular and recognizable because of their unique coloring. Very sturdy and easy to keep and breed, perfect species for a beginner. Very forgiving when it comes to temperature changes and moisture fluctuations.",
-        unitsLeft: 100,
-        ppu: 1
+        form: "eggs",
       },
-    ]
+    ],
   },
-  {
-    group: "LEAF INSECTS",
-    animals: [
-      {
-        name: "Phyllium letiranti \"Tataba\"",
-        imageUrl: "PhylliumLetiranti.jpg",
-        names: [
-          "Milkback"
-        ],
-        origin: "around globe",
-        size: "2-3 cm",
-        humidity: "60%",
-        environment: "18-26 C",
-        info: "Large isopod, very popular and recognizable because of their unique coloring. Very sturdy and easy to keep and breed, perfect species for a beginner. Very forgiving when it comes to temperature changes and moisture fluctuations.",
-        unitsLeft: 100,
-        ppu: 1
-      },
-    ]
-  }
-]
+];

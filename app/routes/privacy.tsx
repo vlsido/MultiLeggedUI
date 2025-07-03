@@ -1,6 +1,6 @@
-import Header from "~/components/Navigation/NavigationHeader";
+import Header from "~/components/Navigation/NavigationHeader/NavigationHeader";
 import type { Route } from "./+types/privacy";
-import Navigation from "~/components/Navigation/NavigationFooter";
+import Navigation from "~/components/Navigation/NavigationFooter/NavigationFooter";
 import PrivacyPolicy from "~/components/Pages/Privacy/PrivacyPolicy";
 
 export function meta({}: Route.MetaArgs) {

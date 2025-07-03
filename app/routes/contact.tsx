@@ -1,6 +1,6 @@
-import Header from "~/components/Navigation/NavigationHeader";
+import Header from "~/components/Navigation/NavigationHeader/NavigationHeader";
 import type { Route } from "./+types/contact";
-import Navigation from "~/components/Navigation/NavigationFooter";
+import Navigation from "~/components/Navigation/NavigationFooter/NavigationFooter";
 import ContactBody from "~/components/Pages/Contact/ContactBody";
 
 export function meta({}: Route.MetaArgs) {

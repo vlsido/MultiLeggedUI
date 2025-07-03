@@ -1,7 +1,7 @@
 import StoreBody from "~/components/Pages/Store/StoreBody/StoreBody";
 import type { Route } from "./+types/store";
-import Header from "~/components/Navigation/NavigationHeader";
-import Navigation from "~/components/Navigation/NavigationFooter";
+import Header from "~/components/Navigation/NavigationHeader/NavigationHeader";
+import Navigation from "~/components/Navigation/NavigationFooter/NavigationFooter";
 
 export function meta({}: Route.MetaArgs) {
   return [

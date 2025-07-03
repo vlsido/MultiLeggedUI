@@ -1,8 +1,8 @@
 import logo from "~/assets/logos/logo.png";
-import { StoreIcon } from "../Icons/StoreIcon";
-import { SearchIcon } from "../Icons/SearchIcon";
+import { StoreIcon } from "../../Icons/StoreIcon";
+import { SearchIcon } from "../../Icons/SearchIcon";
 import { Link, useLocation } from "react-router";
-import ShoppingCartLink from "./ShoppingCartLink";
+import ShoppingCartLink from "../ShoppingCartLink";
 
 function Header() {
   const location = useLocation();
@@ -10,14 +10,22 @@ function Header() {
   return (
     <div className={"flex w-[100%] bg-brown-400 p-[10px]"}>
       <div className={"flex flex-1"}>
-        <img src={logo} className="w-[48px] h-[48px] rounded-[60px]" />
+        <Link to={{ pathname: "/" }}>
+          <div
+            className={
+              location.pathname === "/" ? "rounded-full ring-1 ring-black" : ""
+            }
+          >
+            <img src={logo} className="w-[48px] h-[48px] rounded-[60px]" />
+          </div>
+        </Link>
         <div className="flex flex-1 pr-[48px] justify-center">
-          <Link to={{ pathname: "/" }}>
+          <Link to={{ pathname: "/store" }}>
             <div
               className={
                 "flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[18px] rounded-full items-center " +
-                (location.pathname === "/"
-                  ? "bg-white ring-2 ring-black"
+                (location.pathname === "/store"
+                  ? "bg-white ring-1 ring-black"
                   : "bg-gray-200")
               }
             >

@@ -1,11 +1,11 @@
-import StoreBody from "~/components/Pages/Store/StoreBody/StoreBody";
 import type { Route } from "./+types/store";
 import Header from "~/components/Navigation/NavigationHeader";
 import Navigation from "~/components/Navigation/NavigationFooter";
+import WelcomeBody from "~/components/Pages/Welcome/WelcomeBody";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Store - MultiLegged" },
+    { title: "Welcome - MultiLegged" },
     { name: "description", content: "Welcome to the MultiLegged Store!" },
   ];
 }
@@ -20,7 +20,7 @@ export default function Store() {
       <div className="hidden md:flex">
         <Header />
       </div>
-      <StoreBody />
+      <WelcomeBody />
       <div className="md:hidden flex">
         <Navigation />
       </div>

@@ -56,10 +56,7 @@ function ShoppingCart() {
   }, []);
 
   return (
-    <div
-      data-testid="SHOPPING_CART.CONTAINER:VIEW"
-      className="flex flex-1 flex-col justify-between overflow-y-auto"
-    >
+    <div className="flex flex-1 flex-col justify-between overflow-y-auto">
       <div className="flex flex-1 p-5 justify-center items-center flex-col gap-2.5">
         {cart.length === 0 ? (
           <Notification text="Cart is empty!" severity="INFO" />

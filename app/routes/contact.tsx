@@ -16,7 +16,6 @@ export function meta({}: Route.MetaArgs) {
 export default function Contact({ loaderData }: Route.ComponentProps) {
   return (
     <main
-      data-testid="CONTACT.MAIN_CONTAINER:VIEW"
       aria-label="Contact page"
       className={"flex flex-col h-screen w-screen bg-green-800"}
     >

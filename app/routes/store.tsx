@@ -13,7 +13,6 @@ export function meta({}: Route.MetaArgs) {
 export default function Store() {
   return (
     <main
-      data-testid="HOME.MAIN_CONTAINER:VIEW"
       aria-label="Home page"
       className={"flex flex-col h-screen w-screen bg-green-800"}
     >

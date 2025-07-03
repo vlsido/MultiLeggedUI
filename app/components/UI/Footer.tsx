@@ -2,10 +2,7 @@ import { Link } from "react-router";
 
 function Footer() {
   return (
-    <div
-      data-testid="FOOTER.CONTAINER:VIEW"
-      className="flex flex-col p-2.5 gap-2.5 bg-gray-600"
-    >
+    <div className="flex flex-col p-2.5 gap-2.5 bg-gray-600">
       <div>
         <p className="text-black/80 text-[14px]">© MultiLegged 2025</p>
       </div>

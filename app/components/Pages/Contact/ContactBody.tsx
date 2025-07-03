@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import TextButton from "~/components/UI/buttons/TextButton";
+import TextButton from "~/components/UI/buttons/TextButton/TextButton";
 import { EmailIcon } from "~/components/Icons/EmailIcon";
 import Footer from "~/components/UI/Footer";
 
@@ -7,10 +7,7 @@ function ContactBody() {
   const sendMessage = useCallback(() => {}, []);
 
   return (
-    <div
-      data-testid="CONTACT_BODY.CONTAINER:VIEW"
-      className="flex flex-1 flex-col justify-between overflow-y-auto"
-    >
+    <div className="flex flex-1 flex-col justify-between overflow-y-auto">
       <div className="flex flex-col p-2.5 gap-4 items-center">
         <p className="text-center">
           Have questions or feedback? Send us a message, and we’ll try to
@@ -34,7 +31,6 @@ function ContactBody() {
           />
 
           <TextButton
-            testId="CONTACT_BODY.CONTAINER.FORM.SEND:BUTTON"
             ariaLabel="Send message to support team"
             text="Send"
             onPress={sendMessage}

@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import ShoppingCart from "~/components/views/ShoppingCart";
+import ShoppingCart from "./ShoppingCart";
 import { render, screen } from "~/utils/test-utils";
 
 describe("Shopping cart", () => {

@@ -1,18 +1,11 @@
 import { render, screen } from "~/utils/test-utils";
-import TextButton from "~/components/UI/buttons/TextButton";
+import TextButton from "./TextButton";
 import "@testing-library/jest-dom";
 
 describe("TextButton", () => {
   const mockFn = jest.fn();
   test("Button renders correctly", () => {
-    render(
-      <TextButton
-        testId="TEXT_BUTTON.CONTAINER:BUTTON"
-        text="Test"
-        onPress={mockFn}
-        ariaLabel="Test button"
-      />,
-    );
+    render(<TextButton text="Test" onPress={mockFn} ariaLabel="Test button" />);
 
     expect(screen.getByTestId("TEXT_BUTTON.CONTAINER:BUTTON")).toBeVisible();
     expect(
@@ -23,7 +16,6 @@ describe("TextButton", () => {
   test("Button is disabled if 'disabled' prop is set to 'true'", () => {
     render(
       <TextButton
-        testId="TEXT_BUTTON.CONTAINER:BUTTON"
         text="Test"
         onPress={mockFn}
         disabled={true}
@@ -40,7 +32,6 @@ describe("TextButton", () => {
 
     render(
       <TextButton
-        testId="TEXT_BUTTON.CONTAINER:BUTTON"
         text={text}
         onPress={mockFn}
         ariaLabel="Colored button"

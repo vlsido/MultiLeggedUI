@@ -10,6 +10,9 @@ function Footer() {
         <p className="text-black/80 text-[14px]">© MultiLegged 2025</p>
       </div>
       <div className="flex flex-row gap-2.5 underline decoration-black">
+        <Link to={{ pathname: "/" }}>
+          <p className="text-black">Home</p>
+        </Link>
         <Link to={{ pathname: "/privacy" }}>
           <p className="text-black">Privacy Policy</p>
         </Link>

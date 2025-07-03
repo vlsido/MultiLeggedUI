@@ -1,21 +1,18 @@
-import { useState } from "react";
 import QuantitySelectorPill from "~/components/UI/selectors/QuantitySelectorPill";
 import type { Animal } from "~/types/common";
 
 interface PricePackagesProps {
   animal: Animal;
+  quantity: number;
+  onQuantityChange: (value: number) => void;
 }
 
 function PricePackages(props: PricePackagesProps) {
-  const [quantity, setQuantity] = useState<number>(
-    props.animal.animalPrices[0].minQuantity,
-  );
-
   const currentPackagePriceInCents =
     props.animal.animalPrices.find(
       (pricePackage) =>
-        pricePackage.minQuantity <= quantity &&
-        (pricePackage.maxQuantity ?? Infinity) >= quantity,
+        pricePackage.minQuantity <= props.quantity &&
+        (pricePackage.maxQuantity ?? Infinity) >= props.quantity,
     )?.centsPerUnit ?? 0;
 
   return (
@@ -26,8 +23,8 @@ function PricePackages(props: PricePackagesProps) {
       <div id="price_packages" className="flex gap-2.5 justify-evenly">
         {props.animal.animalPrices.map((pricePackage) => {
           const isCurrentPackage =
-            pricePackage.minQuantity <= quantity &&
-            (pricePackage.maxQuantity ?? Infinity) >= quantity;
+            pricePackage.minQuantity <= props.quantity &&
+            (pricePackage.maxQuantity ?? Infinity) >= props.quantity;
 
           return (
             <div key={pricePackage.id} className="text-[16px]">
@@ -63,8 +60,8 @@ function PricePackages(props: PricePackagesProps) {
       <div className="flex py-1.25 justify-between">
         <p className="font-bold">Quantity</p>
         <QuantitySelectorPill
-          value={quantity}
-          onChange={(value: number) => setQuantity(value)}
+          value={props.quantity}
+          onChange={(value: number) => props.onQuantityChange(value)}
           minQuantity={props.animal.animalPrices[0].minQuantity}
           maxQuantity={props.animal.units}
         />
@@ -73,7 +70,7 @@ function PricePackages(props: PricePackagesProps) {
       <div className="flex py-1.25 justify-between items-center">
         <p className="font-bold">Sub-total</p>
         <p className="font-bold text-[18px]">
-          ${((currentPackagePriceInCents / 100) * quantity).toFixed(2)}
+          ${((currentPackagePriceInCents / 100) * props.quantity).toFixed(2)}
         </p>
       </div>
     </div>

@@ -6,40 +6,45 @@ import Footer from "~/components/UI/Footer";
 import Notification from "~/components/UI/Notification";
 import QuantitySelector from "~/components/UI/selectors/QuantitySelectorFlat";
 import { useAppDispatch, useAppSelector } from "~/hooks/reduxHooks";
-import { addPack, removeFromCart, removePack } from "~/redux/slices/cartSlice";
+import {
+  decreaseItem,
+  increaseItem,
+  removeFromCart,
+} from "~/redux/slices/cartSlice";
 
 function ShoppingCart() {
   const cart = useAppSelector((state) => state.cart.cartItems);
-  const categoriesAnimals = useAppSelector(
-    (state) => state.animals.categoriesAnimals,
-  );
 
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
-  function findPriceByPackId(id: number): number {
-    for (const category of categoriesAnimals) {
-      for (const cd of category.animals) {
-        const pricePackage = cd.animalPrices.find(
-          (pricePackage) => pricePackage.id === id,
-        );
-        if (pricePackage) return pricePackage.centsPerUnit;
-      }
+  function findPriceByAnimalId(id: number): number {
+    const animal = cart.find((item) => item.animalId === id);
+
+    if (animal) {
+      const currentPackagePriceInCents =
+        animal.animalPrices.find(
+          (pricePackage) =>
+            pricePackage.minQuantity <= animal.quantity &&
+            (pricePackage.maxQuantity ?? Infinity) >= animal.quantity,
+        )?.centsPerUnit ?? 0;
+
+      return currentPackagePriceInCents;
     }
     return 0;
   }
 
-  const addQuantity = useCallback((priceId: number) => {
-    dispatch(addPack(priceId));
+  const addQuantity = useCallback((animalId: number) => {
+    dispatch(increaseItem(animalId));
   }, []);
 
-  const removeQuantity = useCallback((priceId: number) => {
-    dispatch(removePack(priceId));
+  const removeQuantity = useCallback((animalId: number) => {
+    dispatch(decreaseItem(animalId));
   }, []);
 
-  const removeItem = useCallback((priceId: number) => {
-    dispatch(removeFromCart(priceId));
+  const removeItem = useCallback((animalId: number) => {
+    dispatch(removeFromCart(animalId));
   }, []);
 
   const handleGoBack = useCallback(() => {
@@ -69,16 +74,17 @@ function ShoppingCart() {
             </p>
             <div className="flex flex-col max-w-[1000px] w-[100%] bg-white">
               {cart.map((item) => {
-                const price = findPriceByPackId(item.priceId) / 100;
+                const price =
+                  (findPriceByAnimalId(item.animalId) * item.quantity) / 100;
 
                 return (
                   <div
-                    key={item.priceId}
+                    key={item.animalId}
                     className="flex flex-col md:flex-row justify-between items-center px-10 md:px-2.5 py-4 gap-2.5 border-1 text-black"
                   >
                     <button
                       className="flex w-[100%] justify-end md:hidden cursor-pointer"
-                      onPointerUp={() => removeItem(item.priceId)}
+                      onPointerUp={() => removeItem(item.animalId)}
                     >
                       <TrashIcon />
                     </button>
@@ -89,24 +95,27 @@ function ShoppingCart() {
                       />
                     </div>
                     <p className="flex-1 underline text-center">
-                      {item.name} x {item.units} ({item.form})
+                      {item.name} ({item.form})
                     </p>
                     <div className="flex md:flex-1 w-[100%] justify-between">
                       <p className="md:hidden">Price:</p>
-                      <p className="md:flex-1 text-center">${price}</p>
+                      <p className="md:flex-1 text-center">
+                        ${(findPriceByAnimalId(item.animalId) / 100).toFixed(2)}
+                        <span className="text-[14px]">/per 1</span>
+                      </p>
                     </div>
                     <div className="flex md:flex-1 w-[100%] justify-between items-center">
                       <p className="md:hidden">Quantity:</p>
                       <QuantitySelector
                         initialQuantity={item.quantity}
-                        onAdd={() => addQuantity(item.priceId)}
-                        onRemove={() => removeQuantity(item.priceId)}
+                        onAdd={() => addQuantity(item.animalId)}
+                        onRemove={() => removeQuantity(item.animalId)}
                       />
                     </div>
                     <div className="flex md:flex-1 w-[100%] justify-between">
                       <p className="md:hidden">Sub-total:</p>
                       <p className="md:flex-1 relative text-center">
-                        ${(price * item.quantity).toFixed(2)}
+                        ${price.toFixed(2)}
                         <p className="hidden md:flex absolute top-[-20px] w-full justify-center opacity-90">
                           (sub-total)
                         </p>
@@ -114,7 +123,7 @@ function ShoppingCart() {
                     </div>
                     <button
                       className="hidden md:flex cursor-pointer"
-                      onPointerUp={() => removeItem(item.priceId)}
+                      onPointerUp={() => removeItem(item.animalId)}
                     >
                       <TrashIcon />
                     </button>

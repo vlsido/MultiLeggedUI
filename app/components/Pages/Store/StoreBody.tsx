@@ -1,51 +1,20 @@
-import TextButton from "~/components/UI/buttons/TextButton";
-import { useAppDispatch, useAppSelector } from "~/hooks/reduxHooks";
+import { useAppSelector } from "~/hooks/reduxHooks";
 import Footer from "~/components/UI/Footer";
-import { useCallback, useState } from "react";
-import { pushToCart } from "~/redux/slices/cartSlice";
+import { useState } from "react";
 import { ArrowLeft } from "~/components/Icons/ArrowLeftIcon";
 import { ChevronIcon } from "~/components/Icons/ChevronIcon";
-import type { AnimalCategory } from "~/types/common";
 import RulerIcon from "~/components/Icons/RulerIcon";
 import WorldIcon from "~/components/Icons/WorldIcon";
 import HumidityIcon from "~/components/Icons/HumidityIcon";
 import TemperatureIcon from "~/components/Icons/TemperatureIcon";
-import PricePackages from "./PricePackages";
+import PurchaseView from "./PurchaseSection/PurchaseView";
 
 function StoreBody() {
   const categoriesAnimals = useAppSelector(
     (state) => state.animals.categoriesAnimals,
   );
 
-  const dispatch = useAppDispatch();
-
   const [category, setCategory] = useState<string>("");
-
-  const handleAddToCart = useCallback(
-    (
-      animalId: number,
-      priceId: number,
-      units: number,
-      name: string,
-      imageUrl: string,
-      form: string,
-      category: AnimalCategory,
-    ) => {
-      dispatch(
-        pushToCart({
-          animalId,
-          priceId,
-          units,
-          name,
-          imageUrl,
-          form,
-          category,
-          quantity: 1,
-        }),
-      );
-    },
-    [],
-  );
 
   if (category === "") {
     return (
@@ -181,16 +150,7 @@ function StoreBody() {
                             <ChevronIcon />
                             <p>{data.description}</p>
                           </div>
-                          <div className="flex flex-col w-full my-2 gap-2 items-center text-[20px]">
-                            <PricePackages animal={data} />
-                            <TextButton
-                              ariaLabel={`Add ${data.name} to cart`}
-                              text="Add to cart"
-                              containerClassName="px-10 py-4 w-full rounded-full bg-black-500 text-white cursor-pointer drop-shadow-md"
-                              textClassName="text-[20px]"
-                              onPress={() => handleAddToCart()}
-                            />
-                          </div>
+                          <PurchaseView animal={data} />
                         </div>
                       </div>
                     );

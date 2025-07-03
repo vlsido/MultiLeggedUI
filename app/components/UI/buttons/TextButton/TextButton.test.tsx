@@ -7,10 +7,8 @@ describe("TextButton", () => {
   test("Button renders correctly", () => {
     render(<TextButton text="Test" onPress={mockFn} ariaLabel="Test button" />);
 
-    expect(screen.getByTestId("TEXT_BUTTON.CONTAINER:BUTTON")).toBeVisible();
-    expect(
-      screen.getByTestId("TEXT_BUTTON.CONTAINER:BUTTON"),
-    ).not.toBeDisabled();
+    expect(screen.getByRole("button")).toBeVisible();
+    expect(screen.getByRole("button")).not.toBeDisabled();
   });
 
   test("Button is disabled if 'disabled' prop is set to 'true'", () => {
@@ -23,8 +21,8 @@ describe("TextButton", () => {
       />,
     );
 
-    expect(screen.getByTestId("TEXT_BUTTON.CONTAINER:BUTTON")).toBeVisible();
-    expect(screen.getByTestId("TEXT_BUTTON.CONTAINER:BUTTON")).toBeDisabled();
+    expect(screen.getByRole("button")).toBeVisible();
+    expect(screen.getByRole("button")).toBeDisabled();
   });
 
   test("Button renders with custom background color and text", () => {
@@ -39,7 +37,7 @@ describe("TextButton", () => {
       />,
     );
 
-    const button = screen.getByTestId("TEXT_BUTTON.CONTAINER:BUTTON");
+    const button = screen.getByRole("button");
 
     expect(button).toHaveClass("bg-[red]");
 

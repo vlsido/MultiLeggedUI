@@ -16,7 +16,7 @@ function ShoppingCart() {
   }, []);
 
   const handleGoCheckout = useCallback(() => {
-    return navigate("/checkout");
+    return navigate("/cart/checkout");
   }, []);
 
   return (
@@ -31,7 +31,7 @@ function ShoppingCart() {
             </p>
             <div className="flex flex-col max-w-[1000px] w-[100%] bg-white">
               {cart.map((item) => (
-                <CartItem item={item} />
+                <CartItem key={item.name} item={item} />
               ))}
             </div>
           </>

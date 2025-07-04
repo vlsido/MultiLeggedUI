@@ -84,9 +84,9 @@ function CartItem(props: ICartItem) {
         <p className="md:hidden">Sub-total:</p>
         <p className="md:flex-1 relative text-center">
           ${price.toFixed(2)}
-          <p className="hidden md:flex absolute top-[-20px] w-full justify-center opacity-90">
+          <span className="hidden md:flex absolute top-[-20px] w-full justify-center opacity-90">
             (sub-total)
-          </p>
+          </span>
         </p>
       </div>
       <button

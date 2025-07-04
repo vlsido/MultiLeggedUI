@@ -25,3 +25,9 @@ export interface AnimalPrice {
   maxQuantity: number | null;
   centsPerUnit: number;
 }
+
+export interface ParcelVendor {
+  name: "Omniva" | "DPD";
+  imageUrl: string;
+  priceInCents: number;
+}

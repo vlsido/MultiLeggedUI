@@ -1,4 +1,4 @@
-import type { CategoryAnimals } from "~/types/common";
+import type { CategoryAnimals, ParcelVendor } from "~/types/common";
 
 export const categoriesAnimalsData: CategoryAnimals[] = [
   {
@@ -43,4 +43,9 @@ export const categoriesAnimalsData: CategoryAnimals[] = [
       },
     ],
   },
+];
+
+export const parcelVendors: ParcelVendor[] = [
+  { name: "Omniva", imageUrl: "/OmnivaVendor.png", priceInCents: 199 },
+  { name: "DPD", imageUrl: "/DPDVendor.png", priceInCents: 199 },
 ];

@@ -1,7 +1,7 @@
-import Header from "~/components/Navigation/NavigationHeader/NavigationHeader";
 import type { Route } from "./+types/cart";
+import { Outlet } from "react-router";
+import Header from "~/components/Navigation/NavigationHeader/NavigationHeader";
 import Navigation from "~/components/Navigation/NavigationFooter/NavigationFooter";
-import ShoppingCart from "~/components/Pages/Cart/ShoppingCart/ShoppingCart";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -22,7 +22,7 @@ export default function Cart({ loaderData }: Route.ComponentProps) {
       <div className="hidden md:flex">
         <Header />
       </div>
-      <ShoppingCart />
+      <Outlet />
       <div className="md:hidden flex">
         <Navigation />
       </div>

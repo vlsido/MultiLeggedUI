@@ -29,9 +29,15 @@ function QuantitySelectorPill(props: QuantitySelectorPillProps) {
   }
 
   const onInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const number = Number(e.target.value);
+    const number = Math.abs(Number(e.target.value));
 
     if (isNaN(number)) return;
+
+    if (
+      props.maxQuantity &&
+      props.maxQuantity.toString().length < number.toString().length
+    )
+      return props.onChange(props.maxQuantity);
 
     props.onChange(number);
   }, []);

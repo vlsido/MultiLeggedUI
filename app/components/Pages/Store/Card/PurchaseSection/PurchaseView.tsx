@@ -23,6 +23,7 @@ function PurchaseView(props: PurchaseViewProps) {
       imageUrl: string,
       form: string,
       animalPrices: AnimalPrice[],
+      unitsLeft: number,
     ) => {
       dispatch(
         pushToCart({
@@ -31,6 +32,7 @@ function PurchaseView(props: PurchaseViewProps) {
           imageUrl,
           form,
           animalPrices,
+          unitsLeft: unitsLeft,
           quantity: quantity,
         }),
       );
@@ -57,6 +59,7 @@ function PurchaseView(props: PurchaseViewProps) {
             props.animal.imageUrl,
             props.animal.form,
             props.animal.animalPrices,
+            props.animal.units,
           )
         }
       />

@@ -26,7 +26,6 @@ export const cartSlice = createSlice({
   reducers: {
     setCartItems: (state, action: PayloadAction<CartItemProps[]>) => {
       state.cartItems = action.payload;
-      localStorage.setItem("cartItems", JSON.stringify(action.payload));
     },
     pushToCart: (state, action: PayloadAction<CartItemProps>) => {
       const item = state.cartItems.find(
@@ -35,13 +34,11 @@ export const cartSlice = createSlice({
       if (item === undefined) {
         state.cartItems.push(action.payload);
       }
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
     removeFromCart: (state, action: PayloadAction<number>) => {
       state.cartItems = state.cartItems.filter(
         (item) => item.animalId !== action.payload,
       );
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
     setItemQuantity: (
       state,
@@ -52,12 +49,10 @@ export const cartSlice = createSlice({
       );
       if (item !== undefined) {
         item.quantity = action.payload.quantity;
-        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
       }
     },
     clearCart: (state) => {
       state.cartItems = [];
-      localStorage.removeItem("cartItems");
     },
   },
 });

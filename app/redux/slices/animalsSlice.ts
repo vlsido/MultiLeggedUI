@@ -17,14 +17,9 @@ export const animalsSlice = createSlice({
   reducers: {
     setCategoriesAnimals: (state, action: PayloadAction<CategoryAnimals[]>) => {
       state.categoriesAnimals = action.payload;
-      localStorage.setItem(
-        "categories_animals",
-        JSON.stringify(action.payload),
-      );
     },
     clearCategoriesAnimals: (state) => {
       state.categoriesAnimals = [];
-      localStorage.removeItem("categories_animals");
     },
   },
 });

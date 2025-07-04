@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore, type Store } from "@reduxjs/toolkit";
 import cartReducer from "./slices/cartSlice";
 import animalsReducer from "./slices/animalsSlice";
 
@@ -14,11 +14,35 @@ export const setupStore = (preloadedState?: Partial<RootState>) => {
   });
 };
 
+function loadStateFromLocalStorage(): RootState | undefined {
+  try {
+    const serializedState = localStorage.getItem("appState");
+    if (serializedState === null) return undefined;
+    return JSON.parse(serializedState);
+  } catch (err) {
+    console.warn("Failed to load state", err);
+    return undefined;
+  }
+}
+
+const state = loadStateFromLocalStorage();
+
 const store = configureStore({
   reducer: {
     cart: cartReducer,
     animals: animalsReducer,
   },
+  preloadedState: state,
+});
+
+store.subscribe(() => {
+  try {
+    const state = store.getState();
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem("appState", serializedState);
+  } catch (err) {
+    console.warn("Failed to save state", err);
+  }
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

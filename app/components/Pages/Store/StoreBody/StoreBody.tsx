@@ -1,6 +1,6 @@
-import { useAppSelector } from "~/hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "~/hooks/reduxHooks";
 import Footer from "~/components/UI/Footer";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { ArrowLeft } from "~/components/Icons/ArrowLeftIcon";
 import RulerIcon from "~/components/Icons/RulerIcon";
 import WorldIcon from "~/components/Icons/WorldIcon";
@@ -9,11 +9,21 @@ import TemperatureIcon from "~/components/Icons/TemperatureIcon";
 import PurchaseView from "../Card/PurchaseSection/PurchaseView";
 import { motion } from "motion/react";
 import Description from "../Card/Description";
+import { clearUserMessage, showUserMessage } from "~/redux/slices/userMessageSlice";
 
 function StoreBody() {
   const categoriesAnimals = useAppSelector(
     (state) => state.animals.categoriesAnimals,
   );
+
+  const dispatch = useAppDispatch();
+
+  const showMessage = useCallback(() => {
+    dispatch(showUserMessage({ text: "The selected quantity is exceeding current available units.", type: "ERROR" }));
+    setTimeout(() => {
+      dispatch(clearUserMessage());
+    }, 3000);
+  }, []);
 
   const [category, setCategory] = useState<string>("");
 
@@ -79,7 +89,7 @@ function StoreBody() {
         <div className="w-full">
           <button
             className="cursor-pointer"
-            onPointerUp={() => setCategory("")}
+            onPointerUp={showMessage}
           >
             <ArrowLeft color={"white"} />
           </button>

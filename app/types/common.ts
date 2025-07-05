@@ -31,3 +31,9 @@ export interface ParcelVendor {
   imageUrl: string;
   priceInCents: number;
 }
+
+
+export interface ParcelMachine {
+  name: string;
+  country: "EE" | "LV" | "LT";
+}

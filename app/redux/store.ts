@@ -1,10 +1,12 @@
 import { combineReducers, configureStore, type Store } from "@reduxjs/toolkit";
 import cartReducer from "./slices/cartSlice";
 import animalsReducer from "./slices/animalsSlice";
+import userMessageReducer from "./slices/userMessageSlice";
 
 const rootReducer = combineReducers({
   cart: cartReducer,
   animals: animalsReducer,
+  userMessage: userMessageReducer
 });
 
 export const setupStore = (preloadedState?: Partial<RootState>) => {
@@ -28,10 +30,7 @@ function loadStateFromLocalStorage(): RootState | undefined {
 const state = loadStateFromLocalStorage();
 
 const store = configureStore({
-  reducer: {
-    cart: cartReducer,
-    animals: animalsReducer,
-  },
+  reducer: rootReducer,
   preloadedState: state,
 });
 

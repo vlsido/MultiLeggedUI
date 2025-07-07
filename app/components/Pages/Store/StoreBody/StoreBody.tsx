@@ -9,21 +9,16 @@ import TemperatureIcon from "~/components/Icons/TemperatureIcon";
 import PurchaseView from "../Card/PurchaseSection/PurchaseView";
 import { motion } from "motion/react";
 import Description from "../Card/Description";
-import { clearUserMessage, showUserMessage } from "~/redux/slices/userMessageSlice";
+import {
+  clearUserMessage,
+  showUserMessage,
+} from "~/redux/slices/userMessageSlice";
+import { SharedColors } from "~/constants/colors";
 
 function StoreBody() {
   const categoriesAnimals = useAppSelector(
     (state) => state.animals.categoriesAnimals,
   );
-
-  const dispatch = useAppDispatch();
-
-  const showMessage = useCallback(() => {
-    dispatch(showUserMessage({ text: "The selected quantity is exceeding current available units.", type: "ERROR" }));
-    setTimeout(() => {
-      dispatch(clearUserMessage());
-    }, 3000);
-  }, []);
 
   const [category, setCategory] = useState<string>("");
 
@@ -88,10 +83,10 @@ function StoreBody() {
       <div className="flex flex-col w-full items-center p-2.5 self-center items-start max-w-[1000px] gap-2.5">
         <div className="w-full">
           <button
-            className="cursor-pointer"
-            onPointerUp={showMessage}
+            className="absolute cursor-pointer p-1 bg-yellow-600/80 rounded-full"
+            onPointerUp={() => setCategory("")}
           >
-            <ArrowLeft color={"white"} />
+            <ArrowLeft color={SharedColors["black-500"]} />
           </button>
         </div>
         <div className="flex flex-col self-center gap-2.5">

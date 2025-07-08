@@ -50,3 +50,7 @@ body {
 button:active {
   opacity: 0.6;
 }
+
+option[disabled] {
+  display: none;
+}

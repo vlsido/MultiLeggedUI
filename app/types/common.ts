@@ -26,14 +26,18 @@ export interface AnimalPrice {
   centsPerUnit: number;
 }
 
-export interface ParcelVendor {
-  name: "Omniva" | "DPD";
+export type ParcelVendor = "Omniva" | "DPD";
+
+export type Country = "EE" | "LV" | "LT";
+
+export interface ParcelVendorData {
+  name: ParcelVendor;
   imageUrl: string;
   priceInCents: number;
 }
 
-
 export interface ParcelMachine {
+  company: ParcelVendor;
   name: string;
   country: "EE" | "LV" | "LT";
 }

@@ -1,20 +1,13 @@
-import { useAppDispatch, useAppSelector } from "~/hooks/reduxHooks";
+import { useAppSelector } from "~/hooks/reduxHooks";
 import { AnimatePresence, motion } from "motion/react";
-import { useCallback, useEffect } from "react";
-import { clearUserMessage, showUserMessage } from "~/redux/slices/userMessageSlice";
-
-const transition = {
-  duration: 0.25,
-  ease: [0, 0.71, 0.2, 1.01],
-}
 
 function UserMessageHelper() {
   const message = useAppSelector((state) => state.userMessage.message);
 
   return (
     <AnimatePresence>
-      {message.text !== "" && (
-        message.type === "INFO" ? (
+      {message.text !== "" &&
+        (message.type === "INFO" ? (
           <motion.div
             className="absolute bg-white right-0 left-0 bottom-[100px] mx-auto self-center text-black max-w-[200px] min-w-[100px] p-2.5 rounded-xl border-blue-500 border-1 drop-shadow-xl"
             initial={{ opacity: 0, y: 0 }}
@@ -39,8 +32,7 @@ function UserMessageHelper() {
               transition={{ duration: 3 }}
             />
           </motion.div>
-        )
-      )}
+        ))}
     </AnimatePresence>
   );
 }

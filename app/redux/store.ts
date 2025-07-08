@@ -6,7 +6,7 @@ import userMessageReducer from "./slices/userMessageSlice";
 const rootReducer = combineReducers({
   cart: cartReducer,
   animals: animalsReducer,
-  userMessage: userMessageReducer
+  userMessage: userMessageReducer,
 });
 
 export const setupStore = (preloadedState?: Partial<RootState>) => {

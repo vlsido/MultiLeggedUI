@@ -1,55 +1,30 @@
-import { useCallback, useEffect, useId, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useCallback, useId, useState } from "react";
 import { useNavigate } from "react-router";
-import { fetchDPDParcelMachines, fetchOmnivaParcelMachines } from "~/api/api";
+import { fetchParcelMachines } from "~/api/api";
 import { CheckmarkFilled } from "~/components/Icons/CheckmarkFilled";
 import TextButton from "~/components/UI/buttons/TextButton/TextButton";
 import { parcelVendors } from "~/data/data";
-import type { ParcelMachine } from "~/types/common";
 
 function CheckoutBody() {
-  const [parcelVendor, setParcelVendor] = useState<"Omniva" | "DPD" | "">("");
-
-  const [country, setCountry] = useState<"EE" | "LV" | "LT">("EE");
-
   const navigate = useNavigate();
+
+  const parcelMachinesQuery = useQuery({
+    queryKey: ["parcelMachines"],
+    queryFn: fetchParcelMachines,
+  });
+
+  const [parcelVendor, setParcelVendor] = useState<string>("");
+
+  const [country, setCountry] = useState<string>("");
+
+  const [parcelMachine, setParcelMachine] = useState<string>("");
 
   const handleGoPayment = useCallback(() => {
     return navigate("/cart/payment");
   }, []);
 
-  const [omnivaParcelMachines, setOmnivaParcelMachines] = useState<
-    ParcelMachine[]
-  >([]);
-
-  const [dpdParcelMachines, setDpdParcelMachines] = useState<ParcelMachine[]>(
-    [],
-  );
-
-  useEffect(() => {
-    fetchOmnivaParcelMachines()
-      .then((data) => {
-        setOmnivaParcelMachines(data);
-      })
-      .catch((e) => {
-        console.warn(e);
-      });
-
-    fetchDPDParcelMachines()
-      .then((data) => {
-        setDpdParcelMachines(data);
-      })
-      .catch((e) => {
-        console.warn(e);
-      });
-  }, []);
-
   const countrySelectId = useId();
-
-  const parcelMachineSelectId = useId();
-
-  const onCountrySelect = useCallback((country: string) => {
-    setCountry(country);
-  }, []);
 
   return (
     <div className="flex flex-1 flex-col justify-between overflow-y-auto">
@@ -81,66 +56,81 @@ function CheckoutBody() {
                 );
               })}
             </div>
-            <div className="flex flex-col gap-2.5">
-              <label htmlFor={countrySelectId}>Select country:</label>
+            <div
+              className={
+                "flex flex-col gap-2.5 " +
+                (parcelVendor === "" ? "opacity-50" : "")
+              }
+            >
               <select
                 id={countrySelectId}
                 className="flex border-1"
-                onChange={(e) => onCountrySelect(e.target.value)}
+                disabled={parcelVendor === ""}
+                onChange={(e) => setCountry(e.target.value)}
               >
+                <option value={""} disabled selected>
+                  Select country
+                </option>
                 <option value={"EE"}>Estonia</option>
                 <option value={"LV"}>Latvia</option>
                 <option value={"LT"}>Lithuania</option>
               </select>
             </div>
-            <div className="flex flex-col gap-2.5">
-              <label htmlFor={parcelMachineSelectId}>
-                Select parcel machine:
-              </label>
+            <div
+              className={
+                "flex flex-col gap-2.5 " + (country === "" ? "opacity-50" : "")
+              }
+            >
               <select
-                id={parcelMachineSelectId}
                 className="flex border-1"
-                onChange={(e) => console.log("e", e.target.value)}
+                disabled={country === ""}
+                onChange={(e) => setParcelMachine(e.target.value)}
+                required
               >
-                {parcelVendor === "Omniva" &&
-                  omnivaParcelMachines.map((machine) => {
-                    if (machine.country !== country) return null;
-                    return <option value={machine.name}>{machine.name}</option>;
-                  })}
-                {parcelVendor === "DPD" &&
-                  dpdParcelMachines.map((machine) => {
-                    if (machine.country !== country) return null;
+                <option value="" disabled selected>
+                  Choose parcel machine
+                </option>
+                {parcelVendor !== "" &&
+                  parcelMachinesQuery.isSuccess &&
+                  parcelMachinesQuery.data.map((machine) => {
+                    if (
+                      machine.company !== parcelVendor ||
+                      machine.country !== country
+                    )
+                      return null;
                     return <option value={machine.name}>{machine.name}</option>;
                   })}
               </select>
             </div>
           </div>
-          <h2 className="py-2.5 text-[18px] font-bold">
-            Recipient information
-          </h2>
-          <div className="flex flex-col">
-            <div className="flex py-2.5">
-              <label className="min-w-[100px]">First Name</label>
-              <input className="border-1 rounded-md" />
+          <div className={parcelMachine === "" ? "opacity-50" : undefined}>
+            <h2 className="py-2.5 text-[18px] font-bold">
+              Recipient information
+            </h2>
+            <div className="flex flex-col">
+              <div className="flex py-2.5">
+                <label className="min-w-[100px]">First Name</label>
+                <input className="border-1 rounded-md" />
+              </div>
+              <div className="flex py-2.5">
+                <label className="min-w-[100px]">Last Name</label>
+                <input className="border-1 rounded-md" />
+              </div>
+              <div className="flex py-2.5">
+                <label className="min-w-[100px]">Phone</label>
+                <input className="border-1 rounded-md" />
+              </div>
             </div>
-            <div className="flex py-2.5">
-              <label className="min-w-[100px]">Last Name</label>
-              <input className="border-1 rounded-md" />
-            </div>
-            <div className="flex py-2.5">
-              <label className="min-w-[100px]">Phone</label>
-              <input className="border-1 rounded-md" />
-            </div>
-          </div>
 
-          <div className="flex w-full justify-end">
-            <TextButton
-              text={"Proceed to payment"}
-              ariaLabel={"Go to payment"}
-              containerClassName="bg-black-500 w-full max-w-[250px] p-2.5 rounded-full drop-shadow-md cursor-pointer"
-              textClassName="text-white"
-              onPress={handleGoPayment}
-            />
+            <div className="flex w-full justify-end">
+              <TextButton
+                text={"Proceed to payment"}
+                ariaLabel={"Go to payment"}
+                containerClassName="bg-black-500 w-full max-w-[250px] p-2.5 rounded-full drop-shadow-md cursor-pointer"
+                textClassName="text-white"
+                onPress={handleGoPayment}
+              />
+            </div>
           </div>
         </div>
       </div>

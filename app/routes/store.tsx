@@ -2,6 +2,7 @@ import StoreBody from "~/components/Pages/Store/StoreBody/StoreBody";
 import type { Route } from "./+types/store";
 import Header from "~/components/Navigation/NavigationHeader/NavigationHeader";
 import Navigation from "~/components/Navigation/NavigationFooter/NavigationFooter";
+import Footer from "~/components/UI/Footer";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -14,12 +15,13 @@ export default function Store() {
   return (
     <main
       aria-label="Home page"
-      className={"flex flex-col h-screen w-screen bg-green-800"}
+      className={"flex flex-col h-screen w-screen bg-green-800 "}
     >
       <div className="hidden md:flex">
         <Header />
       </div>
       <StoreBody />
+      <Footer />
       <div className="md:hidden flex">
         <Navigation />
       </div>

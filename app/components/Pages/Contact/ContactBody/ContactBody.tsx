@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import TextButton from "~/components/UI/buttons/TextButton/TextButton";
 import { EmailIcon } from "~/components/Icons/EmailIcon";
-import Footer from "~/components/UI/Footer";
 
 function ContactBody() {
   const sendMessage = useCallback(() => {}, []);
@@ -44,7 +43,6 @@ function ContactBody() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

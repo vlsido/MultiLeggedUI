@@ -2,7 +2,7 @@ import TextButton from "~/components/UI/buttons/TextButton/TextButton";
 import PricePackages from "./PricePackages";
 import { useAppDispatch, useAppSelector } from "~/hooks/reduxHooks";
 import { useCallback, useState } from "react";
-import type { Animal, AnimalCategory, AnimalPrice } from "~/types/common";
+import type { Animal, AnimalPrice } from "~/types/common";
 import { pushToCart } from "~/redux/slices/cartSlice";
 import { useNavigate } from "react-router";
 

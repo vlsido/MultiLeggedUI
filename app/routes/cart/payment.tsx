@@ -1,5 +1,5 @@
-function Payment() {
-  return <div>amjlzkjdals</div>;
-}
+import PaymentBody from "~/components/Pages/Cart/Payment/PaymentBody/PaymentBody";
 
-export default Payment;
+export default function PaymentBodyWrapper() {
+  return <PaymentBody />;
+}

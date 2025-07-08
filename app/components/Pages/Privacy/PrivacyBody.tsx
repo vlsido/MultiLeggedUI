@@ -1,6 +1,4 @@
-import Footer from "~/components/UI/Footer";
-
-function PrivacyPolicy() {
+function PrivacyBody() {
   return (
     <div className="flex flex-1 flex-col justify-between overflow-y-auto">
       <div className="flex flex-col max-w-[600px] my-2.5 p-2.5 self-center bg-white text-black rounded-xl">
@@ -68,9 +66,8 @@ function PrivacyPolicy() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
 
-export default PrivacyPolicy;
+export default PrivacyBody;

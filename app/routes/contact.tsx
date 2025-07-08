@@ -1,7 +1,8 @@
 import Header from "~/components/Navigation/NavigationHeader/NavigationHeader";
 import type { Route } from "./+types/contact";
 import Navigation from "~/components/Navigation/NavigationFooter/NavigationFooter";
-import ContactBody from "~/components/Pages/Contact/ContactBody";
+import ContactBody from "~/components/Pages/Contact/ContactBody/ContactBody";
+import Footer from "~/components/UI/Footer";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -23,6 +24,7 @@ export default function Contact({ loaderData }: Route.ComponentProps) {
         <Header />
       </div>
       <ContactBody />
+      <Footer />
       <div className="md:hidden flex">
         <Navigation />
       </div>

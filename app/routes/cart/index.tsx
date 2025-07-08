@@ -1,5 +1,5 @@
-import ShoppingCart from "~/components/Pages/Cart/ShoppingCart/ShoppingCart";
+import CartBody from "~/components/Pages/Cart/CartBody/CartBody";
 
-export default function CartOverview() {
-  return <ShoppingCart />;
+export default function CartBodyWrapper() {
+  return <CartBody />;
 }

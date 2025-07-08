@@ -1,12 +1,11 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router";
 import TextButton from "~/components/UI/buttons/TextButton/TextButton";
-import Footer from "~/components/UI/Footer";
 import Notification from "~/components/UI/Notification";
 import { useAppSelector } from "~/hooks/reduxHooks";
 import CartItem from "../CartItem/CartItem";
 
-function ShoppingCart() {
+function CartBody() {
   const cart = useAppSelector((state) => state.cart.cartItems);
 
   const navigate = useNavigate();
@@ -29,24 +28,27 @@ function ShoppingCart() {
             <p className="flex md:hidden text-[20px] self-start font-bold">
               CART
             </p>
-            <div className="flex flex-col max-w-[1000px] w-[100%] bg-white">
+            <div className="flex flex-col max-w-[1000px] w-[100%] bg-white p-8">
               {cart.map((item) => (
                 <CartItem key={item.name} item={item} />
               ))}
+              <div className="flex w-full justify-end">
+                <TextButton
+                  text={
+                    cart.length === 0 ? "Back to store" : "Proceed to checkout"
+                  }
+                  ariaLabel={cart.length === 0 ? "Go back" : "Go checkout"}
+                  containerClassName="bg-black-500 w-full max-w-[250px] p-2.5 mt-8 rounded-full drop-shadow-md cursor-pointer"
+                  textClassName="text-white"
+                  onPress={cart.length === 0 ? handleGoBack : handleGoCheckout}
+                />
+              </div>
             </div>
           </>
         )}
-        <TextButton
-          text={cart.length === 0 ? "Back to store" : "Proceed to checkout"}
-          ariaLabel={cart.length === 0 ? "Go back" : "Go checkout"}
-          containerClassName="bg-yellow-100 w-full max-w-[250px] p-2.5 rounded-full drop-shadow-md cursor-pointer"
-          textClassName="text-black-500"
-          onPress={cart.length === 0 ? handleGoBack : handleGoCheckout}
-        />
       </div>
-      <Footer />
     </div>
   );
 }
 
-export default ShoppingCart;
+export default CartBody;

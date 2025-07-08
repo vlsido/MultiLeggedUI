@@ -1,6 +1,5 @@
-import { useAppDispatch, useAppSelector } from "~/hooks/reduxHooks";
-import Footer from "~/components/UI/Footer";
-import { useCallback, useState } from "react";
+import { useAppSelector } from "~/hooks/reduxHooks";
+import { useState } from "react";
 import { ArrowLeft } from "~/components/Icons/ArrowLeftIcon";
 import RulerIcon from "~/components/Icons/RulerIcon";
 import WorldIcon from "~/components/Icons/WorldIcon";
@@ -9,10 +8,6 @@ import TemperatureIcon from "~/components/Icons/TemperatureIcon";
 import PurchaseView from "../Card/PurchaseSection/PurchaseView";
 import { motion } from "motion/react";
 import Description from "../Card/Description";
-import {
-  clearUserMessage,
-  showUserMessage,
-} from "~/redux/slices/userMessageSlice";
 import { SharedColors } from "~/constants/colors";
 
 function StoreBody() {
@@ -73,13 +68,12 @@ function StoreBody() {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="flex flex-1 flex-col justify-between overflow-y-auto">
+    <div className="flex flex-1 flex-col justify-between overflow-y-auto bg-[url(/Zuk9.png)] bg-contain bg-center bg-local bg-repeat">
       <div className="flex flex-col w-full items-center p-2.5 self-center items-start max-w-[1000px] gap-2.5">
         <div className="w-full">
           <button
@@ -173,7 +167,6 @@ function StoreBody() {
           })}
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

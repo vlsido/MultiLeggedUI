@@ -1,7 +1,8 @@
 import Header from "~/components/Navigation/NavigationHeader/NavigationHeader";
 import type { Route } from "./+types/privacy";
 import Navigation from "~/components/Navigation/NavigationFooter/NavigationFooter";
-import PrivacyPolicy from "~/components/Pages/Privacy/PrivacyPolicy";
+import PrivacyPolicyBody from "~/components/Pages/Privacy/PrivacyBody";
+import Footer from "~/components/UI/Footer";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -22,7 +23,8 @@ export default function Privacy({ loaderData }: Route.ComponentProps) {
       <div className="hidden md:flex">
         <Header />
       </div>
-      <PrivacyPolicy />
+      <PrivacyPolicyBody />
+      <Footer />
       <div className="md:hidden flex">
         <Navigation />
       </div>

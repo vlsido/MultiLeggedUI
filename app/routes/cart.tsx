@@ -2,6 +2,7 @@ import type { Route } from "./+types/cart";
 import { Outlet } from "react-router";
 import Header from "~/components/Navigation/NavigationHeader/NavigationHeader";
 import Navigation from "~/components/Navigation/NavigationFooter/NavigationFooter";
+import Footer from "~/components/UI/Footer";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -23,6 +24,7 @@ export default function Cart({ loaderData }: Route.ComponentProps) {
         <Header />
       </div>
       <Outlet />
+      <Footer />
       <div className="md:hidden flex">
         <Navigation />
       </div>

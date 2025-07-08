@@ -1,6 +1,5 @@
 import { Link } from "react-router";
 import { StoreIcon } from "~/components/Icons/StoreIcon";
-import Footer from "~/components/UI/Footer";
 
 function WelcomeBody() {
   return (
@@ -40,7 +39,6 @@ function WelcomeBody() {
           .
         </p>
       </div>
-      <Footer />
     </div>
   );
 }

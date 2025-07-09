@@ -21,21 +21,24 @@ function CartItem(props: ICartItem) {
     dispatch(removeFromCart(animalId));
   }, []);
 
-  const findPriceByAnimalId = useCallback((id: number) => {
-    const animal = cart.find((item) => item.animalId === id);
+  const findPriceByAnimalId = useCallback(
+    (id: number) => {
+      const animal = cart.find((item) => item.animalId === id);
 
-    if (animal) {
-      const currentPackagePriceInCents =
-        animal.animalPrices.find(
-          (pricePackage) =>
-            pricePackage.minQuantity <= animal.quantity &&
-            (pricePackage.maxQuantity ?? Infinity) >= animal.quantity,
-        )?.centsPerUnit ?? 0;
+      if (animal) {
+        const currentPackagePriceInCents =
+          animal.animalPrices.find(
+            (pricePackage) =>
+              pricePackage.minQuantity <= animal.quantity &&
+              (pricePackage.maxQuantity ?? Infinity) >= animal.quantity,
+          )?.centsPerUnit ?? 0;
 
-      return currentPackagePriceInCents;
-    }
-    return 0;
-  }, []);
+        return currentPackagePriceInCents;
+      }
+      return 0;
+    },
+    [cart],
+  );
 
   const onQuantityChange = useCallback((quantity: number) => {
     dispatch(setItemQuantity({ id: props.item.animalId, quantity: quantity }));

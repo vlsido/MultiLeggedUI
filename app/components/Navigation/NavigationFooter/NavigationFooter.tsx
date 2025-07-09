@@ -34,16 +34,6 @@ function Navigation() {
             <ShoppingCartIcon />
           </div>
         </Link>
-        <div
-          className={
-            "px-[15px] py-1.25 rounded-full " +
-            (location.pathname === "/search"
-              ? "bg-gray-200 ring ring-white"
-              : "bg-gray-200 opacity-[0.75]")
-          }
-        >
-          <SearchIcon />
-        </div>
       </div>
       <div className="flex w-[100%] h-16" />
     </>

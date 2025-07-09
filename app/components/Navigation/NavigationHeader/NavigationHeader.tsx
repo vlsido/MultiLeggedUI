@@ -37,14 +37,12 @@ function Header() {
       </div>
       <div
         className={
-          "flex flex-1 flex-row px-[10px] py-[5px] gap-[10px] min-w-[200px] bg-yellow-100 rounded-full items-center"
+          "flex flex-1 py-[5px] min-w-[200px] justify-center items-center"
         }
       >
-        <SearchIcon />
-        <input
-          className="w-[100%] h-[100%] text-black outline-none"
-          placeholder="Search insects"
-        />
+        <h1 className="text-center text-[24px] text-shadow-md text-shadow-black text-white font-bold">
+          MULTILEGGED STORE
+        </h1>
       </div>
       <div className={"flex flex-1 justify-center"}>
         <ShoppingCartLink />

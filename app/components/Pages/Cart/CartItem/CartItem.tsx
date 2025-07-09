@@ -50,7 +50,7 @@ function CartItem(props: ICartItem) {
   return (
     <div
       key={props.item.animalId}
-      className="flex flex-col md:flex-row justify-between items-center px-10 md:px-2.5 py-4 gap-2.5 border-1 text-black"
+      className="flex flex-col md:flex-row justify-between items-center px-2.5 py-4 gap-2.5 border-1 text-black"
     >
       <button
         className="flex w-[100%] justify-end md:hidden cursor-pointer"

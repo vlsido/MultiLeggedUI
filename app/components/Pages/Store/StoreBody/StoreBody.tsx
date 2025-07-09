@@ -73,7 +73,7 @@ function StoreBody() {
   }
 
   return (
-    <div className="flex flex-1 flex-col justify-between overflow-y-auto bg-[url(/Zuk9.png)] bg-contain bg-center bg-local bg-repeat">
+    <div className="flex flex-1 flex-col justify-between overflow-y-auto">
       <div className="flex flex-col w-full items-center p-2.5 self-center items-start max-w-[1000px] gap-2.5">
         <div className="w-full">
           <button

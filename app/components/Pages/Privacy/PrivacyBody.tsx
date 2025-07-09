@@ -54,14 +54,14 @@ function PrivacyBody() {
               We may update our Privacy Policy from time to time. Thus, you are
               advised to review this page periodically for any changes. We will
               notify you of any changes by posting the new Privacy Policy on
-              this page. This policy is effective as of 01.05.2025.
+              this page. This policy is effective as of 09.07.2025.
             </p>
           </div>
           <div id="section" className="px-5">
             <h2 className="text-[20px] font-bold">Contact us</h2>
             <p className="text-[16px]">
               If you have any questions or suggestions about our Privacy Policy,
-              do not hesitate to contact us at info@multilegged.io
+              do not hesitate to contact us at multileggedstore@gmail.com
             </p>
           </div>
         </div>

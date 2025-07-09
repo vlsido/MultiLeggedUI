@@ -39,7 +39,7 @@ function ContactBody() {
         <div className="flex flex-col max-w-[400px] w-full p-2.5 bg-white rounded-md text-black">
           <div className="flex flex-row items-center gap-2">
             <EmailIcon />
-            <p>info@multilegged.io</p>
+            <p>multileggedstore@gmail.com</p>
           </div>
         </div>
       </div>

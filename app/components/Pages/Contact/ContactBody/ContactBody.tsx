@@ -1,12 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextButton from "~/components/UI/buttons/TextButton/TextButton";
 import { EmailIcon } from "~/components/Icons/EmailIcon";
 import { useMutation } from "@tanstack/react-query";
 import { type ContactPayload, sendContactEmail } from "~/api/api";
 import { userMessageManager } from "~/managers/userMessageManager";
 
+const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+let lastSubmitTime = 0;
+
+function canSubmitAgain(delayMs = 60000) {
+  const now = Date.now();
+  if (now - lastSubmitTime < delayMs) return false;
+  return true;
+}
+
 function ContactBody() {
-  const { mutate, isPending } = useMutation({ mutationFn: sendContactEmail });
+  const { mutate, isPending, isSuccess, isError } = useMutation({
+    mutationFn: sendContactEmail,
+  });
 
   const [formData, setFormData] = useState<ContactPayload>({
     name: "",
@@ -17,14 +29,41 @@ function ContactBody() {
 
   const [isFormInvalid, setIsFormInvalid] = useState<boolean>(false);
 
+  const [isEmailInvalid, setIsEmailInvalid] = useState<boolean>(false);
+
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
+  useEffect(() => {
+    if (isSuccess) {
+      userMessageManager.showUserMessage("Message was sent", "INFO", 3000);
+      lastSubmitTime = Date.now();
+    }
+
+    if (isError) {
+      userMessageManager.showUserMessage(
+        "Server error! Try again later!",
+        "ERROR",
+        3000,
+      );
+    }
+  }, [isSuccess, isError]);
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!canSubmitAgain()) {
+      userMessageManager.showUserMessage(
+        "Message is already sent",
+        "INFO",
+        3000,
+      );
+
+      return;
+    }
+
     if (Object.values(formData).some((value) => !value)) {
       setIsFormInvalid(true);
       userMessageManager.showUserMessage(
@@ -34,6 +73,13 @@ function ContactBody() {
       );
       return;
     }
+
+    if (emailRegex.test(formData.email) === false) {
+      setIsEmailInvalid(true);
+      userMessageManager.showUserMessage("Invalid email format", "ERROR", 3000);
+      return;
+    }
+
     mutate(formData);
   }
 
@@ -66,10 +112,12 @@ function ContactBody() {
             placeholder="Email"
             className={
               "px-2.5 py-1.25 bg-white rounded-md border-1 " +
-              (isFormInvalid === true && formData.email === ""
+              ((isFormInvalid === true && formData.email === "") ||
+              isEmailInvalid === true
                 ? "border-red-600"
                 : "border-white")
             }
+            onFocus={() => setIsEmailInvalid(false)}
             onChange={handleChange}
           />
           <input

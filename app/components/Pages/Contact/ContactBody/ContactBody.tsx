@@ -15,6 +15,8 @@ function ContactBody() {
     message: "",
   });
 
+  const [isFormInvalid, setIsFormInvalid] = useState<boolean>(false);
+
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
@@ -24,6 +26,7 @@ function ContactBody() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (Object.values(formData).some((value) => !value)) {
+      setIsFormInvalid(true);
       userMessageManager.showUserMessage(
         "One or more fields are empty",
         "ERROR",
@@ -43,31 +46,52 @@ function ContactBody() {
         </p>
         <form
           id="contact-form"
-          className="flex flex-col max-w-[400px] w-full gap-2.5 p-2.5 text-black"
+          className="flex flex-col max-w-[400px] w-full rounded-xl bg-gray-600 gap-2.5 p-2.5 text-black"
           onSubmit={handleSubmit}
+          onFocus={() => setIsFormInvalid(false)}
         >
           <input
             name="name"
             placeholder="Name"
-            className="px-2.5 py-1.25 bg-white rounded-md"
+            className={
+              "px-2.5 py-1.25 bg-white rounded-md border-1 " +
+              (isFormInvalid === true && formData.name === ""
+                ? "border-red-600"
+                : "border-white")
+            }
             onChange={handleChange}
           />
           <input
             name="email"
             placeholder="Email"
-            className="px-2.5 py-1.25 bg-white rounded-md"
+            className={
+              "px-2.5 py-1.25 bg-white rounded-md border-1 " +
+              (isFormInvalid === true && formData.email === ""
+                ? "border-red-600"
+                : "border-white")
+            }
             onChange={handleChange}
           />
           <input
             name="subject"
             placeholder="Subject"
-            className="px-2.5 py-1.25 bg-white rounded-md"
+            className={
+              "px-2.5 py-1.25 bg-white rounded-md border-1 " +
+              (isFormInvalid === true && formData.subject === ""
+                ? "border-red-600"
+                : "border-white")
+            }
             onChange={handleChange}
           />
           <textarea
             name="message"
             placeholder="Your message..."
-            className="min-h-[100px] text-top px-2.5 py-1.25 bg-white rounded-md"
+            className={
+              "min-h-[100px] text-top px-2.5 py-1.25 bg-white rounded-md border-1 " +
+              (isFormInvalid === true && formData.message === ""
+                ? "border-red-600"
+                : "border-white")
+            }
             onChange={handleChange}
           />
 
@@ -77,7 +101,8 @@ function ContactBody() {
             type="submit"
             onPress={() => {}}
             disabled={isPending}
-            containerClassName="max-w-50 w-full p-2.5 bg-yellow-100 rounded-full drop-shadow-md self-center cursor-pointer"
+            containerClassName="max-w-50 w-full p-2.5 bg-black-500 rounded-full drop-shadow-md self-center cursor-pointer"
+            textClassName="text-white"
           />
         </form>
         <div className="flex flex-col max-w-[400px] w-full p-2.5 bg-white rounded-md text-black">

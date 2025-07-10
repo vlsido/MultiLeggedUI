@@ -41,3 +41,12 @@ export interface ParcelMachine {
   name: string;
   country: "EE" | "LV" | "LT";
 }
+
+export interface UserMessage {
+  text: string;
+  type: "INFO" | "ERROR";
+  /**
+   * milliseconds
+   */
+  ms: number;
+}

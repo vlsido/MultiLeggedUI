@@ -13,7 +13,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import DataStore from "./components/Fetchers/DataStore";
-import UserMessageHelper from "./components/Helpers/UserMessageHelper";
+import UserMessageHelper from "./components/Helpers/UserMessageHelper/UserMessageHelper";
 
 const queryClient = new QueryClient();
 

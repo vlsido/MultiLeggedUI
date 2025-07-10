@@ -1,12 +1,10 @@
-import { combineReducers, configureStore, type Store } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./slices/cartSlice";
 import animalsReducer from "./slices/animalsSlice";
-import userMessageReducer from "./slices/userMessageSlice";
 
 const rootReducer = combineReducers({
   cart: cartReducer,
   animals: animalsReducer,
-  userMessage: userMessageReducer,
 });
 
 export const setupStore = (preloadedState?: Partial<RootState>) => {

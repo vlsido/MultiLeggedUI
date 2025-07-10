@@ -1,7 +1,9 @@
 import type { Country, ParcelMachine, ParcelVendor } from "~/types/common";
 
+const serverIp = "192.168.0.103";
+
 export async function fetchAnimals() {
-  const response = await fetch("http://192.168.0.102:8080/api/animals");
+  const response = await fetch(`http://${serverIp}:8080/api/animals`);
 
   if (!response.ok) {
     throw new Error("Error fetching animals data");
@@ -61,4 +63,29 @@ export async function fetchParcelMachines(): Promise<ParcelMachine[]> {
   } catch (error) {
     throw error;
   }
+}
+
+export interface ContactPayload {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+export async function sendContactEmail(data: ContactPayload) {
+  console.log(data);
+  const res = await fetch(`http://${serverIp}:8080/api/contact`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.message || "Failed to send contact message");
+  }
+
+  return res.json().catch(() => ({}));
 }

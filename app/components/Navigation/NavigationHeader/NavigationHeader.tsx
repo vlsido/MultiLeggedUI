@@ -40,7 +40,7 @@ function Header() {
           "flex flex-1 py-[5px] min-w-[200px] justify-center items-center"
         }
       >
-        <h1 className="text-center text-[24px] text-shadow-md text-shadow-black text-white font-bold">
+        <h1 className="text-center text-[24px] text-shadow-xs text-shadow-black text-white font-bold">
           MULTILEGGED STORE
         </h1>
       </div>

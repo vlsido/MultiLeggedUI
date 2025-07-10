@@ -8,6 +8,7 @@ interface TextButtonProps {
   textClassName?: string;
   leftSideIcon?: ReactElement;
   disabled?: boolean;
+  type?: "submit" | "reset" | "button";
 }
 
 function TextButton(props: TextButtonProps) {
@@ -18,6 +19,7 @@ function TextButton(props: TextButtonProps) {
           ? props.containerClassName
           : "flex flex-row items-center px-[16px] py-[10px] gap-[8px] bg-black rounded-[4px] cursor-pointer"
       }
+      type={props.type}
       aria-label={props.ariaLabel}
       disabled={props.disabled}
       onPointerUp={props.onPress}

@@ -23,7 +23,14 @@ export default function Contact({ loaderData }: Route.ComponentProps) {
       <div className="hidden md:flex">
         <Header />
       </div>
-      <ContactBody />
+
+      <div className="flex flex-1 flex-col overflow-y-auto">
+        <div className="flex flex-1 bg-[url(/Zuk8.png)] bg-left bg-size-[auto_750px] bg-local bg-repeat-y scale-x-[-1]">
+          <div className="flex flex-1 bg-[url(/Zuk8.png)] bg-left bg-size-[auto_750px] bg-local bg-repeat-y scale-x-[-1]">
+            <ContactBody />
+          </div>
+        </div>
+      </div>
       <Footer />
       <div className="md:hidden flex">
         <Navigation />

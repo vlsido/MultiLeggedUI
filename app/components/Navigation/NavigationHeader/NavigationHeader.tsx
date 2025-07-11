@@ -1,6 +1,5 @@
 import logo from "~/assets/logos/logo.png";
 import { StoreIcon } from "../../Icons/StoreIcon";
-import { SearchIcon } from "../../Icons/SearchIcon";
 import { Link, useLocation } from "react-router";
 import ShoppingCartLink from "../CartLink";
 

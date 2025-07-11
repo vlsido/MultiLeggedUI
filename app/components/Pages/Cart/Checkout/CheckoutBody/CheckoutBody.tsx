@@ -1,139 +1,40 @@
-import { useQuery } from "@tanstack/react-query";
-import { useCallback, useId, useState } from "react";
-import { useNavigate } from "react-router";
-import { fetchParcelMachines } from "~/api/api";
-import { CheckmarkFilled } from "~/components/Icons/CheckmarkFilled";
-import TextButton from "~/components/UI/buttons/TextButton/TextButton";
-import { parcelVendors } from "~/data/data";
+import { CheckoutProvider } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import { useMemo } from "react";
+import CheckoutForm from "../CheckoutForm";
+import { userMessageManager } from "~/managers/userMessageManager";
+
+const stripePromise = loadStripe(
+  "pk_test_51RjTKDPI2Lgb9onPFEhhdBOAbZWotOiwdhSuvJADkva1apcsQSbkpaFHeZx9hDbIdt0Ya5kYZeFnBYVSceC27Ygj00IN3wZ5Kd",
+);
 
 function CheckoutBody() {
-  const navigate = useNavigate();
-
-  const parcelMachinesQuery = useQuery({
-    queryKey: ["parcelMachines"],
-    queryFn: fetchParcelMachines,
-  });
-
-  const [parcelVendor, setParcelVendor] = useState<string>("");
-
-  const [country, setCountry] = useState<string>("");
-
-  const [parcelMachine, setParcelMachine] = useState<string>("");
-
-  const handleGoPayment = useCallback(() => {
-    return navigate("/cart/payment");
+  const promise = useMemo(async () => {
+    return fetch("http://192.168.0.102:8080/api/create-checkout-session", {
+      method: "POST",
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log("clientSecret", json.clientSecret);
+        return json.clientSecret;
+      })
+      .catch(() => {
+        userMessageManager.showUserMessage(
+          "Server error! Try later!",
+          "ERROR",
+          3000,
+        );
+      });
   }, []);
 
-  const countrySelectId = useId();
-
   return (
-    <div className="flex flex-1 flex-col justify-between overflow-y-auto">
-      <div className="flex flex-1 p-5 justify-center items-center flex-col gap-2.5">
-        <div className="flex flex-col gap-2.5 p-5 bg-white text-black">
-          <h2 className="py-2.5 text-[18px] font-bold">Choose parcel vendor</h2>
-          <div className="flex flex-col gap-5">
-            <div className="flex flex-wrap gap-2">
-              {parcelVendors.map((vendor) => {
-                return (
-                  <button
-                    key={vendor.name}
-                    className={
-                      "flex flex-col relative border-2 p-2 cursor-pointer " +
-                      (parcelVendor === vendor.name && "border-green-500")
-                    }
-                    onPointerUp={() => setParcelVendor(vendor.name)}
-                  >
-                    <img src={vendor.imageUrl} />
-                    <p className="self-end">
-                      ${(vendor.priceInCents / 100).toFixed(2)}
-                    </p>
-                    {parcelVendor === vendor.name && (
-                      <div className="absolute top-2 right-2">
-                        <CheckmarkFilled />
-                      </div>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-            <div
-              className={
-                "flex flex-col gap-2.5 " +
-                (parcelVendor === "" ? "opacity-50" : "")
-              }
-            >
-              <select
-                id={countrySelectId}
-                className="flex border-1"
-                disabled={parcelVendor === ""}
-                onChange={(e) => setCountry(e.target.value)}
-              >
-                <option value={""} disabled selected>
-                  Select country
-                </option>
-                <option value={"EE"}>Estonia</option>
-                <option value={"LV"}>Latvia</option>
-                <option value={"LT"}>Lithuania</option>
-              </select>
-            </div>
-            <div
-              className={
-                "flex flex-col gap-2.5 " + (country === "" ? "opacity-50" : "")
-              }
-            >
-              <select
-                className="flex border-1"
-                disabled={country === ""}
-                onChange={(e) => setParcelMachine(e.target.value)}
-                required
-              >
-                <option value="" disabled selected>
-                  Choose parcel machine
-                </option>
-                {parcelVendor !== "" &&
-                  parcelMachinesQuery.isSuccess &&
-                  parcelMachinesQuery.data.map((machine) => {
-                    if (
-                      machine.company !== parcelVendor ||
-                      machine.country !== country
-                    )
-                      return null;
-                    return <option value={machine.name}>{machine.name}</option>;
-                  })}
-              </select>
-            </div>
-          </div>
-          <div className={parcelMachine === "" ? "opacity-50" : undefined}>
-            <h2 className="py-2.5 text-[18px] font-bold">
-              Recipient information
-            </h2>
-            <div className="flex flex-col">
-              <div className="flex py-2.5">
-                <label className="min-w-[100px]">First Name</label>
-                <input className="border-1 rounded-md" />
-              </div>
-              <div className="flex py-2.5">
-                <label className="min-w-[100px]">Last Name</label>
-                <input className="border-1 rounded-md" />
-              </div>
-              <div className="flex py-2.5">
-                <label className="min-w-[100px]">Phone</label>
-                <input className="border-1 rounded-md" />
-              </div>
-            </div>
-
-            <div className="flex w-full justify-end">
-              <TextButton
-                text={"Proceed to payment"}
-                ariaLabel={"Go to payment"}
-                containerClassName="bg-black-500 w-full max-w-[250px] p-2.5 rounded-full drop-shadow-md cursor-pointer"
-                textClassName="text-white"
-                onPress={handleGoPayment}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="flex flex-1 justify-center items-center">
+      <CheckoutProvider
+        stripe={stripePromise}
+        options={{ fetchClientSecret: () => promise }}
+      >
+        <CheckoutForm />
+      </CheckoutProvider>
     </div>
   );
 }

@@ -14,7 +14,7 @@ function UserMessageCard(props: UserMessageCardProps) {
     case "INFO":
       return (
         <motion.div
-          className="absolute bg-white right-0 left-0 bottom-[100px] mx-auto self-center text-black max-w-[200px] min-w-[100px] p-2.5 border-black border-1 drop-shadow-xl"
+          className="absolute bg-white right-0 left-0 bottom-[100px] mx-auto self-center text-black max-w-[200px] min-w-[100px] p-2.5 border-black border-1 drop-shadow-xl z-1"
           initial={{ opacity: 0, y: 0 }}
           animate={{ opacity: 1, y: -50 }}
           exit={{ opacity: 0, y: 50 }}
@@ -26,7 +26,7 @@ function UserMessageCard(props: UserMessageCardProps) {
     case "ERROR":
       return (
         <motion.div
-          className="absolute bg-white right-[50px] top-[100px] mx-auto self-center text-black max-w-[200px] min-w-[100px] border-black border-1 drop-shadow-xl"
+          className="absolute bg-white right-[50px] top-[100px] mx-auto self-center text-black max-w-[200px] min-w-[100px] border-black border-1 drop-shadow-xl z-1"
           initial={{ opacity: 0, x: 0 }}
           animate={{ opacity: 1, x: -50 }}
           exit={{ opacity: 0, x: 50 }}

@@ -14,8 +14,8 @@ function CartBody() {
     return navigate("/store");
   }, []);
 
-  const handleGoCheckout = useCallback(() => {
-    return navigate("/cart/checkout");
+  const handleGoShipping = useCallback(() => {
+    return navigate("/cart/shipping");
   }, []);
 
   return (
@@ -42,7 +42,7 @@ function CartBody() {
                   ariaLabel={cart.length === 0 ? "Go back" : "Go checkout"}
                   containerClassName="bg-black-500 w-full max-w-[250px] p-2.5 mt-8 rounded-full drop-shadow-md cursor-pointer"
                   textClassName="text-white"
-                  onPress={cart.length === 0 ? handleGoBack : handleGoCheckout}
+                  onPress={cart.length === 0 ? handleGoBack : handleGoShipping}
                 />
               </div>
             </div>

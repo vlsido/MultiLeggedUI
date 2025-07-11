@@ -1,6 +1,6 @@
 import type { Country, ParcelMachine, ParcelVendor } from "~/types/common";
 
-const serverIp = "192.168.0.103";
+const serverIp = "192.168.0.102";
 
 export async function fetchAnimals() {
   const response = await fetch(`http://${serverIp}:8080/api/animals`);

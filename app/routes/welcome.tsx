@@ -3,6 +3,7 @@ import Header from "~/components/Navigation/NavigationHeader/NavigationHeader";
 import Navigation from "~/components/Navigation/NavigationFooter/NavigationFooter";
 import WelcomeBody from "~/components/Pages/Welcome/WelcomeBody";
 import Footer from "~/components/UI/Footer";
+import Background from "~/components/UI/Background";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -20,7 +21,9 @@ export default function Store() {
       <div className="hidden md:flex">
         <Header />
       </div>
-      <WelcomeBody />
+      <Background>
+        <WelcomeBody />
+      </Background>
       <Footer />
       <div className="md:hidden flex">
         <Navigation />

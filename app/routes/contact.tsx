@@ -3,6 +3,7 @@ import type { Route } from "./+types/contact";
 import Navigation from "~/components/Navigation/NavigationFooter/NavigationFooter";
 import ContactBody from "~/components/Pages/Contact/ContactBody/ContactBody";
 import Footer from "~/components/UI/Footer";
+import Background from "~/components/UI/Background";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -25,11 +26,9 @@ export default function Contact({ loaderData }: Route.ComponentProps) {
       </div>
 
       <div className="flex flex-1 flex-col overflow-y-auto">
-        <div className="flex flex-1 bg-[url(/Zuk8.png)] bg-left bg-size-[auto_750px] bg-local bg-repeat-y scale-x-[-1]">
-          <div className="flex flex-1 bg-[url(/Zuk8.png)] bg-left bg-size-[auto_750px] bg-local bg-repeat-y scale-x-[-1]">
-            <ContactBody />
-          </div>
-        </div>
+        <Background>
+          <ContactBody />
+        </Background>
       </div>
       <Footer />
       <div className="md:hidden flex">

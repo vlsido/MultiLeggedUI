@@ -3,6 +3,7 @@ import type { Route } from "./+types/store";
 import Header from "~/components/Navigation/NavigationHeader/NavigationHeader";
 import Navigation from "~/components/Navigation/NavigationFooter/NavigationFooter";
 import Footer from "~/components/UI/Footer";
+import Background from "~/components/UI/Background";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -20,13 +21,10 @@ export default function Store() {
       <div className="hidden md:flex">
         <Header />
       </div>
-
       <div className="flex flex-1 flex-col overflow-y-auto">
-        <div className="flex flex-1 bg-[url(/Zuk8.png)] bg-left bg-size-[auto_750px] bg-local bg-repeat-y scale-x-[-1]">
-          <div className="flex flex-1 bg-[url(/Zuk8.png)] bg-left bg-size-[auto_750px] bg-local bg-repeat-y scale-x-[-1]">
-            <StoreBody />
-          </div>
-        </div>
+        <Background>
+          <StoreBody />
+        </Background>
       </div>
       <Footer />
       <div className="md:hidden flex">

@@ -3,6 +3,7 @@ import { Outlet } from "react-router";
 import Header from "~/components/Navigation/NavigationHeader/NavigationHeader";
 import Navigation from "~/components/Navigation/NavigationFooter/NavigationFooter";
 import Footer from "~/components/UI/Footer";
+import Background from "~/components/UI/Background";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -24,11 +25,9 @@ export default function Cart({ loaderData }: Route.ComponentProps) {
         <Header />
       </div>
       <div className="flex flex-1 flex-col overflow-y-auto">
-        <div className="flex flex-1 bg-[url(/Zuk8.png)] bg-left bg-size-[auto_750px] bg-local bg-repeat-y scale-x-[-1]">
-          <div className="flex flex-1 bg-[url(/Zuk8.png)] bg-left bg-size-[auto_750px] bg-local bg-repeat-y scale-x-[-1]">
-            <Outlet />
-          </div>
-        </div>
+        <Background>
+          <Outlet />
+        </Background>
       </div>
       <Footer />
       <div className="md:hidden flex">

@@ -23,7 +23,7 @@ function Header() {
             <div
               className={
                 "flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[18px] rounded-full items-center " +
-                (location.pathname === "/store"
+                (location.pathname.includes("/store")
                   ? "bg-white ring-1 ring-black"
                   : "bg-gray-200")
               }

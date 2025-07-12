@@ -37,7 +37,7 @@ function CartBody() {
               <div className="flex w-full justify-end">
                 <TextButton
                   text={
-                    cart.length === 0 ? "Back to store" : "Proceed to checkout"
+                    cart.length === 0 ? "Back to store" : "Proceed to shipping"
                   }
                   ariaLabel={cart.length === 0 ? "Go back" : "Go checkout"}
                   containerClassName="bg-black-500 w-full max-w-[250px] p-2.5 mt-8 rounded-full drop-shadow-md cursor-pointer"

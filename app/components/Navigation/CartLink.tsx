@@ -33,7 +33,7 @@ function ShoppingCartLink() {
       <div
         className={
           "flex flex-row px-[10px] py-[5px] gap-[10px] text-black text-[20px] rounded-full items-center " +
-          (location.pathname === "/cart"
+          (location.pathname.includes("/cart")
             ? "bg-white ring-1 ring-black"
             : "bg-gray-200")
         }

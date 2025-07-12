@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { NavLink } from "react-router";
 import { TrashIcon } from "~/components/Icons/TrashIcon";
 import QuantitySelectorPill from "~/components/UI/selectors/QuantitySelectorPill";
 import { useAppDispatch, useAppSelector } from "~/hooks/reduxHooks";
@@ -64,9 +65,12 @@ function CartItem(props: ICartItem) {
           className="h-32 w-32 rounded-xl object-contain"
         />
       </div>
-      <p className="flex-1 underline text-center">
+      <NavLink
+        className="flex-1 underline text-center"
+        to={`/store/product/${props.item.animalId}?return_page=cart`}
+      >
         {props.item.name} ({props.item.form})
-      </p>
+      </NavLink>
       <div className="flex md:flex-1 w-[100%] justify-between">
         <p className="md:hidden">Price:</p>
         <p className="md:flex-1 text-center">

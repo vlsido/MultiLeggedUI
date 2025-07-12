@@ -18,7 +18,7 @@ function PricePackages(props: PricePackagesProps) {
   return (
     <div
       id={"selectors"}
-      className="flex flex-col bg-gray-500 gap-1.25 p-5 w-full rounded-4xl"
+      className="flex flex-col bg-gray-100 gap-1.25 p-5 w-full rounded-4xl"
     >
       <div id="price_packages" className="flex gap-2.5 justify-evenly">
         {props.animal.animalPrices.map((pricePackage) => {
@@ -57,7 +57,7 @@ function PricePackages(props: PricePackagesProps) {
         })}
       </div>
       <div className="h-[2px] w-full bg-black" />
-      <div className="flex py-1.25 justify-between">
+      <div className="flex py-1.25 gap-3 justify-between">
         <p className="font-bold">Quantity</p>
         <QuantitySelectorPill
           value={props.quantity}

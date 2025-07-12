@@ -58,7 +58,7 @@ function PurchaseView(props: PurchaseViewProps) {
   );
 
   return (
-    <div className="flex flex-col w-full my-2 gap-2 items-center text-[20px]">
+    <div className="flex flex-col w-full md:max-w-[400px] self-center my-2 gap-2 items-center text-[20px] text-black">
       <PricePackages
         animal={props.animal}
         quantity={quantity}

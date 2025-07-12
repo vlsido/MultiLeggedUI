@@ -1,9 +1,9 @@
-import StoreBody from "~/components/Pages/Store/StoreBody/StoreBody";
 import type { Route } from "./+types/store";
 import Header from "~/components/Navigation/NavigationHeader/NavigationHeader";
 import Navigation from "~/components/Navigation/NavigationFooter/NavigationFooter";
 import Footer from "~/components/UI/Footer";
 import Background from "~/components/UI/Background";
+import { Outlet } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -12,7 +12,7 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function Store() {
+export default function Store({ params }: Route.LoaderArgs) {
   return (
     <main
       aria-label="Home page"
@@ -23,7 +23,7 @@ export default function Store() {
       </div>
       <div className="flex flex-1 flex-col overflow-y-auto">
         <Background>
-          <StoreBody />
+          <Outlet />
         </Background>
       </div>
       <Footer />

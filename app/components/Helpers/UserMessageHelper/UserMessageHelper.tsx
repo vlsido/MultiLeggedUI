@@ -1,10 +1,11 @@
 import { AnimatePresence } from "motion/react";
-import UserMessageCard, { type UserMessageCardProps } from "./UserMessageCard";
-import { useEffect, useRef, useState } from "react";
+import UserMessageCard from "./UserMessageCard";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { userMessageManager } from "~/managers/userMessageManager";
+import type { UserMessage } from "~/types/common";
 
 function UserMessageHelper() {
-  const [message, setMessage] = useState<UserMessageCardProps | null>(null);
+  const [message, setMessage] = useState<UserMessage | null>(null);
 
   const timeoutId = useRef<NodeJS.Timeout | undefined>(undefined);
 
@@ -24,6 +25,10 @@ function UserMessageHelper() {
     };
   }, []);
 
+  const handleOnClose = useCallback(() => {
+    setMessage(null);
+  }, []);
+
   return (
     <AnimatePresence>
       {message != null && (
@@ -31,6 +36,7 @@ function UserMessageHelper() {
           text={message.text}
           type={message.type}
           ms={message.ms}
+          onClose={handleOnClose}
         />
       )}
     </AnimatePresence>

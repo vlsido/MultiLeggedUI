@@ -73,7 +73,6 @@ export interface ContactPayload {
 }
 
 export async function sendContactEmail(data: ContactPayload) {
-  console.log(data);
   const res = await fetch(`http://${serverIp}:8080/api/contact`, {
     method: "POST",
     headers: {

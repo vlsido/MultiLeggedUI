@@ -28,7 +28,7 @@ function CartBody() {
             <p className="flex md:hidden text-[20px] self-start font-bold">
               CART
             </p>
-            <div className="flex flex-col max-w-[1000px] w-[100%] bg-gray-500 rounded-3xl p-8">
+            <div className="flex flex-col max-w-[1000px] w-[100%] bg-gray-500/50 rounded-3xl p-8">
               <div className="flex flex-col gap-2">
                 {cart.map((item) => (
                   <CartItem key={item.name} item={item} />

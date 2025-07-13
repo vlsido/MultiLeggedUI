@@ -29,7 +29,7 @@ function ShippingBody() {
   return (
     <div className="flex flex-1 flex-col justify-between overflow-y-auto">
       <div className="flex flex-1 p-5 justify-center items-center flex-col gap-2.5">
-        <div className="flex flex-col gap-2.5 p-5 bg-white text-black">
+        <div className="flex flex-col gap-2.5 p-5 bg-white rounded-3xl text-black">
           <h2 className="py-2.5 text-[18px] font-bold">Choose parcel vendor</h2>
           <div className="flex flex-col gap-5">
             <div className="flex flex-wrap gap-2">

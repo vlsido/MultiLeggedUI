@@ -47,7 +47,7 @@ function PricePackages(props: PricePackagesProps) {
                     : "text-[20px] font-bold"
                 }
               >
-                ${(pricePackage.centsPerUnit / 100).toFixed(2)}
+                €{(pricePackage.centsPerUnit / 100).toFixed(2)}
                 <span className="text-[12px] font-normal text-nowrap">
                   /per 1
                 </span>
@@ -70,7 +70,7 @@ function PricePackages(props: PricePackagesProps) {
       <div className="flex py-1.25 justify-between items-center">
         <p className="font-bold">Sub-total</p>
         <p className="font-bold text-[18px]">
-          ${((currentPackagePriceInCents / 100) * props.quantity).toFixed(2)}
+          €{((currentPackagePriceInCents / 100) * props.quantity).toFixed(2)}
         </p>
       </div>
     </div>

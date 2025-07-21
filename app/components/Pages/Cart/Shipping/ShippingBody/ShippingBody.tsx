@@ -45,7 +45,7 @@ function ShippingBody() {
                   >
                     <img src={vendor.imageUrl} />
                     <p className="self-end">
-                      ${(vendor.priceInCents / 100).toFixed(2)}
+                      €{(vendor.priceInCents / 100).toFixed(2)}
                     </p>
                     {parcelVendor === vendor.name && (
                       <div className="absolute top-2 right-2">

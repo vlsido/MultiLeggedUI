@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Route } from "./+types/return";
 import { Navigate } from "react-router";
+import { serverIp } from "~/constants/common";
 
 export default function Return({ loaderData }: Route.ComponentProps) {
   const [status, setStatus] = useState<string | null>(null);
@@ -11,9 +12,7 @@ export default function Return({ loaderData }: Route.ComponentProps) {
     const urlParams = new URLSearchParams(queryString);
     const sessionId = urlParams.get("session_id");
 
-    fetch(
-      `http://192.168.0.102:8080/api/session-status?session_id=${sessionId}`,
-    )
+    fetch(`http://${serverIp}:8080/api/session-status?session_id=${sessionId}`)
       .then((res) => res.json())
       .then((data) => {
         setStatus(data.status);

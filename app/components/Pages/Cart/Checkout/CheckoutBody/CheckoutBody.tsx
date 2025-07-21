@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import CheckoutForm from "../CheckoutForm";
 import { userMessageManager } from "~/managers/userMessageManager";
 import { useAppSelector } from "~/hooks/reduxHooks";
+import { serverIp } from "~/constants/common";
 
 const stripePromise = loadStripe(
   "pk_test_51RjTKDPI2Lgb9onPFEhhdBOAbZWotOiwdhSuvJADkva1apcsQSbkpaFHeZx9hDbIdt0Ya5kYZeFnBYVSceC27Ygj00IN3wZ5Kd",
@@ -12,7 +13,7 @@ const stripePromise = loadStripe(
 function CheckoutBody() {
   const cartItems = useAppSelector((state) => state.cart.cartItems);
 
-  const promise = useMemo(async () => {
+  const promise = async () => {
     const data = cartItems.map((item) => {
       return {
         animalId: item.animalId,
@@ -20,7 +21,7 @@ function CheckoutBody() {
       };
     });
 
-    return fetch("http://192.168.0.102:8080/api/create-checkout-session", {
+    return fetch(`http://${serverIp}:8080/api/create-checkout-session`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,23 +30,20 @@ function CheckoutBody() {
     })
       .then((response) => response.json())
       .then((json) => {
+        console.log(json);
+        if (json.error) {
+          userMessageManager.showUserMessage(json.error, "ERROR", 3000);
+        }
         console.log("clientSecret", json.clientSecret);
         return json.clientSecret;
-      })
-      .catch(() => {
-        userMessageManager.showUserMessage(
-          "Server error! Try later!",
-          "ERROR",
-          3000,
-        );
       });
-  }, []);
+  };
 
   return (
     <div className="flex flex-1 justify-center items-center">
       <CheckoutProvider
         stripe={stripePromise}
-        options={{ fetchClientSecret: () => promise }}
+        options={{ fetchClientSecret: promise }}
       >
         <CheckoutForm />
       </CheckoutProvider>

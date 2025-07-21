@@ -74,7 +74,7 @@ function CartItem(props: ICartItem) {
       <div className="flex md:flex-1 w-[100%] justify-between">
         <p className="md:hidden">Price:</p>
         <p className="md:flex-1 text-center">
-          ${(findPriceByAnimalId(props.item.animalId) / 100).toFixed(2)}
+          €{(findPriceByAnimalId(props.item.animalId) / 100).toFixed(2)}
           <span className="text-[14px]">/per 1</span>
         </p>
       </div>
@@ -90,7 +90,7 @@ function CartItem(props: ICartItem) {
       <div className="flex md:flex-1 w-[100%] justify-between">
         <p className="md:hidden">Sub-total:</p>
         <p className="md:flex-1 relative text-center">
-          ${price.toFixed(2)}
+          €{price.toFixed(2)}
           <span className="hidden md:flex absolute top-[-20px] w-full justify-center opacity-90">
             (sub-total)
           </span>

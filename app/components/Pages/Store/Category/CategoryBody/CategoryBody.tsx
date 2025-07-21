@@ -68,7 +68,7 @@ function CategoryBody({ params }: Route.LoaderArgs) {
                                   )}
                                 </div>
                                 <p className={"text-[20px] font-bold"}>
-                                  $
+                                  €
                                   {(pricePackage.centsPerUnit / 100).toFixed(2)}
                                   <span className="text-[12px] font-normal text-nowrap">
                                     /per 1

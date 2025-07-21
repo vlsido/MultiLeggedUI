@@ -38,7 +38,7 @@ function ShoppingCartLink() {
             : "bg-gray-200")
         }
       >
-        <ShoppingCartIcon />${(price / 100).toFixed(2)}
+        <ShoppingCartIcon />€{(price / 100).toFixed(2)}
         <div className="text-[16px] opacity-[0.5]">{cart.length} items</div>
       </div>
     </Link>

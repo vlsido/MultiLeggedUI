@@ -8,13 +8,14 @@ import {
   setItemQuantity,
   type CartItemProps,
 } from "~/redux/slices/cartSlice";
+import { findPriceByAnimalId } from "~/utils/cart-utils";
 
 interface ICartItem {
   item: CartItemProps;
 }
 
 function CartItem(props: ICartItem) {
-  const cart = useAppSelector((state) => state.cart.cartItems);
+  const cartItems = useAppSelector((state) => state.cart.cartItems);
 
   const dispatch = useAppDispatch();
 
@@ -22,31 +23,14 @@ function CartItem(props: ICartItem) {
     dispatch(removeFromCart(animalId));
   }, []);
 
-  const findPriceByAnimalId = useCallback(
-    (id: number) => {
-      const animal = cart.find((item) => item.animalId === id);
-
-      if (animal) {
-        const currentPackagePriceInCents =
-          animal.animalPrices.find(
-            (pricePackage) =>
-              pricePackage.minQuantity <= animal.quantity &&
-              (pricePackage.maxQuantity ?? Infinity) >= animal.quantity,
-          )?.centsPerUnit ?? 0;
-
-        return currentPackagePriceInCents;
-      }
-      return 0;
-    },
-    [cart],
-  );
-
   const onQuantityChange = useCallback((quantity: number) => {
     dispatch(setItemQuantity({ id: props.item.animalId, quantity: quantity }));
   }, []);
 
   const price =
-    (findPriceByAnimalId(props.item.animalId) * props.item.quantity) / 100;
+    (findPriceByAnimalId(cartItems, props.item.animalId) *
+      props.item.quantity) /
+    100;
 
   return (
     <div
@@ -74,7 +58,10 @@ function CartItem(props: ICartItem) {
       <div className="flex md:flex-1 w-[100%] justify-between">
         <p className="md:hidden">Price:</p>
         <p className="md:flex-1 text-center">
-          €{(findPriceByAnimalId(props.item.animalId) / 100).toFixed(2)}
+          €
+          {(findPriceByAnimalId(cartItems, props.item.animalId) / 100).toFixed(
+            2,
+          )}
           <span className="text-[14px]">/per 1</span>
         </p>
       </div>

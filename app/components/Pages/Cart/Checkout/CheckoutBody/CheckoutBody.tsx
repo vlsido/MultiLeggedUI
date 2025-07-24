@@ -1,6 +1,5 @@
 import { CheckoutProvider } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useMemo } from "react";
 import CheckoutForm from "../CheckoutForm";
 import { userMessageManager } from "~/managers/userMessageManager";
 import { useAppSelector } from "~/hooks/reduxHooks";

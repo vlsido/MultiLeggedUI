@@ -12,7 +12,7 @@ const stripePromise = loadStripe(
 function CheckoutBody() {
   const cartItems = useAppSelector((state) => state.cart.cartItems);
 
-  const promise = async () => {
+  async function promise() {
     const data = cartItems.map((item) => {
       return {
         animalId: item.animalId,
@@ -29,14 +29,12 @@ function CheckoutBody() {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         if (json.error) {
           userMessageManager.showUserMessage(json.error, "ERROR", 3000);
         }
-        console.log("clientSecret", json.clientSecret);
         return json.clientSecret;
       });
-  };
+  }
 
   return (
     <div className="flex flex-1 justify-center items-center">

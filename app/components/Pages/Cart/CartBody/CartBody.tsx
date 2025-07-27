@@ -38,7 +38,7 @@ function CartBody() {
                 ))}
               </div>
               <div className="flex w-full justify-end">
-                <div className="flex flex-col bg-white text-black w-full max-w-[250px] rounded-xl p-2.5 mt-8 gap-2.5">
+                <div className="flex flex-col bg-white text-black w-full max-w-[250px] rounded-xl p-2.5 mt-8 gap-2.5 drop-shadow-md">
                   <div>
                     <div className="flex justify-between">
                       <label htmlFor="items_price">Items price</label>

@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import type { Route } from "./+types/return";
-import { Navigate } from "react-router";
+import { Navigate, useSearchParams } from "react-router";
 import { serverIp } from "~/constants/common";
 
-export default function Return({ loaderData }: Route.ComponentProps) {
+export default function Return() {
   const [status, setStatus] = useState<string | null>(null);
   const [customerEmail, setCustomerEmail] = useState<string>("");
 
+  const [searchParams] = useSearchParams();
+
   useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const sessionId = urlParams.get("session_id");
+    const sessionId = searchParams.get("session_id");
 
     fetch(`http://${serverIp}:8080/api/session-status?session_id=${sessionId}`)
       .then((res) => res.json())

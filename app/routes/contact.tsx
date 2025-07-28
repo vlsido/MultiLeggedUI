@@ -29,8 +29,8 @@ export default function Contact({ loaderData }: Route.ComponentProps) {
         <Background>
           <ContactBody />
         </Background>
+        <Footer />
       </div>
-      <Footer />
       <div className="md:hidden flex">
         <Navigation />
       </div>

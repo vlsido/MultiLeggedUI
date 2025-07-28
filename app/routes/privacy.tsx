@@ -29,8 +29,8 @@ export default function Privacy({ loaderData }: Route.ComponentProps) {
         <Background>
           <PrivacyPolicyBody />
         </Background>
+        <Footer />
       </div>
-      <Footer />
       <div className="md:hidden flex">
         <Navigation />
       </div>

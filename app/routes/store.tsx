@@ -25,8 +25,8 @@ export default function Store({ params }: Route.LoaderArgs) {
         <Background>
           <Outlet />
         </Background>
+        <Footer />
       </div>
-      <Footer />
       <div className="md:hidden flex">
         <Navigation />
       </div>

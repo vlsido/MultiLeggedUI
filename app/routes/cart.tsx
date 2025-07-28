@@ -28,8 +28,8 @@ export default function Cart({ loaderData }: Route.ComponentProps) {
         <Background>
           <Outlet />
         </Background>
+        <Footer />
       </div>
-      <Footer />
       <div className="md:hidden flex">
         <Navigation />
       </div>

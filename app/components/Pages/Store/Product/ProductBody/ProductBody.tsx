@@ -64,7 +64,7 @@ function ProductBody({ params }: Route.LoaderArgs) {
           <p className="text-black text-center text-[20px]">{data.name}</p>
           <div className="flex flex-col md:flex-row gap-5 text-black">
             <img
-              className="h-[300px] w-[300px] object-cover"
+              className="h-[300px] w-[300px] rounded-xl object-cover"
               src={data.imageUrl}
             />
             <div className="flex flex-col py-2 gap-1 whitespace-pre-line">

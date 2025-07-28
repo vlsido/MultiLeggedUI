@@ -1,5 +1,5 @@
 import type { Route } from ".react-router/types/app/+types/root";
-import { Navigate, NavLink } from "react-router";
+import { Navigate, NavLink, useSearchParams } from "react-router";
 import { ArrowLeft } from "~/components/Icons/ArrowLeftIcon";
 import HumidityIcon from "~/components/Icons/HumidityIcon";
 import RulerIcon from "~/components/Icons/RulerIcon";
@@ -9,48 +9,41 @@ import { SharedColors } from "~/constants/colors";
 import { useAppSelector } from "~/hooks/reduxHooks";
 import PurchaseView from "../../Card/PurchaseSection/PurchaseView";
 import { userMessageManager } from "~/managers/userMessageManager";
-import { useCallback, useEffect, useState } from "react";
+import { useMemo } from "react";
 
 function ProductBody({ params }: Route.LoaderArgs) {
   const categoriesAnimals = useAppSelector(
     (state) => state.animals.categoriesAnimals,
   );
 
-  const data = categoriesAnimals
-    .flatMap((category) => category.animals)
-    .find((animal) => animal.id.toString() === params.productId);
+  const [searchParams] = useSearchParams();
 
-  const [shouldRedirect, setShouldRedirect] = useState<boolean>(false);
+  const data = useMemo(
+    () =>
+      categoriesAnimals
+        .flatMap((category) => category.animals)
+        .find((animal) => animal.id.toString() === params.productId),
+    [],
+  );
 
-  useEffect(() => {
-    if (data === undefined) {
-      userMessageManager.showUserMessage(
-        "Product couldn't be found",
-        "ERROR",
-        3000,
-      );
-      setShouldRedirect(true);
-    }
-  }, [data]);
-
-  const getBackLink = useCallback(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const returnPage = urlParams.get("return_page");
+  function getBackLink() {
+    const returnPage = searchParams.get("r");
 
     if (returnPage === "cart") return "/cart";
 
     if (returnPage) return `/store/category/${returnPage}`;
 
     return "/store";
-  }, []);
-
-  if (shouldRedirect) {
-    return <Navigate to={getBackLink()} />;
   }
 
   if (data === undefined) {
-    return null;
+    userMessageManager.showUserMessage(
+      "Product couldn't be found",
+      "ERROR",
+      5000,
+    );
+
+    return <Navigate to={getBackLink()} />;
   }
 
   return (
@@ -63,7 +56,7 @@ function ProductBody({ params }: Route.LoaderArgs) {
           <ArrowLeft color={SharedColors["black-500"]} />
         </NavLink>
       </div>
-      <div className="flex flex-col self-center gap-2.5">
+      <div className="flex flex-col w-full self-center gap-2.5">
         <div
           key={data.id}
           className="flex flex-col max-w-[400px] md:max-w-[800px] bg-gray-400/50 p-5 rounded-xl"

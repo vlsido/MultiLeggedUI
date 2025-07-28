@@ -56,65 +56,59 @@ function ProductBody({ params }: Route.LoaderArgs) {
           <ArrowLeft color={SharedColors["black-500"]} />
         </NavLink>
       </div>
-      <div className="flex flex-col w-full self-center gap-2.5">
-        <div
-          key={data.id}
-          className="flex flex-col max-w-[400px] md:max-w-[800px] bg-gray-400/50 p-5 rounded-xl"
-        >
-          <div className="flex flex-col gap-3 p-5 bg-gray-500 rounded-xl items-center">
-            <p className="text-black text-center text-[20px]">{data.name}</p>
-            <div className="flex flex-col md:flex-row gap-5 text-black">
-              <div className="flex h-[300px] min-w-[300px]">
-                <img
-                  className="h-[300px] w-[300px] object-cover"
-                  src={data.imageUrl}
-                />
-              </div>
-
-              <div className="flex flex-col py-2 gap-1 whitespace-pre-line">
-                {data.origin && (
-                  <div className="flex gap-1.5">
-                    <WorldIcon />
-                    <p>
-                      Origin <span className="font-bold"> {data.origin}</span>
-                    </p>
-                  </div>
-                )}
-                {data.size && (
-                  <div className="flex gap-1.5">
-                    <RulerIcon />
-                    <p>
-                      Size up to <span className="font-bold"> {data.size}</span>
-                    </p>
-                  </div>
-                )}
-                {data.humidity && (
-                  <div className="flex gap-1.5">
-                    <HumidityIcon />
-                    <p>
-                      Humidity{" "}
-                      <span className="font-bold"> {data.humidity}</span>
-                    </p>
-                  </div>
-                )}
-                {data.temperature && (
-                  <div className="flex gap-1.5">
-                    <TemperatureIcon />
-                    <p>
-                      Environment temp
-                      <span className="font-bold"> {data.temperature}</span>
-                    </p>
-                  </div>
-                )}
-
-                <div className="p-4 italic max-w-[300px] drop-shadow-md">
-                  <p>{data.description}</p>
+      <div
+        key={data.id}
+        className="flex flex-col self-center md:max-w-[800px] bg-gray-400/50 p-5 rounded-xl"
+      >
+        <div className="flex flex-col gap-3 p-5 bg-gray-500 rounded-xl items-center">
+          <p className="text-black text-center text-[20px]">{data.name}</p>
+          <div className="flex flex-col md:flex-row gap-5 text-black">
+            <img
+              className="h-[300px] w-[300px] object-cover"
+              src={data.imageUrl}
+            />
+            <div className="flex flex-col py-2 gap-1 whitespace-pre-line">
+              {data.origin && (
+                <div className="flex gap-1.5">
+                  <WorldIcon />
+                  <p>
+                    Origin <span className="font-bold"> {data.origin}</span>
+                  </p>
                 </div>
+              )}
+              {data.size && (
+                <div className="flex gap-1.5">
+                  <RulerIcon />
+                  <p>
+                    Size up to <span className="font-bold"> {data.size}</span>
+                  </p>
+                </div>
+              )}
+              {data.humidity && (
+                <div className="flex gap-1.5">
+                  <HumidityIcon />
+                  <p>
+                    Humidity <span className="font-bold"> {data.humidity}</span>
+                  </p>
+                </div>
+              )}
+              {data.temperature && (
+                <div className="flex gap-1.5">
+                  <TemperatureIcon />
+                  <p>
+                    Environment temp
+                    <span className="font-bold"> {data.temperature}</span>
+                  </p>
+                </div>
+              )}
+
+              <div className="p-4 italic max-w-[300px] drop-shadow-md">
+                <p>{data.description}</p>
               </div>
             </div>
           </div>
-          <PurchaseView animal={data} />
         </div>
+        <PurchaseView animal={data} />
       </div>
     </div>
   );

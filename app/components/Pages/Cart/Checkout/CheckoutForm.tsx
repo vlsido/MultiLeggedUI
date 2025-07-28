@@ -1,31 +1,47 @@
-import { PaymentElement, useCheckout } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import {
+  PaymentElement,
+  useCheckout,
+  type CheckoutContextValue,
+} from "@stripe/react-stripe-js";
+import {
+  useState,
+  type Dispatch,
+  type InputHTMLAttributes,
+  type SetStateAction,
+} from "react";
 
-const validateEmail = async (email, checkout) => {
+async function validateEmail(email: string, checkout: CheckoutContextValue) {
   const updateResult = await checkout.updateEmail(email);
   const isValid = updateResult.type !== "error";
 
   return { isValid, message: !isValid ? updateResult.error.message : null };
-};
+}
 
-const EmailInput = ({ email, setEmail, error, setError }) => {
+interface EmailInputProps {
+  email: string;
+  setEmail: Dispatch<SetStateAction<string>>;
+  error: string | null;
+  setError: Dispatch<SetStateAction<string | null>>;
+}
+
+function EmailInput(props: EmailInputProps) {
   const checkout = useCheckout();
 
-  const handleBlur = async () => {
-    if (!email) {
+  async function handleBlur() {
+    if (!props.email) {
       return;
     }
 
-    const { isValid, message } = await validateEmail(email, checkout);
+    const { isValid, message } = await validateEmail(props.email, checkout);
     if (!isValid) {
-      setError(message);
+      props.setError(message);
     }
-  };
+  }
 
-  const handleChange = (e) => {
-    setError(null);
-    setEmail(e.target.value);
-  };
+  function handleChange(event: InputHTMLAttributes<HTMLInputElement>) {
+    props.setError(null);
+    props.setEmail(event.target.value);
+  }
 
   return (
     <>
@@ -34,30 +50,32 @@ const EmailInput = ({ email, setEmail, error, setError }) => {
         <input
           id="email"
           type="text"
-          value={email}
+          value={props.email}
           onChange={handleChange}
           onBlur={handleBlur}
-          className={error ? "error" : "bg-gray-500 rounded-sm"}
+          className={props.error ? "error" : "bg-gray-500 rounded-sm"}
         />
       </label>
-      {error && <div id="email-errors">{error}</div>}
+      {props.error && <div id="email-errors">{props.error}</div>}
     </>
   );
-};
+}
 
 function CheckoutForm() {
   const checkout = useCheckout();
 
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState(null);
-  const [message, setMessage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  console.log(checkout.status);
+
+  const [email, setEmail] = useState<string>("");
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // checkout.on("change", (session) => {
   //   // Handle changes to the checkout session
   // });
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     setIsLoading(true);
@@ -84,7 +102,7 @@ function CheckoutForm() {
     console.log("success");
 
     setIsLoading(false);
-  };
+  }
 
   return (
     <div className="bg-white p-4 rounded-3xl">

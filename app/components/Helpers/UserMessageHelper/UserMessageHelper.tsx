@@ -10,7 +10,7 @@ function UserMessageHelper() {
   const timeoutId = useRef<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
-    const unsubscribe = userMessageManager.subscribe((text, type, ms) => {
+    const unsubscribe = userMessageManager.subscribe((text, type, ms?) => {
       setMessage({ text, type, ms });
 
       clearTimeout(timeoutId.current);
@@ -35,7 +35,7 @@ function UserMessageHelper() {
         <UserMessageCard
           text={message.text}
           type={message.type}
-          ms={message.ms}
+          ms={message.ms ?? 5000}
           onClose={handleOnClose}
         />
       )}

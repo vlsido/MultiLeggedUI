@@ -1,13 +1,13 @@
 type UserMessageListener = (
   message: string,
   type: "INFO" | "ERROR",
-  ms: number,
+  ms?: number,
 ) => void;
 
 class UserMessageManager {
   private listeners = new Set<UserMessageListener>();
 
-  showUserMessage(text: string, type: "INFO" | "ERROR", ms: number) {
+  showUserMessage(text: string, type: "INFO" | "ERROR", ms?: number) {
     for (const listener of this.listeners) {
       listener(text, type, ms);
     }

@@ -52,5 +52,5 @@ export interface UserMessage {
   /**
    * milliseconds
    */
-  ms: number;
+  ms?: number;
 }

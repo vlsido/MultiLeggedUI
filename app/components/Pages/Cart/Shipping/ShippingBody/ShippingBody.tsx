@@ -43,7 +43,13 @@ function ShippingBody() {
       setIsInputInvalid(true);
       return;
     }
-    return navigate("/cart/checkout");
+    return navigate("/cart/checkout", {
+      state: {
+        firstName: firstNameRef.current,
+        lastName: lastNameRef.current,
+        phone,
+      },
+    });
   }
 
   const onFocus = useCallback(() => {
@@ -156,8 +162,9 @@ function ShippingBody() {
             Recipient information
           </h2>
           <div className="flex flex-col gap-1" onFocus={onFocus}>
-            <label>First Name</label>
+            <label htmlFor="first_name">First Name</label>
             <input
+              autoComplete="given-name"
               id="first_name"
               name="first_name"
               className={
@@ -172,6 +179,7 @@ function ShippingBody() {
             />
             <label htmlFor="last_name">Last Name</label>
             <input
+              autoComplete="family-name"
               id="last_name"
               name="last_name"
               className={
@@ -187,7 +195,7 @@ function ShippingBody() {
 
             <label htmlFor="phone">Phone</label>
             <PhoneInput
-              className="flex border-1 rounded-md pl-1 max-w-full"
+              className="border-1 rounded-md pl-1 w-full"
               containerComponentProps={{ id: "phone", name: "phone" }}
               placeholder="Enter phone number"
               addInternationalOption={false}

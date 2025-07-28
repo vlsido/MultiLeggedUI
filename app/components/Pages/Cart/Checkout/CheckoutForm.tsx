@@ -45,7 +45,7 @@ function EmailInput(props: EmailInputProps) {
 
   return (
     <>
-      <label className="flex gap-2 text-black">
+      <label className="flex gap-2 text-black bg-gray-200  text-[16px] border-black-500/10 border-[0.1px] rounded-md drop-shadow-sm pl-2 items-center mb-2">
         Email
         <input
           id="email"
@@ -53,10 +53,14 @@ function EmailInput(props: EmailInputProps) {
           value={props.email}
           onChange={handleChange}
           onBlur={handleBlur}
-          className={props.error ? "error" : "bg-gray-500 rounded-sm"}
+          className={"rounded-sm w-full p-2"}
         />
       </label>
-      {props.error && <div id="email-errors">{props.error}</div>}
+      {props.error && (
+        <div id="email-errors" className="text-red-500">
+          {props.error}
+        </div>
+      )}
     </>
   );
 }
@@ -64,16 +68,12 @@ function EmailInput(props: EmailInputProps) {
 function CheckoutForm() {
   const checkout = useCheckout();
 
-  console.log(checkout.status);
+  console.log(checkout);
 
   const [email, setEmail] = useState<string>("");
   const [emailError, setEmailError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  // checkout.on("change", (session) => {
-  //   // Handle changes to the checkout session
-  // });
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -113,22 +113,27 @@ function CheckoutForm() {
           error={emailError}
           setError={setEmailError}
         />
-        <h4 className="text-black">Payment</h4>
-        <PaymentElement id="payment-element" />
-        <div className="flex w-full justify-end mt-4">
-          <button
-            className="bg-black-500 py-2 px-4 self-center rounded-full"
-            disabled={isLoading}
-            id="submit"
-          >
-            {isLoading ? (
-              <div className="spinner"></div>
-            ) : (
-              `Pay ${checkout.total.total.amount} now`
-            )}
-          </button>
+        <div
+          className={
+            emailError || email === "" ? "opacity-50 pointer-events-none" : ""
+          }
+        >
+          <h4 className="text-black">Payment</h4>
+          <PaymentElement id="payment-element" />
+          <div className="flex w-full justify-end mt-4">
+            <button
+              className="bg-black-500 py-2 px-4 self-center rounded-full"
+              disabled={isLoading}
+              id="submit"
+            >
+              {isLoading ? (
+                <div className="spinner"></div>
+              ) : (
+                `Pay ${checkout.total.total.amount} now`
+              )}
+            </button>
+          </div>
         </div>
-        {/* Show any error or success messages */}
         {message && (
           <div className="text-black" id="payment-message">
             {message}

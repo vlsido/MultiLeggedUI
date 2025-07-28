@@ -5,8 +5,8 @@ import { SharedColors } from "~/constants/colors";
 import { useAppSelector } from "~/hooks/reduxHooks";
 
 function CategoryBody({ params }: Route.LoaderArgs) {
-  const categoriesAnimals = useAppSelector(
-    (state) => state.animals.categoriesAnimals,
+  const categoriesProducts = useAppSelector(
+    (state) => state.products.categoriesProducts,
   );
 
   return (
@@ -20,20 +20,23 @@ function CategoryBody({ params }: Route.LoaderArgs) {
         </NavLink>
       </div>
       <div className="flex flex-col self-center gap-2.5">
-        {categoriesAnimals.map((categoryAnimals, index) => {
+        {categoriesProducts.map((categoryProducts) => {
           if (
             params.categoryId !== "all" &&
-            categoryAnimals.category !== params.categoryId
+            categoryProducts.category !== params.categoryId
           )
             return null;
 
           return (
-            <div key={index} className="bg-gray-100/50 rounded-xl">
+            <div
+              key={categoryProducts.category}
+              className="bg-gray-100/50 rounded-xl"
+            >
               <div className="px-6 py-2 text-black font-bold">
-                {categoryAnimals.category.toUpperCase()}
+                {categoryProducts.category.toUpperCase()}
               </div>
               <div className="flex px-4 py-4 gap-4 flex-wrap justify-center">
-                {categoryAnimals.animals.map((data) => {
+                {categoryProducts.products.map((data) => {
                   return (
                     <div
                       key={data.id}
@@ -48,7 +51,7 @@ function CategoryBody({ params }: Route.LoaderArgs) {
                       </div>
                       <div className="flex flex-col gap-2 h-full text-black">
                         <div className="flex gap-1 justify-evenly">
-                          {data.animalPrices.map((pricePackage) => {
+                          {data.productPrices.map((pricePackage) => {
                             return (
                               <div
                                 key={pricePackage.id}
@@ -81,7 +84,7 @@ function CategoryBody({ params }: Route.LoaderArgs) {
                       </div>
                       <NavLink
                         className="px-10 py-2.5 self-end rounded-full bg-black-500 text-white cursor-pointer"
-                        to={`/store/product/${data.id}?return_page=${params.categoryId}`}
+                        to={`/store/product/${data.id}?r=${params.categoryId}`}
                       >
                         Product page
                       </NavLink>

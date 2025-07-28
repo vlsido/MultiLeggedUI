@@ -7,7 +7,7 @@ describe("Shopping cart", () => {
     render(<ShoppingCart />, {
       preloadedState: {
         cart: { cartItems: [] },
-        animals: { categoriesAnimals: [] },
+        products: { categoriesProducts: [] },
       },
     });
 

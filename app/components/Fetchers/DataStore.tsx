@@ -1,20 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { fetchAnimals } from "~/api/api";
+import { fetchProducts } from "~/api/api";
 import { useAppDispatch } from "~/hooks/reduxHooks";
-import { setCategoriesAnimals } from "~/redux/slices/animalsSlice";
+import { setCategoriesProducts } from "~/redux/slices/productsSlice";
 
 function DataStore() {
   const queryClient = useQuery({
-    queryKey: ["animals"],
-    queryFn: fetchAnimals,
+    queryKey: ["products"],
+    queryFn: fetchProducts,
   });
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (queryClient.isSuccess) {
-      dispatch(setCategoriesAnimals(queryClient.data));
+      dispatch(setCategoriesProducts(queryClient.data));
     }
   }, [queryClient.isSuccess]);
 

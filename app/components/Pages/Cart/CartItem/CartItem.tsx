@@ -8,7 +8,7 @@ import {
   setItemQuantity,
   type CartItemProps,
 } from "~/redux/slices/cartSlice";
-import { findPriceByAnimalId } from "~/utils/cart-utils";
+import { findPriceByProductId } from "~/utils/cart-utils";
 
 interface ICartItem {
   item: CartItemProps;
@@ -19,27 +19,27 @@ function CartItem(props: ICartItem) {
 
   const dispatch = useAppDispatch();
 
-  const removeItem = useCallback((animalId: number) => {
-    dispatch(removeFromCart(animalId));
+  const removeItem = useCallback((productId: number) => {
+    dispatch(removeFromCart(productId));
   }, []);
 
   const onQuantityChange = useCallback((quantity: number) => {
-    dispatch(setItemQuantity({ id: props.item.animalId, quantity: quantity }));
+    dispatch(setItemQuantity({ id: props.item.productId, quantity: quantity }));
   }, []);
 
   const price =
-    (findPriceByAnimalId(cartItems, props.item.animalId) *
+    (findPriceByProductId(cartItems, props.item.productId) *
       props.item.quantity) /
     100;
 
   return (
     <div
-      key={props.item.animalId}
+      key={props.item.productId}
       className="flex flex-col md:flex-row justify-between items-center px-2.5 py-4 gap-2.5 rounded-xl border-1 bg-white text-black"
     >
       <button
         className="flex w-[100%] justify-end md:hidden cursor-pointer"
-        onPointerUp={() => removeItem(props.item.animalId)}
+        onPointerUp={() => removeItem(props.item.productId)}
       >
         <TrashIcon />
       </button>
@@ -51,7 +51,7 @@ function CartItem(props: ICartItem) {
       </div>
       <NavLink
         className="flex-1 underline text-center"
-        to={`/store/product/${props.item.animalId}?return_page=cart`}
+        to={`/store/product/${props.item.productId}?r=cart`}
       >
         {props.item.name} ({props.item.form})
       </NavLink>
@@ -59,9 +59,9 @@ function CartItem(props: ICartItem) {
         <p className="md:hidden">Price:</p>
         <p className="md:flex-1 text-center">
           €
-          {(findPriceByAnimalId(cartItems, props.item.animalId) / 100).toFixed(
-            2,
-          )}
+          {(
+            findPriceByProductId(cartItems, props.item.productId) / 100
+          ).toFixed(2)}
           <span className="text-[14px]">/per 1</span>
         </p>
       </div>
@@ -70,7 +70,7 @@ function CartItem(props: ICartItem) {
         <QuantitySelectorPill
           value={props.item.quantity}
           onChange={(value: number) => onQuantityChange(value)}
-          minQuantity={props.item.animalPrices[0].minQuantity}
+          minQuantity={props.item.productPrices[0].minQuantity}
           maxQuantity={props.item.unitsLeft}
         />
       </div>
@@ -85,7 +85,7 @@ function CartItem(props: ICartItem) {
       </div>
       <button
         className="hidden md:flex cursor-pointer"
-        onPointerUp={() => removeItem(props.item.animalId)}
+        onPointerUp={() => removeItem(props.item.productId)}
       >
         <TrashIcon />
       </button>

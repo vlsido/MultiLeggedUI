@@ -1,13 +1,13 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { type RootState } from "../store";
-import type { AnimalPrice } from "~/types/common";
+import type { ProductPrice } from "~/types/common";
 
 export interface CartItemProps {
-  animalId: number;
+  productId: number;
   name: string;
   imageUrl: string;
   form: string;
-  animalPrices: AnimalPrice[];
+  productPrices: ProductPrice[];
   unitsLeft: number;
   quantity: number;
 }
@@ -29,7 +29,7 @@ export const cartSlice = createSlice({
     },
     pushToCart: (state, action: PayloadAction<CartItemProps>) => {
       const item = state.cartItems.find(
-        (ci) => ci.animalId === action.payload.animalId,
+        (ci) => ci.productId === action.payload.productId,
       );
       if (item === undefined) {
         state.cartItems.push(action.payload);
@@ -37,7 +37,7 @@ export const cartSlice = createSlice({
     },
     removeFromCart: (state, action: PayloadAction<number>) => {
       state.cartItems = state.cartItems.filter(
-        (item) => item.animalId !== action.payload,
+        (item) => item.productId !== action.payload,
       );
     },
     setItemQuantity: (
@@ -45,7 +45,7 @@ export const cartSlice = createSlice({
       action: PayloadAction<{ id: number; quantity: number }>,
     ) => {
       const item = state.cartItems.find(
-        (ci) => ci.animalId === action.payload.id,
+        (ci) => ci.productId === action.payload.id,
       );
       if (item !== undefined) {
         item.quantity = action.payload.quantity;

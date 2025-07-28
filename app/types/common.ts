@@ -1,11 +1,11 @@
-export type AnimalCategory = "ISOPODS" | "STICK INSECTS" | "LEAD INSECTS ";
+export type ProductCategory = "ISOPODS" | "STICK INSECTS" | "LEAD INSECTS ";
 
-export interface CategoryAnimals {
-  category: AnimalCategory;
-  animals: Animal[];
+export interface CategoryProducts {
+  category: ProductCategory;
+  products: Product[];
 }
 
-export interface Animal {
+export interface Product {
   id: number;
   name: string;
   imageUrl: string;
@@ -15,11 +15,11 @@ export interface Animal {
   temperature: string | null;
   description: string;
   units: number;
-  animalPrices: AnimalPrice[];
+  productPrices: ProductPrice[];
   form: string;
 }
 
-export interface AnimalPrice {
+export interface ProductPrice {
   id: number;
   minQuantity: number;
   maxQuantity: number | null;

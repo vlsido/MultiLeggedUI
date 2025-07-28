@@ -1,11 +1,11 @@
 import { serverIp } from "~/constants/common";
 import type { ShippingLocations } from "~/types/common";
 
-export async function fetchAnimals() {
-  const response = await fetch(`http://${serverIp}:8080/api/animals`);
+export async function fetchProducts() {
+  const response = await fetch(`http://${serverIp}:8080/api/products`);
 
   if (!response.ok) {
-    throw new Error("Error fetching animals data");
+    throw new Error("Error fetching products data");
   }
 
   const data = await response.json();
@@ -20,7 +20,7 @@ export async function fetchShippingLocations(): Promise<ShippingLocations[]> {
     );
 
     if (!response.ok) {
-      throw new Error("Error fetching animals data");
+      throw new Error("Error fetching shipping locations");
     }
 
     const data = await response.json();

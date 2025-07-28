@@ -1,15 +1,15 @@
 import QuantitySelectorPill from "~/components/UI/selectors/QuantitySelectorPill";
-import type { Animal } from "~/types/common";
+import type { Product } from "~/types/common";
 
 interface PricePackagesProps {
-  animal: Animal;
+  product: Product;
   quantity: number;
   onQuantityChange: (value: number) => void;
 }
 
 function PricePackages(props: PricePackagesProps) {
   const currentPackagePriceInCents =
-    props.animal.animalPrices.find(
+    props.product.productPrices.find(
       (pricePackage) =>
         pricePackage.minQuantity <= props.quantity &&
         (pricePackage.maxQuantity ?? Infinity) >= props.quantity,
@@ -21,7 +21,7 @@ function PricePackages(props: PricePackagesProps) {
       className="flex flex-col bg-gray-100 gap-1.25 p-5 w-full rounded-4xl"
     >
       <div id="price_packages" className="flex gap-2.5 justify-evenly">
-        {props.animal.animalPrices.map((pricePackage) => {
+        {props.product.productPrices.map((pricePackage) => {
           const isCurrentPackage =
             pricePackage.minQuantity <= props.quantity &&
             (pricePackage.maxQuantity ?? Infinity) >= props.quantity;
@@ -32,11 +32,11 @@ function PricePackages(props: PricePackagesProps) {
                 {pricePackage.maxQuantity ? (
                   <p>
                     {pricePackage.minQuantity} - {pricePackage.maxQuantity}{" "}
-                    {props.animal.form}
+                    {props.product.form}
                   </p>
                 ) : (
                   <p>
-                    {">="} {pricePackage.minQuantity} {props.animal.form}
+                    {">="} {pricePackage.minQuantity} {props.product.form}
                   </p>
                 )}
               </div>
@@ -62,8 +62,8 @@ function PricePackages(props: PricePackagesProps) {
         <QuantitySelectorPill
           value={props.quantity}
           onChange={(value: number) => props.onQuantityChange(value)}
-          minQuantity={props.animal.animalPrices[0].minQuantity}
-          maxQuantity={props.animal.units}
+          minQuantity={props.product.productPrices[0].minQuantity}
+          maxQuantity={props.product.units}
         />
       </div>
       <div className="h-[2px] w-full bg-black" />

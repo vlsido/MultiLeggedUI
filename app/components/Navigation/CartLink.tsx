@@ -6,9 +6,9 @@ import { findCartPrice } from "~/utils/cart-utils";
 function ShoppingCartLink() {
   const cartItems = useAppSelector((state) => state.cart.cartItems);
 
-  const location = useLocation();
+  console.log(cartItems);
 
-  const price = findCartPrice(cartItems);
+  const location = useLocation();
 
   return (
     <Link to={{ pathname: "/cart" }}>
@@ -20,7 +20,7 @@ function ShoppingCartLink() {
             : "bg-gray-200")
         }
       >
-        <ShoppingCartIcon />€{(price / 100).toFixed(2)}
+        <ShoppingCartIcon />€{(findCartPrice(cartItems) / 100).toFixed(2)}
         <div className="text-[16px] opacity-[0.5]">
           {cartItems.length} items
         </div>

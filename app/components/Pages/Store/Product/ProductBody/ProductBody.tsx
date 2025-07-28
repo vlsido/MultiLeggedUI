@@ -12,19 +12,25 @@ import { userMessageManager } from "~/managers/userMessageManager";
 import { useMemo } from "react";
 
 function ProductBody({ params }: Route.LoaderArgs) {
-  const categoriesAnimals = useAppSelector(
-    (state) => state.animals.categoriesAnimals,
+  const categoriesProducts = useAppSelector(
+    (state) => state.products.categoriesProducts,
   );
 
   const [searchParams] = useSearchParams();
 
-  const data = useMemo(
-    () =>
-      categoriesAnimals
-        .flatMap((category) => category.animals)
-        .find((animal) => animal.id.toString() === params.productId),
-    [],
-  );
+  const data = useMemo(() => {
+    const data = categoriesProducts
+      .flatMap((category) => category.products)
+      .find((product) => product.id.toString() === params.productId);
+    if (data === undefined) {
+      userMessageManager.showUserMessage(
+        "Product couldn't be found",
+        "ERROR",
+        5000,
+      );
+    }
+    return data;
+  }, []);
 
   function getBackLink() {
     const returnPage = searchParams.get("r");
@@ -37,12 +43,6 @@ function ProductBody({ params }: Route.LoaderArgs) {
   }
 
   if (data === undefined) {
-    userMessageManager.showUserMessage(
-      "Product couldn't be found",
-      "ERROR",
-      5000,
-    );
-
     return <Navigate to={getBackLink()} />;
   }
 
@@ -108,7 +108,7 @@ function ProductBody({ params }: Route.LoaderArgs) {
             </div>
           </div>
         </div>
-        <PurchaseView animal={data} />
+        <PurchaseView product={data} />
       </div>
     </div>
   );

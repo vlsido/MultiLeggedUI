@@ -1,9 +1,9 @@
-import type { CategoryAnimals, ShippingCompanyData } from "~/types/common";
+import type { CategoryProducts, ShippingCompanyData } from "~/types/common";
 
-export const categoriesAnimalsData: CategoryAnimals[] = [
+export const categoriesProductsData: CategoryProducts[] = [
   {
     category: "ISOPODS",
-    animals: [
+    products: [
       {
         id: 1,
         imageUrl: "/porcellio_laevis_1.png",
@@ -15,10 +15,10 @@ export const categoriesAnimalsData: CategoryAnimals[] = [
         description:
           "Large isopod, very popular and recognizable because of their unique coloring. Very sturdy and easy to keep and breed, perfect species for a beginner. Very forgiving when it comes to temperature changes and moisture fluctuations.",
         units: 0,
-        animalPrices: [
+        productPrices: [
           { id: 1, minQuantity: 8, maxQuantity: 20, centsPerUnit: 599 },
         ],
-        form: "animals",
+        form: "products",
       },
       {
         id: 3,
@@ -31,16 +31,16 @@ export const categoriesAnimalsData: CategoryAnimals[] = [
         description:
           "Large isopod, very popular and recognizable because of their unique coloring. Very sturdy and easy to keep and breed, perfect species for a beginner. Very forgiving when it comes to temperature changes and moisture fluctuations.",
         units: 0,
-        animalPrices: [
+        productPrices: [
           { id: 1, minQuantity: 8, maxQuantity: 20, centsPerUnit: 599 },
         ],
-        form: "animals",
+        form: "products",
       },
     ],
   },
   {
     category: "STICK INSECTS",
-    animals: [
+    products: [
       {
         id: 2,
         imageUrl: "/medauroidea_extradentata_1.png",
@@ -52,7 +52,7 @@ export const categoriesAnimalsData: CategoryAnimals[] = [
         description:
           "Large isopod, very popular and recognizable because of their unique coloring.Very sturdy and easy to keep and breed, perfect species for a beginner. Very forgiving when it comes to temperature changes and moisture fluctuations.",
         units: 0,
-        animalPrices: [
+        productPrices: [
           { id: 1, minQuantity: 8, maxQuantity: 20, centsPerUnit: 599 },
         ],
         form: "eggs",

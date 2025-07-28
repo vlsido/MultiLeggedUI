@@ -1,17 +1,17 @@
 import type { CartItemProps } from "~/redux/slices/cartSlice";
 
-export function findPriceByAnimalId(
+export function findPriceByProductId(
   cartItems: CartItemProps[],
   id: number,
 ): number {
-  const animal = cartItems.find((item) => item.animalId === id);
+  const product = cartItems.find((item) => item.productId === id);
 
-  if (animal) {
+  if (product) {
     const currentPackagePriceInCents =
-      animal.animalPrices.find(
+      product.productPrices.find(
         (pricePackage) =>
-          pricePackage.minQuantity <= animal.quantity &&
-          (pricePackage.maxQuantity ?? Infinity) >= animal.quantity,
+          pricePackage.minQuantity <= product.quantity &&
+          (pricePackage.maxQuantity ?? Infinity) >= product.quantity,
       )?.centsPerUnit ?? 0;
 
     return currentPackagePriceInCents;
@@ -22,7 +22,7 @@ export function findPriceByAnimalId(
 export function findCartPrice(cartItems: CartItemProps[]) {
   const price = cartItems.reduce(
     (total, item) =>
-      total + findPriceByAnimalId(cartItems, item.animalId) * item.quantity,
+      total + findPriceByProductId(cartItems, item.productId) * item.quantity,
     0,
   );
 

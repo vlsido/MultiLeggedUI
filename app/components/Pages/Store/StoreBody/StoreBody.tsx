@@ -4,8 +4,8 @@ import { motion } from "motion/react";
 import { Navigate } from "react-router";
 
 function StoreBody() {
-  const categoriesAnimals = useAppSelector(
-    (state) => state.animals.categoriesAnimals,
+  const categoriesProducts = useAppSelector(
+    (state) => state.products.categoriesProducts,
   );
 
   const [category, setCategory] = useState<string>("");
@@ -37,7 +37,7 @@ function StoreBody() {
               />
             </div>
           </motion.button>
-          {categoriesAnimals.map((categoryAnimals, index) => {
+          {categoriesProducts.map((categoryProducts, index) => {
             return (
               <motion.button
                 key={index}
@@ -46,15 +46,15 @@ function StoreBody() {
                   scale: 1.2,
                   transition: { duration: 0.5 },
                 }}
-                onPointerUp={() => setCategory(categoryAnimals.category)}
+                onPointerUp={() => setCategory(categoryProducts.category)}
               >
                 <div className="px-6 font-bold">
-                  <h3>{categoryAnimals.category.toUpperCase()}</h3>
+                  <h3>{categoryProducts.category.toUpperCase()}</h3>
                 </div>
                 <div className="flex gap-3 p-5 bg-gray-500 ring-white ring-1 rounded-xl items-center">
                   <img
                     className="h-32 w-32 rounded-full object-cover"
-                    src={categoryAnimals.animals[0].imageUrl}
+                    src={categoryProducts.products[0].imageUrl}
                   />
                 </div>
               </motion.button>

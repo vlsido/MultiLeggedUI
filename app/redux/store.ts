@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./slices/cartSlice";
-import animalsReducer from "./slices/animalsSlice";
+import productsReducer from "./slices/productsSlice";
 
 const rootReducer = combineReducers({
   cart: cartReducer,
-  animals: animalsReducer,
+  products: productsReducer,
 });
 
 export const setupStore = (preloadedState?: Partial<RootState>) => {
